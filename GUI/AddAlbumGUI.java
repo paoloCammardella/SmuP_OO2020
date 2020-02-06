@@ -28,6 +28,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AddAlbumGUI extends JFrame {
 
@@ -55,7 +57,7 @@ public class AddAlbumGUI extends JFrame {
 		setAlwaysOnTop(true);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 437, 697);
+		setBounds(100, 100, 449, 613);
 		setBackground(darkGrey);
 		
 		contentPane = new JPanel();
@@ -220,7 +222,7 @@ public class AddAlbumGUI extends JFrame {
 					.addComponent(labelGenere, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(318, Short.MAX_VALUE))
+					.addContainerGap(261, Short.MAX_VALUE))
 		);
 		AddAlbum.setLayout(gl_AddAlbum);
 		
@@ -234,30 +236,50 @@ public class AddAlbumGUI extends JFrame {
 		});
 		labelX.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		labelX.setForeground(new Color(255, 0, 0));
+		
+		JButton button_1 = new JButton("Annulla");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		button_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		button_1.setForeground(Color.WHITE);
+		button_1.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		button_1.setFocusPainted(false);
+		button_1.setBorderPainted(false);
+		button_1.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
+		button_1.setBackground(new Color(204, 0, 0));
 		GroupLayout gl_panelAdd = new GroupLayout(panelAdd);
 		gl_panelAdd.setHorizontalGroup(
 			gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-					.addContainerGap(398, Short.MAX_VALUE)
-					.addComponent(labelX)
-					.addGap(21))
-				.addGroup(gl_panelAdd.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
-						.addComponent(AddAlbum, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(button, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(9))
+					.addGroup(gl_panelAdd.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
+							.addComponent(labelX)
+							.addGap(21))
+						.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
+							.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+								.addComponent(button_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+								.addComponent(AddAlbum, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
+							.addGap(9))
+						.addGroup(gl_panelAdd.createSequentialGroup()
+							.addComponent(button, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+							.addGap(9))))
 		);
 		gl_panelAdd.setVerticalGroup(
-			gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+			gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(AddAlbum, GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+					.addComponent(AddAlbum, GroupLayout.PREFERRED_SIZE, 460, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(button, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panelAdd.setLayout(gl_panelAdd);
 

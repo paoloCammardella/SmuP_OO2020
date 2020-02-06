@@ -32,8 +32,6 @@ import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.Component;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -50,18 +48,13 @@ public class AddArtistGUI extends JFrame {
 	private JTextField textFieldNomeDarte;
 	private JTextField textFieldCitta;
 	private JTextField textFieldFollowers;
-	private JComboBox<String> comboBoxPubblicazioni;
 	
 	Color darkGrey = new Color(21, 21, 21);
 	Color grey = new Color(26, 26, 26);
 	Color black = new Color(15, 15, 15);
-	Color blue = new Color(0, 0, 170);
+	Color blue = new Color(0, 0, 153);
 	
 	int mouseX, mouseY;
-	private JTextField textFieldNomePubblicazione;
-	private JTextField textFieldDurata;
-	private JTextField textFieldGenere;
-	private JTextField textFieldEP;
 
 	public AddArtistGUI(Controller controller) {
 		setUndecorated(true);
@@ -73,7 +66,7 @@ public class AddArtistGUI extends JFrame {
 		setAlwaysOnTop(true);
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 801, 695);
+		setBounds(100, 100, 433, 750);
 		setBackground(darkGrey);
 		
 		contentPane = new JPanel();
@@ -100,7 +93,7 @@ public class AddArtistGUI extends JFrame {
 			}
 		});
 		panelAdd.setBackground(darkGrey);
-		contentPane.add(panelAdd, BorderLayout.CENTER);
+		contentPane.add(panelAdd, BorderLayout.SOUTH);
 		
 		DateFormat format = new SimpleDateFormat("dd/MM/YYYY");
 		
@@ -126,6 +119,16 @@ public class AddArtistGUI extends JFrame {
 		labelCodiceArtista.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		textFieldCodiceArtista = new JTextField();
+		textFieldCodiceArtista.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldCodiceArtista.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldCodiceArtista.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
 		textFieldCodiceArtista.setOpaque(false);
 		textFieldCodiceArtista.setSelectedTextColor(new Color(255, 255, 255));
 		textFieldCodiceArtista.setSelectionColor(new Color(0, 153, 204));
@@ -141,6 +144,16 @@ public class AddArtistGUI extends JFrame {
 		labelNome.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		textFieldNome = new JTextField();
+		textFieldNome.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
 		textFieldNome.setOpaque(false);
 		textFieldNome.setSelectionColor(new Color(0, 153, 204));
 		textFieldNome.setSelectedTextColor(Color.WHITE);
@@ -156,6 +169,16 @@ public class AddArtistGUI extends JFrame {
 		lblCognome.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		textFieldCognome = new JTextField();
+		textFieldCognome.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldCognome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldCognome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
 		textFieldCognome.setOpaque(false);
 		textFieldCognome.setSelectionColor(new Color(0, 153, 204));
 		textFieldCognome.setSelectedTextColor(Color.WHITE);
@@ -169,9 +192,19 @@ public class AddArtistGUI extends JFrame {
 		JLabel labelData = new JLabel("Data nascita");
 		labelData.setForeground(Color.WHITE);
 		labelData.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		textFieldDataNascita = new JFormattedTextField(format);
-		textFieldDataNascita.setOpaque(false);
 		
+		textFieldDataNascita = new JFormattedTextField(format);
+		textFieldDataNascita.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldDataNascita.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldDataNascita.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
+		textFieldDataNascita.setOpaque(false);
 		textFieldDataNascita.setSelectionColor(new Color(0, 153, 204));
 		textFieldDataNascita.setSelectedTextColor(Color.WHITE);
 		textFieldDataNascita.setForeground(Color.WHITE);
@@ -186,6 +219,16 @@ public class AddArtistGUI extends JFrame {
 		labelNomeDarte.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		textFieldNomeDarte = new JTextField();
+		textFieldNomeDarte.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldNomeDarte.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldNomeDarte.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
 		textFieldNomeDarte.setOpaque(false);
 		textFieldNomeDarte.setSelectionColor(new Color(0, 153, 204));
 		textFieldNomeDarte.setSelectedTextColor(Color.WHITE);
@@ -201,6 +244,16 @@ public class AddArtistGUI extends JFrame {
 		lblCitt.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
 		textFieldCitta = new JTextField();
+		textFieldCitta.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldCitta.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldCitta.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
 		textFieldCitta.setOpaque(false);
 		textFieldCitta.setSelectionColor(new Color(0, 153, 204));
 		textFieldCitta.setSelectedTextColor(Color.WHITE);
@@ -216,6 +269,16 @@ public class AddArtistGUI extends JFrame {
 		labelErroreInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		
 		textFieldFollowers = new JTextField();
+		textFieldFollowers.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldFollowers.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldFollowers.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
 		textFieldFollowers.setOpaque(false);
 		textFieldFollowers.addKeyListener(new KeyAdapter() {
 			@Override
@@ -241,132 +304,15 @@ public class AddArtistGUI extends JFrame {
 		lblFollowers.setForeground(Color.WHITE);
 		lblFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
-		JLabel lblHaiQualcheSingolo = new JLabel("Hai qualche pubblicazione?");
-		lblHaiQualcheSingolo.setForeground(Color.WHITE);
-		lblHaiQualcheSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
-		textFieldNomePubblicazione = new JTextField();
-		textFieldNomePubblicazione.setVisible(false);
-		textFieldNomePubblicazione.setSelectionColor(new Color(0, 153, 204));
-		textFieldNomePubblicazione.setSelectedTextColor(Color.WHITE);
-		textFieldNomePubblicazione.setOpaque(false);
-		textFieldNomePubblicazione.setForeground(Color.WHITE);
-		textFieldNomePubblicazione.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldNomePubblicazione.setColumns(10);
-		textFieldNomePubblicazione.setCaretColor(new Color(0, 153, 204));
-		textFieldNomePubblicazione.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		textFieldNomePubblicazione.setBackground(new Color(36, 53, 102));
-		
-		JLabel labelNomePubblicazione = new JLabel("Nome Song");
-		labelNomePubblicazione.setVisible(false);
-		labelNomePubblicazione.setForeground(Color.WHITE);
-		labelNomePubblicazione.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
-		JLabel labelDurata = new JLabel("Durata");
-		labelDurata.setVisible(false);
-		labelDurata.setForeground(Color.WHITE);
-		labelDurata.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
-		textFieldDurata = new JTextField();
-		textFieldDurata.setVisible(false);
-		textFieldDurata.setSelectionColor(new Color(0, 153, 204));
-		textFieldDurata.setSelectedTextColor(Color.WHITE);
-		textFieldDurata.setOpaque(false);
-		textFieldDurata.setForeground(Color.WHITE);
-		textFieldDurata.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldDurata.setColumns(10);
-		textFieldDurata.setCaretColor(new Color(0, 153, 204));
-		textFieldDurata.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		textFieldDurata.setBackground(new Color(36, 53, 102));
-		
-		textFieldGenere = new JTextField();
-		textFieldGenere.setVisible(false);
-		textFieldGenere.setSelectionColor(new Color(0, 153, 204));
-		textFieldGenere.setSelectedTextColor(Color.WHITE);
-		textFieldGenere.setOpaque(false);
-		textFieldGenere.setForeground(Color.WHITE);
-		textFieldGenere.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldGenere.setColumns(10);
-		textFieldGenere.setCaretColor(new Color(0, 153, 204));
-		textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		textFieldGenere.setBackground(new Color(36, 53, 102));
-		
-		JLabel labelGenere = new JLabel("Genere");
-		labelGenere.setVisible(false);
-		labelGenere.setForeground(Color.WHITE);
-		labelGenere.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
-		textFieldEP = new JTextField();
-		textFieldEP.setVisible(false);
-		textFieldEP.setSelectionColor(new Color(0, 153, 204));
-		textFieldEP.setSelectedTextColor(Color.WHITE);
-		textFieldEP.setOpaque(false);
-		textFieldEP.setForeground(Color.WHITE);
-		textFieldEP.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldEP.setColumns(10);
-		textFieldEP.setCaretColor(new Color(0, 153, 204));
-		textFieldEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		textFieldEP.setBackground(new Color(36, 53, 102));
-		
-		JLabel labelNomeEP = new JLabel("Nome EP");
-		labelNomeEP.setVisible(false);
-		labelNomeEP.setForeground(Color.WHITE);
-		labelNomeEP.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
-		comboBoxPubblicazioni = new JComboBox<String>();
-		comboBoxPubblicazioni.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				comboBoxPubblicazioni.setBackground(darkGrey);
-			}
-		});
-		comboBoxPubblicazioni.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		comboBoxPubblicazioni.setBackground(darkGrey);
-		comboBoxPubblicazioni.setBorder(null);
-		comboBoxPubblicazioni.setForeground(Color.white);
-		comboBoxPubblicazioni.setOpaque(true);
-		comboBoxPubblicazioni.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(comboBoxPubblicazioni.getSelectedItem() == "Singolo" || comboBoxPubblicazioni.getSelectedItem() == "Brano") {
-					textFieldNomePubblicazione.setVisible(true);
-					labelNomePubblicazione.setVisible(true);
-					labelDurata.setVisible(true);
-					textFieldDurata.setVisible(true);
-					textFieldGenere.setVisible(true);
-					labelGenere.setVisible(true);
-					labelNomeEP.setVisible(false);
-					textFieldEP.setVisible(false);
-				}
-				else if(comboBoxPubblicazioni.getSelectedItem() == "EP") {
-					textFieldNomePubblicazione.setVisible(true);
-					labelNomePubblicazione.setVisible(true);
-					labelDurata.setVisible(true);
-					textFieldDurata.setVisible(true);
-					textFieldGenere.setVisible(true);
-					labelGenere.setVisible(true);
-					labelNomeEP.setVisible(true);
-					textFieldEP.setVisible(true);
-				}
-				else {
-					textFieldNomePubblicazione.setVisible(false);
-					labelNomePubblicazione.setVisible(false);
-					labelDurata.setVisible(false);
-					textFieldDurata.setVisible(false);
-					textFieldGenere.setVisible(false);
-					labelGenere.setVisible(false);
-					textFieldEP.setVisible(false);
-					textFieldEP.setVisible(false);
-				}
-			}
-		});
-		comboBoxPubblicazioni.setModel(new DefaultComboBoxModel<String>(new String[] {"No", "Singolo", "EP", "Brano"}));
-		
 		GroupLayout gl_AddArtist = new GroupLayout(AddArtist);
 		gl_AddArtist.setHorizontalGroup(
 			gl_AddArtist.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddArtist.createSequentialGroup()
-					.addGroup(gl_AddArtist.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_AddArtist.createSequentialGroup()
+					.addGroup(gl_AddArtist.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(Alignment.LEADING, gl_AddArtist.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(labelAddArtist, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(Alignment.LEADING, gl_AddArtist.createSequentialGroup()
 							.addGap(20)
 							.addGroup(gl_AddArtist.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(labelCodiceArtista, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -383,22 +329,7 @@ public class AddArtistGUI extends JFrame {
 								.addComponent(textFieldCitta, Alignment.LEADING)
 								.addComponent(lblFollowers, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(textFieldFollowers, Alignment.LEADING)
-								.addComponent(labelErroreInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addGap(18)
-							.addGroup(gl_AddArtist.createParallelGroup(Alignment.LEADING)
-								.addComponent(labelNomeEP, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldEP, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-								.addComponent(labelGenere, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-								.addComponent(labelDurata, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldDurata, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-								.addComponent(labelNomePubblicazione, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldNomePubblicazione, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBoxPubblicazioni, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblHaiQualcheSingolo, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_AddArtist.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(labelAddArtist, GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)))
+								.addComponent(labelErroreInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_AddArtist.setVerticalGroup(
@@ -407,57 +338,35 @@ public class AddArtistGUI extends JFrame {
 					.addContainerGap()
 					.addComponent(labelAddArtist, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addGap(27)
-					.addGroup(gl_AddArtist.createParallelGroup(Alignment.BASELINE)
-						.addComponent(labelCodiceArtista)
-						.addComponent(lblHaiQualcheSingolo, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addComponent(labelCodiceArtista)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_AddArtist.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBoxPubblicazioni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_AddArtist.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_AddArtist.createSequentialGroup()
-							.addComponent(labelNome)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblCognome)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldCognome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(labelData)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(labelNomeDarte)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldNomeDarte, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblCitt)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldCitta, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblFollowers)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(labelErroreInput, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_AddArtist.createSequentialGroup()
-							.addComponent(labelNomePubblicazione, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(textFieldNomePubblicazione, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(labelDurata, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(textFieldDurata, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(labelGenere, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(labelNomeEP, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
-							.addComponent(textFieldEP, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
+					.addComponent(labelNome)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblCognome)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldCognome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(labelData)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(labelNomeDarte)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldNomeDarte, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblCitt)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldCitta, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblFollowers)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(labelErroreInput, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 		);
 		AddArtist.setLayout(gl_AddArtist);
 		
@@ -490,29 +399,35 @@ public class AddArtistGUI extends JFrame {
 		
 		GroupLayout gl_panelAdd = new GroupLayout(panelAdd);
 		gl_panelAdd.setHorizontalGroup(
-			gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+			gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
-						.addComponent(AddArtist, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_panelAdd.createSequentialGroup()
-							.addComponent(btnAnnulla, GroupLayout.PREFERRED_SIZE, 378, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnAggiungi, GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE))
-						.addComponent(labelX))
-					.addContainerGap())
+					.addGroup(gl_panelAdd.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelAdd.createSequentialGroup()
+							.addComponent(AddArtist, GroupLayout.PREFERRED_SIZE, 402, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(gl_panelAdd.createParallelGroup(Alignment.LEADING)
+							.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
+								.addComponent(labelX)
+								.addContainerGap())
+							.addGroup(gl_panelAdd.createSequentialGroup()
+								.addComponent(btnAnnulla, GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+								.addGap(11))
+							.addGroup(gl_panelAdd.createSequentialGroup()
+								.addComponent(btnAggiungi, GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+								.addGap(11)))))
 		);
 		gl_panelAdd.setVerticalGroup(
 			gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
 					.addComponent(labelX)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AddArtist, GroupLayout.PREFERRED_SIZE, 595, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panelAdd.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(AddArtist, GroupLayout.PREFERRED_SIZE, 607, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(btnAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		panelAdd.setLayout(gl_panelAdd);
 
