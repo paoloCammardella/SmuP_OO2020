@@ -98,6 +98,18 @@ public class Controller {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	public void insertAlbumDB(String codice, String nome, String genere) {
+		if((codice.length()>0) && (nome.length()>0) && (genere.length()>0)){
+			albumDAO.insertAlbum(nome, codice, genere);
+		}
+		else {
+			JOptionPane.showMessageDialog(frameAddAlbum,
+					"Inserisci un album valido!!!",
+					"Errore",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 	public void frameAddArtistGUI() {
 		frameAddArtist.setVisible(true);
