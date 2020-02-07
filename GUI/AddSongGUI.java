@@ -11,6 +11,8 @@ import _Controller.Controller;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 
 import javax.swing.JTextField;
@@ -37,15 +39,18 @@ import java.awt.event.FocusEvent;
 public class AddSongGUI extends JFrame {
 
 	private JPanel contentPane;
-	
+
 	private Controller controller;
 	private JComboBox<String> comboBoxPubblicazioni;
-	
+	private JComboBox<String> comboBoxArtisti;
+	private JComboBox<String> comboBoxAlbum;
+
 	Color darkGrey = new Color(21, 21, 21);
 	Color grey = new Color(26, 26, 26);
 	Color black = new Color(15, 15, 15);
-	Color blue = new Color(0, 0, 153);
-	
+	Color blue = new Color(0, 0, 255);
+	Color darkBlue = new Color(0, 0, 153);
+
 	int mouseX, mouseY;
 	private JTextField textFieldNomePubblicazione;
 	private JTextField textFieldDurata;
@@ -54,23 +59,23 @@ public class AddSongGUI extends JFrame {
 
 	public AddSongGUI(Controller controller) {
 		setUndecorated(true);
-		
+
 		setResizable(false);
 		this.controller = controller;
-		
+
 		setTitle("Aggiungi Artist");
 		setAlwaysOnTop(true);
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 448, 726);
 		setBackground(darkGrey);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBackground(darkGrey);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel panelAdd = new JPanel();
 		panelAdd.addMouseListener(new MouseAdapter() {
 			@Override
@@ -84,43 +89,74 @@ public class AddSongGUI extends JFrame {
 			public void mouseDragged(MouseEvent e) {
 				int x = e.getXOnScreen();
 				int y = e.getYOnScreen();
-				
+
 				setLocation(x - mouseX, y - mouseY);
 			}
 		});
 		panelAdd.setBackground(darkGrey);
 		contentPane.add(panelAdd, BorderLayout.CENTER);
-		
+
 		DateFormat format = new SimpleDateFormat("dd/MM/YYYY");
-		
+
 		JPanel AddArtist = new JPanel();
 		AddArtist.setBackground(grey);
-		
-		JButton btnAggiungi = new JButton("Aggiungi");
-		btnAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAggiungi.setBorderPainted(false);
-		btnAggiungi.setForeground(Color.WHITE);
-		btnAggiungi.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		btnAggiungi.setFocusPainted(false);
-		btnAggiungi.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
-		btnAggiungi.setBackground(blue);
-		
+
+		JButton buttonAggiungi = new JButton("Aggiungi");
+		buttonAggiungi.setEnabled(false);
+		buttonAggiungi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String artista = comboBoxArtisti.getSelectedItem().toString();
+				String nome = textFieldNomePubblicazione.getText();
+				String durata = textFieldDurata.getText();
+				//int durataInt = Integer.parseInt(durata);
+				String genere = textFieldGenere.getText();
+				String ep = textFieldEP.getText();
+
+				if(comboBoxPubblicazioni.getSelectedItem() == "Singolo") {
+					controller.insertSingleDB(artista, nome, durata, genere);
+					textFieldNomePubblicazione.setText("");
+					textFieldDurata.setText("");
+					textFieldGenere.setText("");
+
+				}else if(comboBoxPubblicazioni.getSelectedItem() == "Brano") {
+					String album = comboBoxAlbum.getSelectedItem().toString();
+					controller.insertSongDB(artista, nome, durata, genere, album);
+					textFieldNomePubblicazione.setText("");
+					textFieldDurata.setText("");
+					textFieldGenere.setText("");
+
+				}else if(comboBoxPubblicazioni.getSelectedItem() == "EP") {
+					controller.insertEPDB(artista, nome, durata, genere, ep);
+					textFieldNomePubblicazione.setText("");
+					textFieldDurata.setText("");
+					textFieldGenere.setText("");
+				}
+			}
+		});
+		buttonAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonAggiungi.setBorderPainted(false);
+		buttonAggiungi.setForeground(Color.WHITE);
+		buttonAggiungi.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		buttonAggiungi.setFocusPainted(false);
+		buttonAggiungi.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
+		buttonAggiungi.setBackground(blue);
+
 		JLabel labelAddSong = new JLabel("Add Song");
 		labelAddSong.setBounds(10, 11, 401, 36);
 		labelAddSong.setHorizontalAlignment(SwingConstants.CENTER);
 		labelAddSong.setForeground(Color.WHITE);
 		labelAddSong.setFont(new Font("Segoe UI", Font.BOLD, 26));
-		
+
 		JLabel labelErroreInput = new JLabel("");
 		labelErroreInput.setBounds(20, 538, 0, 23);
 		labelErroreInput.setForeground(Color.RED);
 		labelErroreInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		
+
 		JLabel lblHaiQualcheSingolo = new JLabel("Tipo di pubblicazione");
 		lblHaiQualcheSingolo.setBounds(10, 120, 401, 25);
 		lblHaiQualcheSingolo.setForeground(Color.WHITE);
 		lblHaiQualcheSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
+
 		textFieldNomePubblicazione = new JTextField();
 		textFieldNomePubblicazione.addFocusListener(new FocusAdapter() {
 			@Override
@@ -143,19 +179,19 @@ public class AddSongGUI extends JFrame {
 		textFieldNomePubblicazione.setCaretColor(new Color(0, 153, 204));
 		textFieldNomePubblicazione.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldNomePubblicazione.setBackground(new Color(36, 53, 102));
-		
+
 		JLabel labelNomePubblicazione = new JLabel("Nome Song");
 		labelNomePubblicazione.setBounds(10, 193, 361, 25);
 		labelNomePubblicazione.setVisible(false);
 		labelNomePubblicazione.setForeground(Color.WHITE);
 		labelNomePubblicazione.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
+
 		JLabel labelDurata = new JLabel("Durata");
 		labelDurata.setBounds(10, 270, 361, 25);
 		labelDurata.setVisible(false);
 		labelDurata.setForeground(Color.WHITE);
 		labelDurata.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
+
 		textFieldDurata = new JTextField();
 		textFieldDurata.addFocusListener(new FocusAdapter() {
 			@Override
@@ -178,7 +214,7 @@ public class AddSongGUI extends JFrame {
 		textFieldDurata.setCaretColor(new Color(0, 153, 204));
 		textFieldDurata.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldDurata.setBackground(new Color(36, 53, 102));
-		
+
 		textFieldGenere = new JTextField();
 		textFieldGenere.addFocusListener(new FocusAdapter() {
 			@Override
@@ -201,13 +237,13 @@ public class AddSongGUI extends JFrame {
 		textFieldGenere.setCaretColor(new Color(0, 153, 204));
 		textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldGenere.setBackground(new Color(36, 53, 102));
-		
+
 		JLabel labelGenere = new JLabel("Genere");
 		labelGenere.setBounds(10, 347, 361, 25);
 		labelGenere.setVisible(false);
 		labelGenere.setForeground(Color.WHITE);
 		labelGenere.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
+
 		textFieldEP = new JTextField();
 		textFieldEP.addFocusListener(new FocusAdapter() {
 			@Override
@@ -230,21 +266,22 @@ public class AddSongGUI extends JFrame {
 		textFieldEP.setCaretColor(new Color(0, 153, 204));
 		textFieldEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldEP.setBackground(new Color(36, 53, 102));
-		
+
 		JLabel labelNomeEP = new JLabel("Nome EP");
 		labelNomeEP.setBounds(10, 424, 361, 25);
 		labelNomeEP.setVisible(false);
 		labelNomeEP.setForeground(Color.WHITE);
 		labelNomeEP.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
+
 		JLabel labelAlbum = new JLabel("Album");
 		labelAlbum.setForeground(Color.WHITE);
 		labelAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		labelAlbum.setBounds(10, 424, 401, 25);
 		labelAlbum.setVisible(false);
 		AddArtist.add(labelAlbum);
-		
-		JComboBox<String> comboBoxAlbum = new JComboBox<String>();
+
+		comboBoxAlbum = new JComboBox<String>();
+		comboBoxAlbum.setModel(new DefaultComboBoxModel(new String[] {"Prova"}));
 		comboBoxAlbum.setOpaque(true);
 		comboBoxAlbum.setForeground(Color.WHITE);
 		comboBoxAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -253,8 +290,8 @@ public class AddSongGUI extends JFrame {
 		comboBoxAlbum.setBounds(10, 460, 179, 26);
 		comboBoxAlbum.setVisible(false);
 		AddArtist.add(comboBoxAlbum);
-		
-		
+
+
 		comboBoxPubblicazioni = new JComboBox<String>();
 		comboBoxPubblicazioni.setBounds(10, 156, 179, 26);
 		comboBoxPubblicazioni.addFocusListener(new FocusAdapter() {
@@ -281,6 +318,7 @@ public class AddSongGUI extends JFrame {
 					textFieldEP.setVisible(false);
 					labelAlbum.setVisible(false);
 					comboBoxAlbum.setVisible(false);
+					buttonAggiungi.setEnabled(true);
 				}
 				else if(comboBoxPubblicazioni.getSelectedItem() == "Brano") {
 					textFieldNomePubblicazione.setVisible(true);
@@ -293,6 +331,7 @@ public class AddSongGUI extends JFrame {
 					comboBoxAlbum.setVisible(true);
 					labelNomeEP.setVisible(false);
 					textFieldEP.setVisible(false);
+					buttonAggiungi.setEnabled(true);
 				}
 				else if(comboBoxPubblicazioni.getSelectedItem() == "EP") {
 					textFieldNomePubblicazione.setVisible(true);
@@ -305,6 +344,7 @@ public class AddSongGUI extends JFrame {
 					textFieldEP.setVisible(true);
 					labelAlbum.setVisible(false);
 					comboBoxAlbum.setVisible(false);
+					buttonAggiungi.setEnabled(true);
 				}
 				else {
 					textFieldNomePubblicazione.setVisible(false);
@@ -317,11 +357,12 @@ public class AddSongGUI extends JFrame {
 					textFieldEP.setVisible(false);
 					labelAlbum.setVisible(false);
 					comboBoxAlbum.setVisible(false);
+					buttonAggiungi.setEnabled(false);
 				}
 			}
 		});
 		comboBoxPubblicazioni.setModel(new DefaultComboBoxModel<String>(new String[] {"No", "Singolo", "EP", "Brano"}));
-		
+
 		JLabel labelX = new JLabel("x");
 		labelX.setAlignmentY(Component.TOP_ALIGNMENT);
 		labelX.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -334,7 +375,7 @@ public class AddSongGUI extends JFrame {
 		});
 		labelX.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		labelX.setForeground(new Color(255, 0, 0));
-		
+
 		JButton btnAnnulla = new JButton("Annulla");
 		btnAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAnnulla.addActionListener(new ActionListener() {
@@ -348,31 +389,31 @@ public class AddSongGUI extends JFrame {
 		btnAnnulla.setBorderPainted(false);
 		btnAnnulla.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
 		btnAnnulla.setBackground(new Color(204, 0, 0));
-		
+
 		GroupLayout gl_panelAdd = new GroupLayout(panelAdd);
 		gl_panelAdd.setHorizontalGroup(
-			gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+				gl_panelAdd.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
-						.addComponent(AddArtist, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-						.addComponent(labelX)
-						.addComponent(btnAggiungi, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-						.addComponent(btnAnnulla, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
-					.addContainerGap())
-		);
+						.addContainerGap()
+						.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+								.addComponent(AddArtist, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+								.addComponent(labelX)
+								.addComponent(buttonAggiungi, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+								.addComponent(btnAnnulla, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
+						.addContainerGap())
+				);
 		gl_panelAdd.setVerticalGroup(
-			gl_panelAdd.createParallelGroup(Alignment.LEADING)
+				gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-					.addComponent(labelX)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AddArtist, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+						.addComponent(labelX)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(AddArtist, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(buttonAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(btnAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				);
 		AddArtist.setLayout(null);
 		AddArtist.add(labelErroreInput);
 		AddArtist.add(labelNomeEP);
@@ -386,14 +427,15 @@ public class AddSongGUI extends JFrame {
 		AddArtist.add(comboBoxPubblicazioni);
 		AddArtist.add(lblHaiQualcheSingolo);
 		AddArtist.add(labelAddSong);
-		
+
 		JLabel labelNomeArtista = new JLabel("Artista");
 		labelNomeArtista.setForeground(Color.WHITE);
 		labelNomeArtista.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		labelNomeArtista.setBounds(10, 47, 401, 25);
 		AddArtist.add(labelNomeArtista);
-		
-		JComboBox<String> comboBoxArtisti = new JComboBox<String>();
+
+		comboBoxArtisti = new JComboBox<String>();
+		comboBoxArtisti.setModel(new DefaultComboBoxModel(new String[] {"Prova"}));
 		comboBoxArtisti.setOpaque(true);
 		comboBoxArtisti.setForeground(Color.WHITE);
 		comboBoxArtisti.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -401,10 +443,9 @@ public class AddSongGUI extends JFrame {
 		comboBoxArtisti.setBackground(new Color(21, 21, 21));
 		comboBoxArtisti.setBounds(10, 83, 179, 26);
 		AddArtist.add(comboBoxArtisti);
-		
+
 		panelAdd.setLayout(gl_panelAdd);
 
 		setLocationRelativeTo(null);
-		
 	}
 }
