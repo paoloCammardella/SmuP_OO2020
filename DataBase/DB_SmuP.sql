@@ -2,9 +2,10 @@ CREATE TABLE Artista(
     id_Artist CHAR(5) PRIMARY KEY,
     firstName VARCHAR(30) NOT NULL,
     secondName VARCHAR(30) NOT NULL,
-    birthDate DATE NOT NULL,
+    birthDate VARCHAR(30) NOT NULL,
     city VARCHAR(30) NOT NULL,
-    followers INTEGER NOT NULL
+    followers INTEGER NOT NULL,
+    nomeDArte VARCHAR(30) NOT NULL,
 );
 
 CREATE TABLE Album(

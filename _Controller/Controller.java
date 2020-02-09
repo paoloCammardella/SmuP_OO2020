@@ -6,29 +6,6 @@ import GUI.AddSongGUI;
 import GUI.HomeGUI;
 import Connessione.ConnessioneDB;
 import DAO.AlbumDAO;
-
-import DAO.AlbumDAO;
-import DAO.AlbumDAOimpl;
-import DAO.ArtistaDAO;
-import DAO.ArtistaDAOimpl;
-import DAO.SongDAO;
-import DAO.SongDAOimpl;
-
-import DAO.AlbumDAO;
-import DAO.AlbumDAOimpl;
-import DAO.ArtistaDAO;
-import DAO.ArtistaDAOimpl;
-import DAO.SongDAO;
-import DAO.SongDAOimpl;
-
-import DAO.AlbumDAO;
-import DAO.AlbumDAOimpl;
-import DAO.ArtistaDAO;
-import DAO.ArtistaDAOimpl;
-import DAO.SongDAO;
-import DAO.SongDAOimpl;
-
-import DAO.AlbumDAO;
 import DAO.AlbumDAOimpl;
 import DAO.ArtistaDAO;
 import DAO.ArtistaDAOimpl;
@@ -36,6 +13,8 @@ import DAO.SongDAO;
 import DAO.SongDAOimpl;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JOptionPane;
 
@@ -47,10 +26,10 @@ public class Controller {
 	AddAlbumGUI frameAddAlbum;
 	AddSongGUI frameAddSong;
 	
-	AlbumDAO albumDAO;
-	ArtistaDAOimpl artistDAO;
+	ArtistaDAO artistDAO;
 	SongDAO songDAO;
-	
+	AlbumDAO albumDAO;
+
 	public Controller() {
 		//Connessione al DB
 		connection = ConnessioneDB.getConnection();
@@ -76,7 +55,8 @@ public class Controller {
 
 	public void insertArtistDB(String codice, String nome, String cognome, String dataNascita, String nomeDArte, String citta, String followers) {
 		if((codice.length()>0) && (nome.length()>0) && (cognome.length()>0) && (dataNascita.length()>0) && (nomeDArte.length()>0) && (citta.length()>0) && (followers.length()>0)) {
-			artistDAO.insertArtist(codice, nome, cognome, dataNascita, nomeDArte, citta, followers);
+			int Ifollowers = Integer.parseInt(followers);
+			artistDAO.insertArtist(codice, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddArtist,
@@ -84,6 +64,17 @@ public class Controller {
 					"Errore",
 					JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public ResultSet stampaArtistDB() {
+		ResultSet rs = artistDAO.stampaArtist();
+		try {
+			if(rs != null)
+				return rs;	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 	public void insertSongDB(String artista, String nome, String durata, String genere, String album) {
@@ -132,6 +123,17 @@ public class Controller {
 					"Errore",
 					JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public ResultSet stampaAlbumDB() {
+		ResultSet rs = albumDAO.stampaAlbum();
+		try {
+			if(rs != null)
+				return rs;	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 	public void frameAddArtistGUI() {

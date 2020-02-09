@@ -30,8 +30,6 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class AddAlbumGUI extends JFrame {
 
@@ -41,16 +39,12 @@ public class AddAlbumGUI extends JFrame {
 	private JTextField textFieldCodice;
 	private JTextField textFieldNome;
 	private JTextField textFieldGenere;
-	private String codice;
-	private String nome;
-	private String genere;
 
 	Color darkGrey = new Color(21, 21, 21);
 	Color grey = new Color(26, 26, 26);
 	Color black = new Color(15, 15, 15);
-	Color lightblue = new Color(26, 123, 170);
-	Color darkblue = new Color(0, 0, 153);
 	Color blue = new Color(0, 0, 255);
+	Color darkBlue = new Color(0, 0, 153);
 
 	int mouseX, mouseY;
 
@@ -101,8 +95,16 @@ public class AddAlbumGUI extends JFrame {
 
 		JButton button = new JButton("Create");
 		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setParametriAlbum(codice, nome, genere);
+			public void actionPerformed(ActionEvent e) {
+				String codice = textFieldCodice.getText();
+				String nome = textFieldNome.getText();
+				String genere = textFieldGenere.getText();
+
+				controller.insertAlbumDB(codice, nome, genere);
+
+				textFieldCodice.setText("");
+				textFieldNome.setText("");
+				textFieldGenere.setText("");
 			}
 		});
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -111,7 +113,7 @@ public class AddAlbumGUI extends JFrame {
 		button.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		button.setFocusPainted(false);
 		button.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
-		button.setBackground(new Color(0, 0, 255));
+		button.setBackground(blue);
 
 		JLabel labelCodice = new JLabel("Codice");
 		labelCodice.setForeground(Color.WHITE);
@@ -125,12 +127,10 @@ public class AddAlbumGUI extends JFrame {
 		textFieldNome.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				//labelNome.setForeground(blue);
 				textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
-				//labelNome.setForeground(Color.WHITE);
 				textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 			}
 		});
@@ -176,24 +176,14 @@ public class AddAlbumGUI extends JFrame {
 		labelAddAlbum.setForeground(Color.WHITE);
 		labelAddAlbum.setFont(new Font("Segoe UI", Font.BOLD, 26));
 
-		JLabel lblMaxCaratteri = new JLabel("Max 5 caratteri alfanumerici");
-
 		textFieldCodice = new JTextField();
-		textFieldCodice.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				lblMaxCaratteri.setText("");
-			}
-		});
 		textFieldCodice.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				//labelCodice.setForeground(blue);
 				textFieldCodice.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
-				//labelCodice.setForeground(Color.WHITE);
 				textFieldCodice.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 			}
 		});
@@ -206,8 +196,6 @@ public class AddAlbumGUI extends JFrame {
 		textFieldCodice.setCaretColor(new Color(0, 153, 204));
 		textFieldCodice.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldCodice.setBackground(new Color(36, 53, 102));
-
-		lblMaxCaratteri.setForeground(Color.WHITE);
 		GroupLayout gl_AddAlbum = new GroupLayout(AddAlbum);
 		gl_AddAlbum.setHorizontalGroup(
 				gl_AddAlbum.createParallelGroup(Alignment.LEADING)
@@ -217,10 +205,7 @@ public class AddAlbumGUI extends JFrame {
 										.addGap(25)
 										.addGroup(gl_AddAlbum.createParallelGroup(Alignment.TRAILING, false)
 												.addComponent(textFieldCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-												.addGroup(Alignment.LEADING, gl_AddAlbum.createSequentialGroup()
-														.addComponent(labelCodice, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-														.addPreferredGap(ComponentPlacement.RELATED)
-														.addComponent(lblMaxCaratteri))
+												.addComponent(labelCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(labelNome, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(textFieldNome)
 												.addComponent(labelGenere, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -228,7 +213,7 @@ public class AddAlbumGUI extends JFrame {
 								.addGroup(gl_AddAlbum.createSequentialGroup()
 										.addContainerGap()
 										.addComponent(labelAddAlbum, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(21, Short.MAX_VALUE))
+						.addContainerGap(13, Short.MAX_VALUE))
 				);
 		gl_AddAlbum.setVerticalGroup(
 				gl_AddAlbum.createParallelGroup(Alignment.LEADING)
@@ -236,9 +221,7 @@ public class AddAlbumGUI extends JFrame {
 						.addContainerGap()
 						.addComponent(labelAddAlbum, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addGap(31)
-						.addGroup(gl_AddAlbum.createParallelGroup(Alignment.BASELINE)
-								.addComponent(labelCodice, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblMaxCaratteri))
+						.addComponent(labelCodice, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textFieldCodice, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
@@ -249,7 +232,7 @@ public class AddAlbumGUI extends JFrame {
 						.addComponent(labelGenere, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(197, Short.MAX_VALUE))
+						.addContainerGap(261, Short.MAX_VALUE))
 				);
 		AddAlbum.setLayout(gl_AddAlbum);
 
@@ -311,17 +294,6 @@ public class AddAlbumGUI extends JFrame {
 		panelAdd.setLayout(gl_panelAdd);
 
 		setLocationRelativeTo(null);
-	}
 
-	public void setParametriAlbum(String codice, String nome, String genere) {
-		codice = textFieldCodice.getText();
-		nome = textFieldNome.getText();
-		genere = textFieldGenere.getText();
-
-		controller.insertAlbumDB(codice, nome, genere);
-
-		textFieldCodice.setText("");
-		textFieldNome.setText("");
-		textFieldGenere.setText("");
 	}
 }

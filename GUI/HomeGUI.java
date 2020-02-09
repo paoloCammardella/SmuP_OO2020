@@ -14,30 +14,42 @@ import javax.swing.SwingConstants;
 import java.awt.Cursor;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import java.awt.FlowLayout;
+import javax.swing.ScrollPaneConstants;
+import java.awt.Dimension;
+import java.awt.ComponentOrientation;
 
 public class HomeGUI extends JFrame {
 
 	private JPanel contentPane;
-	
+
 	private Controller controller;
-	
+
 	Color darkGrey = new Color(21, 21, 21);
 	Color grey = new Color(26, 26, 26);
 	Color black = new Color(15, 15, 15);
+
+	private JPanel panel;
+	private JScrollPane scrollPane;
 
 	public HomeGUI(Controller controller) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(HomeGUI.class.getResource("/Img/Logo-48.png")));
 
 		this.controller = controller;
-		
+
 		setBackground(new Color(36, 53, 102));
 		setTitle("Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,26 +57,26 @@ public class HomeGUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(darkGrey);
 		setContentPane(contentPane);
-		
+
 		JPanel menuRight = new JPanel();
 		menuRight.setBackground(black);
-		
+
 		JLabel label = new JLabel("");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Logo-64.png")));
-		
+
 		JPanel Card = new JPanel();
 		Card.setBackground(grey);
-		
+
 		JPanel panelDashboard = new JPanel();
 		panelDashboard.setBackground(grey);
-		
+
 		JPanel panelShowArtists = new JPanel();
 		panelShowArtists.setBackground(grey);
-		
+
 		JPanel panelShowAlbums = new JPanel();
 		panelShowAlbums.setBackground(grey);
-		
+
 		JButton buttonDashboard = new JButton("Dashboard");
 		buttonDashboard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -93,13 +105,16 @@ public class HomeGUI extends JFrame {
 		buttonDashboard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		buttonDashboard.setBorderPainted(false);
 		buttonDashboard.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Dashboard-48.png")));
-		
+
 		JButton buttonShowArtists = new JButton("Show artist");
 		buttonShowArtists.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelDashboard.setVisible(false);
 				panelShowArtists.setVisible(true);
 				panelShowAlbums.setVisible(false);
+
+				panel.removeAll();
+				stampaArtistGUI();
 			}
 		});
 		buttonShowArtists.setHorizontalTextPosition(SwingConstants.RIGHT);
@@ -122,7 +137,7 @@ public class HomeGUI extends JFrame {
 		buttonShowArtists.setFocusPainted(false);
 		buttonShowArtists.setBorderPainted(false);
 		buttonShowArtists.setBackground(new Color(15, 15, 15));
-		
+
 		JButton buttonShowAlbums = new JButton("Show albums");
 		buttonShowAlbums.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -154,58 +169,58 @@ public class HomeGUI extends JFrame {
 		buttonShowAlbums.setBackground(new Color(15, 15, 15));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(menuRight, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(6)
-							.addComponent(label, GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(Card, GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
+						.addComponent(menuRight, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(6)
+										.addComponent(label, GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE))
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(Card, GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)))
+						.addContainerGap())
+				);
 		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(35)
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(Card, GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
-					.addContainerGap())
+						.addGap(35)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+						.addGap(18)
+						.addComponent(Card, GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+						.addContainerGap())
 				.addComponent(menuRight, GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
-		);
+				);
 		GroupLayout gl_menuRight = new GroupLayout(menuRight);
 		gl_menuRight.setHorizontalGroup(
-			gl_menuRight.createParallelGroup(Alignment.LEADING)
+				gl_menuRight.createParallelGroup(Alignment.LEADING)
 				.addComponent(buttonDashboard, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
 				.addComponent(buttonShowArtists, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
 				.addComponent(buttonShowAlbums, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-		);
+				);
 		gl_menuRight.setVerticalGroup(
-			gl_menuRight.createParallelGroup(Alignment.LEADING)
+				gl_menuRight.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_menuRight.createSequentialGroup()
-					.addGap(165)
-					.addComponent(buttonDashboard, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addGap(3)
-					.addComponent(buttonShowArtists, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addGap(3)
-					.addComponent(buttonShowAlbums, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(331, Short.MAX_VALUE))
-		);
+						.addGap(165)
+						.addComponent(buttonDashboard, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+						.addGap(3)
+						.addComponent(buttonShowArtists, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+						.addGap(3)
+						.addComponent(buttonShowAlbums, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(331, Short.MAX_VALUE))
+				);
 		menuRight.setLayout(gl_menuRight);
 		Card.setLayout(new CardLayout(0, 0));
-		
+
 		Card.add(panelDashboard, "name_228475787480200");
-		
+
 		JLabel labelCreatedBy = new JLabel("Created by Franzese Salvatore & Cammardella Paolo");
 		labelCreatedBy.setHorizontalAlignment(SwingConstants.CENTER);
 		labelCreatedBy.setAlignmentX(Component.CENTER_ALIGNMENT);
 		labelCreatedBy.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 		labelCreatedBy.setForeground(new Color(255, 255, 255));
 		labelCreatedBy.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
+
 		JLabel lblDashboard = new JLabel("DASHBOARD");
 		lblDashboard.setAlignmentY(Component.TOP_ALIGNMENT);
 		lblDashboard.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -213,7 +228,7 @@ public class HomeGUI extends JFrame {
 		lblDashboard.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDashboard.setForeground(new Color(255, 255, 255));
 		lblDashboard.setFont(new Font("Segoe UI", Font.BOLD, 30));
-		
+
 		JButton buttonAddArtist = new JButton("Add Artist");
 		buttonAddArtist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -241,7 +256,7 @@ public class HomeGUI extends JFrame {
 		buttonAddArtist.setFocusPainted(false);
 		buttonAddArtist.setBorderPainted(false);
 		buttonAddArtist.setBackground(new Color(15, 15, 15));
-		
+
 		JButton buttonAddAlbum = new JButton("Add Album");
 		buttonAddAlbum.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -269,18 +284,18 @@ public class HomeGUI extends JFrame {
 		buttonAddAlbum.setFocusPainted(false);
 		buttonAddAlbum.setBorderPainted(false);
 		buttonAddAlbum.setBackground(new Color(15, 15, 15));
-		
+
 		JLabel SpazioButtom = new JLabel("");
 		SpazioButtom.setHorizontalAlignment(SwingConstants.CENTER);
 		SpazioButtom.setForeground(Color.WHITE);
 		SpazioButtom.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		SpazioButtom.setAlignmentY(1.0f);
 		SpazioButtom.setAlignmentX(0.5f);
-		
+
 		JLabel SpazioLeft = new JLabel("");
-		
+
 		JLabel SpazioRight = new JLabel("");
-		
+
 		JButton btnAddSong = new JButton("Add Song");
 		btnAddSong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAddSong.addMouseListener(new MouseAdapter() {
@@ -308,106 +323,384 @@ public class HomeGUI extends JFrame {
 		btnAddSong.setBorderPainted(false);
 		btnAddSong.setBorder(null);
 		btnAddSong.setBackground(new Color(15, 15, 15));
-		
+
 		GroupLayout gl_panelDashboard = new GroupLayout(panelDashboard);
 		gl_panelDashboard.setHorizontalGroup(
-			gl_panelDashboard.createParallelGroup(Alignment.LEADING)
+				gl_panelDashboard.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelDashboard.createSequentialGroup()
-					.addGap(10)
-					.addComponent(lblDashboard, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
-					.addGap(10))
+						.addGap(10)
+						.addComponent(lblDashboard, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
+						.addGap(10))
 				.addGroup(gl_panelDashboard.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(SpazioLeft, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(buttonAddArtist, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(buttonAddAlbum, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnAddSong, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
-					.addGap(1)
-					.addComponent(SpazioRight, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-					.addContainerGap())
+						.addContainerGap()
+						.addComponent(SpazioLeft, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(buttonAddArtist, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(buttonAddAlbum, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btnAddSong, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
+						.addGap(1)
+						.addComponent(SpazioRight, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+						.addContainerGap())
 				.addGroup(gl_panelDashboard.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(labelCreatedBy, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
-					.addContainerGap())
+						.addContainerGap()
+						.addComponent(labelCreatedBy, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
+						.addContainerGap())
 				.addGroup(gl_panelDashboard.createSequentialGroup()
-					.addGap(20)
-					.addComponent(SpazioButtom, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE))
-		);
+						.addGap(20)
+						.addComponent(SpazioButtom, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE))
+				);
 		gl_panelDashboard.setVerticalGroup(
-			gl_panelDashboard.createParallelGroup(Alignment.LEADING)
+				gl_panelDashboard.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelDashboard.createSequentialGroup()
-					.addGap(11)
-					.addComponent(lblDashboard, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelDashboard.createSequentialGroup()
-							.addGap(11)
-							.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING)
-								.addComponent(SpazioLeft, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+						.addGap(11)
+						.addComponent(lblDashboard, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panelDashboard.createSequentialGroup()
-									.addGap(2)
-									.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(buttonAddArtist, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(buttonAddAlbum, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)))))
-						.addGroup(gl_panelDashboard.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnAddSong, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE)
-								.addComponent(SpazioRight, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(SpazioButtom, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-					.addGap(4)
-					.addComponent(labelCreatedBy, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+										.addGap(11)
+										.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING)
+												.addComponent(SpazioLeft, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+												.addGroup(gl_panelDashboard.createSequentialGroup()
+														.addGap(2)
+														.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING, false)
+																.addComponent(buttonAddArtist, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																.addComponent(buttonAddAlbum, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)))))
+								.addGroup(gl_panelDashboard.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING)
+												.addComponent(btnAddSong, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE)
+												.addComponent(SpazioRight, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(SpazioButtom, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+						.addGap(4)
+						.addComponent(labelCreatedBy, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				);
 		panelDashboard.setLayout(gl_panelDashboard);
-		
+
 		Card.add(panelShowArtists, "name_228485702864300");
-		
+
 		JLabel lblArtists_1 = new JLabel("ARTISTS");
 		lblArtists_1.setForeground(new Color(255, 255, 255));
 		lblArtists_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblArtists_1.setFont(new Font("Segoe UI", Font.BOLD, 30));
+
+		scrollPane = new JScrollPane();
+		scrollPane.setAutoscrolls(true);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBorder(null);
 		GroupLayout gl_panelShowArtists = new GroupLayout(panelShowArtists);
 		gl_panelShowArtists.setHorizontalGroup(
-			gl_panelShowArtists.createParallelGroup(Alignment.LEADING)
+				gl_panelShowArtists.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelShowArtists.createSequentialGroup()
-					.addGap(10)
-					.addComponent(lblArtists_1, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
-					.addGap(10))
-		);
+						.addGap(10)
+						.addComponent(lblArtists_1, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
+						.addGap(10))
+				.addGroup(gl_panelShowArtists.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 1062, Short.MAX_VALUE)
+						.addGap(13))
+				);
 		gl_panelShowArtists.setVerticalGroup(
-			gl_panelShowArtists.createParallelGroup(Alignment.LEADING)
+				gl_panelShowArtists.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelShowArtists.createSequentialGroup()
-					.addGap(11)
-					.addComponent(lblArtists_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
-		);
+						.addGap(11)
+						.addComponent(lblArtists_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+						.addGap(16))
+				);
+
+		panel = new JPanel();
+		panel.setBackground(grey);
+		panel.setForeground(grey);
+
+		scrollPane.setBackground(darkGrey);
+		scrollPane.setViewportView(panel);
+		FlowLayout fl_panel = new FlowLayout(FlowLayout.CENTER, 5, 5);
+		panel.setLayout(fl_panel);
+
+		JPanel panel_BackGround = new JPanel();
+		panel_BackGround.setBackground(darkGrey);
+
+		JTextField textFieldNomeArtista = new JTextField();
+		textFieldNomeArtista.setForeground(new Color(255, 255, 255));
+		textFieldNomeArtista.setEditable(false);
+		textFieldNomeArtista.setDisabledTextColor(new Color(255, 255, 255));
+		textFieldNomeArtista.setBackground(darkGrey);
+		textFieldNomeArtista.setBorder(null);
+		textFieldNomeArtista.setFont(new Font("Segoe UI", Font.BOLD, 24));
+		textFieldNomeArtista.setColumns(10);
+
+		JTextField textFieldNomeDArte = new JTextField();
+		textFieldNomeDArte.setForeground(new Color(255, 255, 255));
+		textFieldNomeDArte.setEditable(false);
+		textFieldNomeDArte.setDisabledTextColor(new Color(255, 255, 255));
+		textFieldNomeDArte.setBackground(darkGrey);
+		textFieldNomeDArte.setBorder(null);
+		textFieldNomeDArte.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		textFieldNomeDArte.setColumns(10);
+
+		JTextField textFieldDataNascita = new JTextField();
+		textFieldDataNascita.setForeground(new Color(255, 255, 255));
+		textFieldDataNascita.setEditable(false);
+		textFieldDataNascita.setDisabledTextColor(new Color(255, 255, 255));
+		textFieldDataNascita.setBackground(darkGrey);
+		textFieldDataNascita.setBorder(null);
+		textFieldDataNascita.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		textFieldDataNascita.setColumns(10);
+
+		JTextField textFieldFollowers = new JTextField();
+		textFieldFollowers.setForeground(new Color(255, 255, 255));
+		textFieldFollowers.setEditable(false);
+		textFieldFollowers.setDisabledTextColor(new Color(255, 255, 255));
+		textFieldFollowers.setBackground(darkGrey);
+		textFieldFollowers.setBorder(null);
+		textFieldFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+		textFieldFollowers.setColumns(10);
+
+		JTextField textFieldCity = new JTextField();
+		textFieldCity.setForeground(new Color(255, 255, 255));
+		textFieldCity.setEditable(false);
+		textFieldCity.setDisabledTextColor(new Color(255, 255, 255));
+		textFieldCity.setBackground(darkGrey);
+		textFieldCity.setBorder(null);
+		textFieldCity.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		textFieldCity.setColumns(10);
+
+		JTextField textFieldCodiceArtista = new JTextField();
+		textFieldCodiceArtista.setForeground(new Color(255, 255, 255));
+		textFieldCodiceArtista.setEditable(false);
+		textFieldCodiceArtista.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		textFieldCodiceArtista.setDisabledTextColor(new Color(255, 255, 255));
+		textFieldCodiceArtista.setBackground(darkGrey);
+		textFieldCodiceArtista.setBorder(null);
+		textFieldCodiceArtista.setColumns(10);
+
+		JLabel lblFollowers = new JLabel("Followers:");
+		lblFollowers.setForeground(new Color(255, 255, 255));
+		lblFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+		JLabel lblCod = new JLabel("Cod:");
+		lblCod.setForeground(Color.WHITE);
+		lblCod.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+		JLabel lblDataNascita = new JLabel("Data nascita:");
+		lblDataNascita.setForeground(Color.WHITE);
+		lblDataNascita.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		GroupLayout gl_panel_BackGround = new GroupLayout(panel_BackGround);
+		gl_panel_BackGround.setHorizontalGroup(
+				gl_panel_BackGround.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_BackGround.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_panel_BackGround.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_BackGround.createSequentialGroup()
+										.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_BackGround.createSequentialGroup()
+										.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)))
+						.addPreferredGap(ComponentPlacement.RELATED, 373, Short.MAX_VALUE)
+						.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panel_BackGround.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel_BackGround.createSequentialGroup()
+										.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel_BackGround.createSequentialGroup()
+										.addComponent(lblFollowers, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap())
+				);
+		gl_panel_BackGround.setVerticalGroup(
+				gl_panel_BackGround.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_BackGround.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(gl_panel_BackGround.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(gl_panel_BackGround.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldCodiceArtista, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+								.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblFollowers))
+						.addContainerGap())
+				);
+		panel_BackGround.setLayout(gl_panel_BackGround);
+		panel.add(panel_BackGround);
 		panelShowArtists.setLayout(gl_panelShowArtists);
-		
+
 		Card.add(panelShowAlbums, "name_228516752218900");
-		
+
 		JLabel lblAlbums_1 = new JLabel("ALBUMS");
 		lblAlbums_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlbums_1.setForeground(new Color(255, 255, 255));
 		lblAlbums_1.setFont(new Font("Segoe UI", Font.BOLD, 30));
 		GroupLayout gl_panelShowAlbums = new GroupLayout(panelShowAlbums);
 		gl_panelShowAlbums.setHorizontalGroup(
-			gl_panelShowAlbums.createParallelGroup(Alignment.LEADING)
+				gl_panelShowAlbums.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelShowAlbums.createSequentialGroup()
-					.addGap(10)
-					.addComponent(lblAlbums_1, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
-					.addGap(10))
-		);
+						.addGap(10)
+						.addComponent(lblAlbums_1, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
+						.addGap(10))
+				);
 		gl_panelShowAlbums.setVerticalGroup(
-			gl_panelShowAlbums.createParallelGroup(Alignment.LEADING)
+				gl_panelShowAlbums.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelShowAlbums.createSequentialGroup()
-					.addGap(11)
-					.addComponent(lblAlbums_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
-		);
+						.addGap(11)
+						.addComponent(lblAlbums_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+				);
 		panelShowAlbums.setLayout(gl_panelShowAlbums);
 		contentPane.setLayout(gl_contentPane);
 		setLocationRelativeTo(null);
+	}
+
+	public void stampaArtistGUI() {
+		ResultSet rs = controller.stampaArtistDB();
+		try {
+			if(rs != null) {
+				while(rs.next()) {
+					JPanel panel_BackGround = new JPanel();
+					panel_BackGround.setBackground(darkGrey);
+
+					JTextField textFieldNomeArtista = new JTextField();
+					textFieldNomeArtista.setForeground(new Color(255, 255, 255));
+					textFieldNomeArtista.setEditable(false);
+					textFieldNomeArtista.setDisabledTextColor(new Color(255, 255, 255));
+					textFieldNomeArtista.setBackground(darkGrey);
+					textFieldNomeArtista.setBorder(null);
+					textFieldNomeArtista.setFont(new Font("Segoe UI", Font.BOLD, 24));
+					textFieldNomeArtista.setColumns(10);
+
+					JTextField textFieldNomeDArte = new JTextField();
+					textFieldNomeDArte.setForeground(new Color(255, 255, 255));
+					textFieldNomeDArte.setEditable(false);
+					textFieldNomeDArte.setDisabledTextColor(new Color(255, 255, 255));
+					textFieldNomeDArte.setBackground(darkGrey);
+					textFieldNomeDArte.setBorder(null);
+					textFieldNomeDArte.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+					textFieldNomeDArte.setColumns(10);
+
+					JTextField textFieldDataNascita = new JTextField();
+					textFieldDataNascita.setForeground(new Color(255, 255, 255));
+					textFieldDataNascita.setEditable(false);
+					textFieldDataNascita.setDisabledTextColor(new Color(255, 255, 255));
+					textFieldDataNascita.setBackground(darkGrey);
+					textFieldDataNascita.setBorder(null);
+					textFieldDataNascita.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+					textFieldDataNascita.setColumns(10);
+
+					JTextField textFieldFollowers = new JTextField();
+					textFieldFollowers.setForeground(new Color(255, 255, 255));
+					textFieldFollowers.setEditable(false);
+					textFieldFollowers.setDisabledTextColor(new Color(255, 255, 255));
+					textFieldFollowers.setBackground(darkGrey);
+					textFieldFollowers.setBorder(null);
+					textFieldFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+					textFieldFollowers.setColumns(10);
+
+					JTextField textFieldCity = new JTextField();
+					textFieldCity.setForeground(new Color(255, 255, 255));
+					textFieldCity.setEditable(false);
+					textFieldCity.setDisabledTextColor(new Color(255, 255, 255));
+					textFieldCity.setBackground(darkGrey);
+					textFieldCity.setBorder(null);
+					textFieldCity.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+					textFieldCity.setColumns(10);
+
+					JTextField textFieldCodiceArtista = new JTextField();
+					textFieldCodiceArtista.setForeground(new Color(255, 255, 255));
+					textFieldCodiceArtista.setEditable(false);
+					textFieldCodiceArtista.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+					textFieldCodiceArtista.setDisabledTextColor(new Color(255, 255, 255));
+					textFieldCodiceArtista.setBackground(darkGrey);
+					textFieldCodiceArtista.setBorder(null);
+					textFieldCodiceArtista.setColumns(10);
+
+					JLabel lblFollowers = new JLabel("Followers:");
+					lblFollowers.setForeground(new Color(255, 255, 255));
+					lblFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+					JLabel lblCod = new JLabel("Cod:");
+					lblCod.setForeground(Color.WHITE);
+					lblCod.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+					JLabel lblDataNascita = new JLabel("Data nascita:");
+					lblDataNascita.setForeground(Color.WHITE);
+					lblDataNascita.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+					GroupLayout gl_panel_BackGround = new GroupLayout(panel_BackGround);
+					gl_panel_BackGround.setHorizontalGroup(
+							gl_panel_BackGround.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel_BackGround.createSequentialGroup()
+									.addContainerGap()
+									.addGroup(gl_panel_BackGround.createParallelGroup(Alignment.LEADING)
+											.addGroup(gl_panel_BackGround.createSequentialGroup()
+													.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
+											.addGroup(gl_panel_BackGround.createSequentialGroup()
+													.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE)))
+									.addPreferredGap(ComponentPlacement.RELATED, 373, Short.MAX_VALUE)
+									.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_panel_BackGround.createParallelGroup(Alignment.TRAILING)
+											.addGroup(gl_panel_BackGround.createSequentialGroup()
+													.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
+											.addGroup(gl_panel_BackGround.createSequentialGroup()
+													.addComponent(lblFollowers, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)))
+									.addContainerGap())
+							);
+					gl_panel_BackGround.setVerticalGroup(
+							gl_panel_BackGround.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel_BackGround.createSequentialGroup()
+									.addContainerGap()
+									.addGroup(gl_panel_BackGround.createParallelGroup(Alignment.BASELINE)
+											.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+											.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(gl_panel_BackGround.createParallelGroup(Alignment.BASELINE)
+											.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+											.addComponent(textFieldCodiceArtista, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+											.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblFollowers))
+									.addContainerGap())
+							);
+					panel_BackGround.setLayout(gl_panel_BackGround);
+					panel.add(panel_BackGround);
+					
+					textFieldCodiceArtista.setText(rs.getString("id_Artist"));
+					textFieldNomeArtista.setText(rs.getString("firstName") + " " + rs.getString("secondName"));
+					textFieldDataNascita.setText(rs.getString("birthDate"));
+					textFieldCity.setText(rs.getString("city"));
+					textFieldFollowers.setText(rs.getString("followers"));
+					textFieldNomeDArte.setText(rs.getString("nomeDArte"));
+				}
+			}
+			else
+				JOptionPane.showMessageDialog(this,
+						"DataBase vuoto!!!",
+						"Errore",
+						JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
