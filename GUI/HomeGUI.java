@@ -35,7 +35,7 @@ public class HomeGUI extends JFrame {
 
 	public HomeGUI(Controller controller) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(HomeGUI.class.getResource("/Img/Logo-48.png")));
-		
+
 		this.controller = controller;
 		
 		setBackground(new Color(36, 53, 102));
