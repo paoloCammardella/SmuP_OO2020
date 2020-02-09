@@ -5,7 +5,7 @@ CREATE TABLE Artista(
     birthDate VARCHAR(30) NOT NULL,
     city VARCHAR(30) NOT NULL,
     followers INTEGER NOT NULL,
-    nomeDArte VARCHAR(30) NOT NULL,
+    nomeDArte VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Album(
@@ -23,16 +23,16 @@ CREATE TABLE EP(
     nameEP VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE Publica(
+CREATE TABLE Pubblica(
     id_Release CHAR(5) PRIMARY KEY,
     releaseDate DATE NOT NULL,
     id_Artist CHAR(5),
     id_Album CHAR(5),
-	id_Single CHAR(5),
+    id_Single CHAR(5),
     id_EP CHAR(5),
-    CONSTRAINT FK1 FOREIGN KEY (id_Artist) REFERENCES Artist(id_Artist),
+    CONSTRAINT FK1 FOREIGN KEY (id_Artist) REFERENCES Artista(id_Artist),
     CONSTRAINT FK2 FOREIGN KEY (id_Album) REFERENCES Album(id_Album),
-    CONSTRAINT FK3 FOREIGN KEY (id_Single) REFERENCES Single(id_Single),
+    CONSTRAINT FK3 FOREIGN KEY (id_Single) REFERENCES Singolo(id_Single),
     CONSTRAINT FK4 FOREIGN KEY (id_EP) REFERENCES EP(id_EP)
 );
 
@@ -45,6 +45,6 @@ CREATE TABLE Brano(
     id_Single CHAR(5),
     id_EP CHAR(5),
     CONSTRAINT FK2 FOREIGN KEY (id_Album) REFERENCES Album(id_Album),
-    CONSTRAINT FK3 FOREIGN KEY (id_Single) REFERENCES Single(id_Single),
+    CONSTRAINT FK3 FOREIGN KEY (id_Single) REFERENCES Singolo(id_Single),
     CONSTRAINT FK4 FOREIGN KEY (id_EP) REFERENCES EP(id_EP)
 );
