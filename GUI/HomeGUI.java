@@ -199,7 +199,7 @@ public class HomeGUI extends JFrame {
 		
 		Card.add(panelDashboard, "name_228475787480200");
 		
-		JLabel labelCreatedBy = new JLabel("Created by Franzese Salvatore & Paolo Cammardella");
+		JLabel labelCreatedBy = new JLabel("Created by Franzese Salvatore & Cammardella Paolo");
 		labelCreatedBy.setHorizontalAlignment(SwingConstants.CENTER);
 		labelCreatedBy.setAlignmentX(Component.CENTER_ALIGNMENT);
 		labelCreatedBy.setAlignmentY(Component.BOTTOM_ALIGNMENT);
