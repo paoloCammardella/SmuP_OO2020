@@ -11,10 +11,8 @@ import DAO.ArtistaDAO;
 import DAO.ArtistaDAOimpl;
 import DAO.SongDAO;
 import DAO.SongDAOimpl;
-import Entita.Artista;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -101,23 +99,6 @@ public class Controller {
 			e.printStackTrace();
 		}
 		return rs;
-	}
-	
-	public ArrayList<Artista> comboBoxArtista() {
-		ArrayList<Artista> listArtist = new ArrayList<Artista>();
-		ResultSet rs = artistDAO.stampaArtist();
-		try {
-			while(rs != null) {
-				String followers = rs.getString(7);
-				int f = Integer.parseInt(followers);
-				Artista a = new Artista(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), f);
-				listArtist.add(a);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return listArtist;
 	}
 
 	public void insertSongDB(String artista, String nome, String durata, String genere, String album) {
