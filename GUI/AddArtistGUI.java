@@ -11,7 +11,6 @@ import _Controller.Controller;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
@@ -31,9 +30,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 import java.awt.event.MouseMotionAdapter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.Component;
@@ -101,8 +97,6 @@ public class AddArtistGUI extends JFrame {
 		});
 		panelAdd.setBackground(darkGrey);
 		contentPane.add(panelAdd, BorderLayout.SOUTH);
-
-		DateFormat format = new SimpleDateFormat("dd/MM/YYYY");
 
 		JPanel AddArtist = new JPanel();
 		AddArtist.setBackground(grey);
@@ -220,7 +214,8 @@ public class AddArtistGUI extends JFrame {
 		JLabel labelData = new JLabel("Data nascita");
 		labelData.setForeground(Color.WHITE);
 		labelData.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-
+		
+		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
 		textFieldDataNascita = new JFormattedTextField(format);
 		textFieldDataNascita.addFocusListener(new FocusAdapter() {
 			@Override

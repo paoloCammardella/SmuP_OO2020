@@ -39,7 +39,41 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 			System.out.println("Errore inserimento: " + e.getMessage());
 		}
 	}
-
+	
+	@Override
+	public void deleteArtist(String codice) {
+		try {
+			String query_delete = "DELETE FROM Artist WHERE id_Artist = ?";
+			
+			PreparedStatement pst = connection.prepareStatement(query_delete);
+			pst.setString(1, codice);
+			pst.executeUpdate();
+		}
+		catch(SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	@Override
+	public void updateArtist(String codice, String nome, String cognome, String dataNascita, String citta, int followers, String nomeDArte) {
+		try {
+			String query_update = "UPDATE Artist SET firstName = ? , secondName = ?, birthDate = ?, city = ?, followers = ?, nomeDArte = ? WHERE id_Artist = ? ";
+			
+			PreparedStatement pst = connection.prepareStatement(query_update);
+			pst.setString(1, nome);
+			pst.setString(2, cognome);
+			pst.setString(3, dataNascita);
+			pst.setString(4, citta);
+			pst.setInt(5, followers);
+			pst.setString(6, nomeDArte);
+			pst.setString(7, codice);
+			pst.executeUpdate();
+		}
+		catch(SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
 	@Override
 	public ResultSet stampaArtist() {
 		ResultSet rs = null;

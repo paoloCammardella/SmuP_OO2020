@@ -1,7 +1,4 @@
-
 package Entita;
-
-import java.util.Date;
 
 public class Artista{
 	
@@ -9,18 +6,18 @@ public class Artista{
 	private String lastName;
 	private String nickname;
 	private String id_Artist;
-	private Date birthDate;
+	private String birthDate;
 	private String city;
 	private int followers;
 	
-	public Artista(String city, String firstName, String lastName, String nickname, String id_Artist, Date birthDate, int followers) {
-		setCity(city);
+	public Artista(String id_Artist,  String firstName, String lastName, String city, String birthDate, String nickname, int followers) {
+		setId_Artist(id_Artist);
 		setFristName(firstName);
 		setLastName(lastName);
-		setId_Artist(id_Artist);
+		setCity(city);
+		setBirthDate(birthDate);
 		setNickname(nickname);
 		setFollowers(0);
-		setBirthDate(birthDate);
 	}
 	
 	public String getFristName() {
@@ -47,10 +44,10 @@ public class Artista{
 	public void setId_Artist(String id_Artist) {
 		this.id_Artist = id_Artist;
 	}
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 	public String getCity() {
@@ -64,6 +61,11 @@ public class Artista{
 	}
 	public void setFollowers(int followers) {
 		this.followers = followers;
+	}
+	
+	@Override
+	public String toString() {
+		return getId_Artist() + ", " + getFristName();
 	}
 }
 

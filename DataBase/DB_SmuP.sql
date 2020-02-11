@@ -28,7 +28,7 @@ CREATE TABLE Pubblica(
     releaseDate DATE NOT NULL,
     id_Artist CHAR(5),
     id_Album CHAR(5),
-    id_Single CHAR(5),
+	id_Single CHAR(5),
     id_EP CHAR(5),
     CONSTRAINT FK1 FOREIGN KEY (id_Artist) REFERENCES Artista(id_Artist),
     CONSTRAINT FK2 FOREIGN KEY (id_Album) REFERENCES Album(id_Album),
@@ -48,3 +48,10 @@ CREATE TABLE Brano(
     CONSTRAINT FK3 FOREIGN KEY (id_Single) REFERENCES Singolo(id_Single),
     CONSTRAINT FK4 FOREIGN KEY (id_EP) REFERENCES EP(id_EP)
 );
+
+CREATE SEQUENCE public."codicePubblica"
+    INCREMENT 1
+    START 0
+    MINVALUE 0
+    MAXVALUE 500
+    CACHE 1;

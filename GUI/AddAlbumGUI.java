@@ -16,6 +16,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
+import Entita.Artista;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -24,12 +26,17 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.Cursor;
 import java.awt.event.MouseMotionAdapter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AddAlbumGUI extends JFrame {
 
@@ -39,6 +46,7 @@ public class AddAlbumGUI extends JFrame {
 	private JTextField textFieldCodice;
 	private JTextField textFieldNome;
 	private JTextField textFieldGenere;
+	private JComboBox<String> comboBoxArtisti;
 
 	Color darkGrey = new Color(21, 21, 21);
 	Color grey = new Color(26, 26, 26);
@@ -47,16 +55,15 @@ public class AddAlbumGUI extends JFrame {
 	Color darkBlue = new Color(0, 0, 153);
 
 	int mouseX, mouseY;
+	private JTextField textFieldData;
 
 	public AddAlbumGUI(Controller controller) {
-		setUndecorated(true);
-
-		setResizable(false);
 		this.controller = controller;
-
+		
+		setUndecorated(true);
+		setResizable(false);
 		setTitle("Aggiungi Artist");
 		setAlwaysOnTop(true);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 449, 613);
 		setBackground(darkGrey);
@@ -99,8 +106,10 @@ public class AddAlbumGUI extends JFrame {
 				String codice = textFieldCodice.getText();
 				String nome = textFieldNome.getText();
 				String genere = textFieldGenere.getText();
+				String data = textFieldData.getText();
+				String artista = comboBoxArtisti.getSelectedItem().toString();
 
-				controller.insertAlbumDB(codice, nome, genere);
+				controller.insertAlbumDB(codice, nome, genere, data, artista);
 
 				textFieldCodice.setText("");
 				textFieldNome.setText("");
@@ -196,44 +205,81 @@ public class AddAlbumGUI extends JFrame {
 		textFieldCodice.setCaretColor(new Color(0, 153, 204));
 		textFieldCodice.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldCodice.setBackground(new Color(36, 53, 102));
+		
+		JLabel labelArtista = new JLabel("Artista");
+		labelArtista.setForeground(Color.WHITE);
+		labelArtista.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		
+		comboBoxArtisti = new JComboBox<String>();
+		comboBoxArtisti.setOpaque(true);
+		comboBoxArtisti.setForeground(Color.WHITE);
+		comboBoxArtisti.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		comboBoxArtisti.setBorder(null);
+		comboBoxArtisti.setBackground(new Color(21, 21, 21));
+		
+		JLabel labelData = new JLabel("Data pubblicazione");
+		labelData.setForeground(Color.WHITE);
+		labelData.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		
+		textFieldData = new JTextField();
+		textFieldData.setSelectionColor(new Color(0, 153, 204));
+		textFieldData.setSelectedTextColor(Color.WHITE);
+		textFieldData.setOpaque(false);
+		textFieldData.setForeground(Color.WHITE);
+		textFieldData.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		textFieldData.setColumns(10);
+		textFieldData.setCaretColor(new Color(0, 153, 204));
+		textFieldData.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		textFieldData.setBackground(new Color(36, 53, 102));
 		GroupLayout gl_AddAlbum = new GroupLayout(AddAlbum);
 		gl_AddAlbum.setHorizontalGroup(
-				gl_AddAlbum.createParallelGroup(Alignment.LEADING)
+			gl_AddAlbum.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddAlbum.createSequentialGroup()
-						.addGroup(gl_AddAlbum.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_AddAlbum.createSequentialGroup()
-										.addGap(25)
-										.addGroup(gl_AddAlbum.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(textFieldCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-												.addComponent(labelCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(labelNome, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(textFieldNome)
-												.addComponent(labelGenere, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(textFieldGenere)))
-								.addGroup(gl_AddAlbum.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(labelAddAlbum, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(13, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addComponent(labelAddAlbum, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_AddAlbum.createSequentialGroup()
+					.addGap(25)
+					.addGroup(gl_AddAlbum.createParallelGroup(Alignment.LEADING)
+						.addComponent(labelArtista, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
+						.addComponent(comboBoxArtisti, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textFieldData, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelData, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_AddAlbum.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(textFieldCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+							.addComponent(labelCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(labelNome, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(textFieldNome)
+							.addComponent(labelGenere, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(textFieldGenere)))
+					.addGap(19))
+		);
 		gl_AddAlbum.setVerticalGroup(
-				gl_AddAlbum.createParallelGroup(Alignment.LEADING)
+			gl_AddAlbum.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddAlbum.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(labelAddAlbum, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addGap(31)
-						.addComponent(labelCodice, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textFieldCodice, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(labelGenere, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(261, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addComponent(labelAddAlbum, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addGap(31)
+					.addComponent(labelCodice, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldCodice, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(labelNome, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(labelGenere, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(labelData, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textFieldData, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(labelArtista, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBoxArtisti, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(58, Short.MAX_VALUE))
+		);
 		AddAlbum.setLayout(gl_AddAlbum);
 
 		JLabel labelX = new JLabel("x");
@@ -262,38 +308,60 @@ public class AddAlbumGUI extends JFrame {
 		button_1.setBackground(new Color(204, 0, 0));
 		GroupLayout gl_panelAdd = new GroupLayout(panelAdd);
 		gl_panelAdd.setHorizontalGroup(
-				gl_panelAdd.createParallelGroup(Alignment.LEADING)
+			gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelAdd.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
-										.addComponent(labelX)
-										.addGap(21))
-								.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
-										.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
-												.addComponent(button_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-												.addComponent(AddAlbum, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
-										.addGap(9))
-								.addGroup(gl_panelAdd.createSequentialGroup()
-										.addComponent(button, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-										.addGap(9))))
-				);
+					.addContainerGap()
+					.addGroup(gl_panelAdd.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
+							.addComponent(labelX)
+							.addGap(21))
+						.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
+							.addComponent(AddAlbum, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
+							.addComponent(button, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl_panelAdd.createSequentialGroup()
+							.addComponent(button_1, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+							.addGap(9))))
+		);
 		gl_panelAdd.setVerticalGroup(
-				gl_panelAdd.createParallelGroup(Alignment.LEADING)
+			gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(AddAlbum, GroupLayout.PREFERRED_SIZE, 460, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				);
+					.addContainerGap()
+					.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(AddAlbum, GroupLayout.PREFERRED_SIZE, 460, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(button, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
 		panelAdd.setLayout(gl_panelAdd);
 
 		setLocationRelativeTo(null);
-
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				aggiungiArticoliComboBox();
+			}
+		});
+	}
+	
+	public void aggiungiArticoliComboBox() {
+		ResultSet rs = controller.stampaArtistDB();
+		comboBoxArtisti.removeAllItems();
+		try {
+			while(rs.next()) {
+				String followers = rs.getString("followers");
+				int f = Integer.parseInt(followers);
+				Artista a = new Artista(rs.getString("id_Artist"), rs.getString("firstname"), rs.getString("secondname"), rs.getString("city"), rs.getString("nomeDArte"), rs.getString("birthDate"), f);
+				comboBoxArtisti.addItem(a.toString());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

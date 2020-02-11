@@ -11,17 +11,18 @@ import DAO.ArtistaDAO;
 import DAO.ArtistaDAOimpl;
 import DAO.SongDAO;
 import DAO.SongDAOimpl;
+import Entita.Artista;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 public class Controller {
 
 	Connection connection;
-
+	
+	HomeGUI frameHome;
 	AddArtistGUI frameAddArtist;
 	AddAlbumGUI frameAddAlbum;
 	AddSongGUI frameAddSong;
@@ -35,7 +36,7 @@ public class Controller {
 		connection = ConnessioneDB.getConnection();
 
 		//Frame principale
-		HomeGUI frameHome = new HomeGUI(this);
+		frameHome = new HomeGUI(this);
 		frameHome.setVisible(true);
 
 		//Altri frame
@@ -66,6 +67,31 @@ public class Controller {
 		}
 	}
 	
+	public void deleteArtistDB(String codice) {
+		if(codice.length()>0){
+			artistDAO.deleteArtist(codice);
+		}
+		else {
+			JOptionPane.showMessageDialog(frameHome,
+				    "Impossibile eliminare l'artista!!!",
+				    "Errore",
+				    JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void updateArtistDB(String codice, String nome, String cognome, String dataNascita, String nomeDArte, String citta, String followers) {
+		if((codice.length()>0) && (nome.length()>0) && (cognome.length()>0) && (dataNascita.length()>0) && (nomeDArte.length()>0) && (citta.length()>0) && (followers.length()>0)) {
+			int Ifollowers = Integer.parseInt(followers);
+			artistDAO.updateArtist(codice, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
+		}
+		else {
+			JOptionPane.showMessageDialog(frameHome,
+					"Errore aggiornamento artista!!!",
+					"Errore",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	public ResultSet stampaArtistDB() {
 		ResultSet rs = artistDAO.stampaArtist();
 		try {
@@ -75,6 +101,23 @@ public class Controller {
 			e.printStackTrace();
 		}
 		return rs;
+	}
+	
+	public ArrayList<Artista> comboBoxArtista() {
+		ArrayList<Artista> listArtist = new ArrayList<Artista>();
+		ResultSet rs = artistDAO.stampaArtist();
+		try {
+			while(rs != null) {
+				String followers = rs.getString(7);
+				int f = Integer.parseInt(followers);
+				Artista a = new Artista(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), f);
+				listArtist.add(a);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return listArtist;
 	}
 
 	public void insertSongDB(String artista, String nome, String durata, String genere, String album) {
@@ -113,9 +156,9 @@ public class Controller {
 		}
 	}
 	
-	public void insertAlbumDB(String codice, String nome, String genere) {
-		if((codice.length()>0) && (nome.length()>0) && (genere.length()>0)){
-			albumDAO.insertAlbum(nome, codice, genere);
+	public void insertAlbumDB(String codice, String nome, String genere, String data, String artista) {
+		if((codice.length()>0) && (nome.length()>0) && (genere.length()>0) && (data.length()>0) && (artista.length()>0)){
+			albumDAO.insertAlbum(nome, codice, genere, data, artista);
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddAlbum,
