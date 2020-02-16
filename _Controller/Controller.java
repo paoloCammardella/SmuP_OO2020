@@ -137,9 +137,10 @@ public class Controller {
 		}
 	}
 	
-	public void insertAlbumDB(String codice, String nome, String genere, String data, String artista) {
-		if((codice.length()>0) && (nome.length()>0) && (genere.length()>0) && (data.length()>0) && (artista.length()>0)){
-			albumDAO.insertAlbum(nome, codice, genere, data, artista);
+	public void insertAlbumDB(String codice, String nome, String songNumber, String genere, String data, String artista) {
+		if((codice.length()>0) && (nome.length()>0) && (songNumber.length()>0) && (genere.length()>0) && (data.length()>0) && (artista.length()>0)){
+			int nSong = Integer.parseInt(songNumber);
+			albumDAO.insertAlbum(codice, nome, nSong, genere, data, artista);
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddAlbum,

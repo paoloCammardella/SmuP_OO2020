@@ -11,7 +11,8 @@ CREATE TABLE Artista(
 CREATE TABLE Album(
     id_Album CHAR(5) PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
-    songNumber INTEGER NOT NULL
+    songNumber INTEGER NOT NULL,
+    genere VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Singolo(
@@ -24,8 +25,8 @@ CREATE TABLE EP(
 );
 
 CREATE TABLE Pubblica(
-    id_Release CHAR(5) PRIMARY KEY,
-    releaseDate DATE NOT NULL,
+    id_Release INTEGER PRIMARY KEY,
+    releaseDate VARCHAR(30) NOT NULL,
     id_Artist CHAR(5),
     id_Album CHAR(5),
 	id_Single CHAR(5),
@@ -49,9 +50,9 @@ CREATE TABLE Brano(
     CONSTRAINT FK4 FOREIGN KEY (id_EP) REFERENCES EP(id_EP)
 );
 
-CREATE SEQUENCE public."codicePubblica"
-    INCREMENT 1
-    START 0
-    MINVALUE 0
-    MAXVALUE 500
-    CACHE 1;
+CREATE SEQUENCE codicePubblica
+START WITH 0
+INCREMENT BY 1
+MINVALUE 0
+MAXVALUE 1000
+NO CYCLE;

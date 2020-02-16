@@ -56,6 +56,7 @@ public class AddAlbumGUI extends JFrame {
 
 	int mouseX, mouseY;
 	private JTextField textFieldData;
+	private JTextField textFieldSongNumber;
 
 	public AddAlbumGUI(Controller controller) {
 		this.controller = controller;
@@ -65,7 +66,7 @@ public class AddAlbumGUI extends JFrame {
 		setTitle("Aggiungi Artist");
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 449, 613);
+		setBounds(100, 100, 449, 642);
 		setBackground(darkGrey);
 
 		contentPane = new JPanel();
@@ -92,7 +93,7 @@ public class AddAlbumGUI extends JFrame {
 			}
 		});
 		panelAdd.setBackground(darkGrey);
-		contentPane.add(panelAdd, BorderLayout.CENTER);
+		contentPane.add(panelAdd, BorderLayout.SOUTH);
 
 
 		DateFormat format = new SimpleDateFormat("dd/MM/YYYY");
@@ -108,12 +109,15 @@ public class AddAlbumGUI extends JFrame {
 				String genere = textFieldGenere.getText();
 				String data = textFieldData.getText();
 				String artista = comboBoxArtisti.getSelectedItem().toString();
+				String songNumber = textFieldSongNumber.getText();
 
-				controller.insertAlbumDB(codice, nome, genere, data, artista);
+				controller.insertAlbumDB(codice, nome, songNumber, genere, data, artista);
 
 				textFieldCodice.setText("");
 				textFieldNome.setText("");
 				textFieldGenere.setText("");
+				textFieldData.setText("");
+				textFieldSongNumber.setText("");
 			}
 		});
 		button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -231,26 +235,44 @@ public class AddAlbumGUI extends JFrame {
 		textFieldData.setCaretColor(new Color(0, 153, 204));
 		textFieldData.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldData.setBackground(new Color(36, 53, 102));
+		
+		textFieldSongNumber = new JTextField();
+		textFieldSongNumber.setSelectionColor(new Color(0, 153, 204));
+		textFieldSongNumber.setSelectedTextColor(Color.WHITE);
+		textFieldSongNumber.setOpaque(false);
+		textFieldSongNumber.setForeground(Color.WHITE);
+		textFieldSongNumber.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		textFieldSongNumber.setColumns(10);
+		textFieldSongNumber.setCaretColor(new Color(0, 153, 204));
+		textFieldSongNumber.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		textFieldSongNumber.setBackground(new Color(36, 53, 102));
+		
+		JLabel lblNumeroDiBrani = new JLabel("Numero di brani");
+		lblNumeroDiBrani.setForeground(Color.WHITE);
+		lblNumeroDiBrani.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		GroupLayout gl_AddAlbum = new GroupLayout(AddAlbum);
 		gl_AddAlbum.setHorizontalGroup(
 			gl_AddAlbum.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddAlbum.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(labelAddAlbum, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
-				.addGroup(gl_AddAlbum.createSequentialGroup()
-					.addGap(25)
 					.addGroup(gl_AddAlbum.createParallelGroup(Alignment.LEADING)
-						.addComponent(labelArtista, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBoxArtisti, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textFieldData, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
-						.addComponent(labelData, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_AddAlbum.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(textFieldCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-							.addComponent(labelCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(labelNome, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(textFieldNome)
-							.addComponent(labelGenere, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(textFieldGenere)))
+						.addGroup(gl_AddAlbum.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(labelAddAlbum, GroupLayout.PREFERRED_SIZE, 385, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_AddAlbum.createSequentialGroup()
+							.addGap(25)
+							.addGroup(gl_AddAlbum.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(textFieldCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+								.addComponent(labelCodice, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(labelNome, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(textFieldNome)
+								.addComponent(lblNumeroDiBrani, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(textFieldSongNumber, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+								.addComponent(labelGenere, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(textFieldGenere, Alignment.LEADING)
+								.addComponent(labelData, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldData, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 361, GroupLayout.PREFERRED_SIZE)
+								.addComponent(labelArtista, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 376, GroupLayout.PREFERRED_SIZE)
+								.addComponent(comboBoxArtisti, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE))))
 					.addGap(19))
 		);
 		gl_AddAlbum.setVerticalGroup(
@@ -267,18 +289,22 @@ public class AddAlbumGUI extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNumeroDiBrani, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+					.addComponent(textFieldSongNumber, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(labelGenere, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(labelData, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(textFieldData, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(labelArtista, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(comboBoxArtisti, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(58, Short.MAX_VALUE))
+					.addGap(18))
 		);
 		AddAlbum.setLayout(gl_AddAlbum);
 
@@ -312,17 +338,16 @@ public class AddAlbumGUI extends JFrame {
 				.addGroup(gl_panelAdd.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panelAdd.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelAdd.createSequentialGroup()
+							.addComponent(AddAlbum, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+							.addContainerGap())
 						.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
 							.addComponent(labelX)
 							.addGap(21))
-						.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
-							.addComponent(AddAlbum, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(Alignment.TRAILING, gl_panelAdd.createSequentialGroup()
-							.addComponent(button, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-							.addGap(9))
 						.addGroup(gl_panelAdd.createSequentialGroup()
-							.addComponent(button_1, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+							.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+								.addComponent(button, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+								.addComponent(button_1, GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
 							.addGap(9))))
 		);
 		gl_panelAdd.setVerticalGroup(
@@ -331,12 +356,12 @@ public class AddAlbumGUI extends JFrame {
 					.addContainerGap()
 					.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(AddAlbum, GroupLayout.PREFERRED_SIZE, 460, GroupLayout.PREFERRED_SIZE)
+					.addComponent(AddAlbum, GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(button, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(button_1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		panelAdd.setLayout(gl_panelAdd);
 

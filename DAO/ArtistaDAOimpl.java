@@ -21,7 +21,7 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 	@Override
 	public void insertArtist(String codice, String nome, String cognome, String dataNascita, String citta, int followers, String nomeDArte) {
 		try {
-			String query_insert = "INSERT INTO Artist (id_artist, firstName, secondName, birthDate, city, followers, nomeDArte) VALUES (?,?,?,?,?,?,?)";
+			String query_insert = "INSERT INTO Artista (id_artist, firstName, secondName, birthDate, city, followers, nomeDArte) VALUES (?,?,?,?,?,?,?)";
 			
 			PreparedStatement pst = connection.prepareStatement(query_insert);
 			pst.setString(1, codice);
@@ -43,7 +43,7 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 	@Override
 	public void deleteArtist(String codice) {
 		try {
-			String query_delete = "DELETE FROM Artist WHERE id_Artist = ?";
+			String query_delete = "DELETE FROM Artista WHERE id_Artist = ?";
 			
 			PreparedStatement pst = connection.prepareStatement(query_delete);
 			pst.setString(1, codice);
@@ -57,7 +57,7 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 	@Override
 	public void updateArtist(String codice, String nome, String cognome, String dataNascita, String citta, int followers, String nomeDArte) {
 		try {
-			String query_update = "UPDATE Artist SET firstName = ? , secondName = ?, birthDate = ?, city = ?, followers = ?, nomeDArte = ? WHERE id_Artist = ? ";
+			String query_update = "UPDATE Artista SET firstName = ? , secondName = ?, birthDate = ?, city = ?, followers = ?, nomeDArte = ? WHERE id_Artist = ? ";
 			
 			PreparedStatement pst = connection.prepareStatement(query_update);
 			pst.setString(1, nome);
@@ -80,7 +80,7 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 		try {
 			Statement st = connection.createStatement();
 			
-			String query_stampa = "SELECT * FROM Artist";
+			String query_stampa = "SELECT * FROM Artista";
 			rs = st.executeQuery(query_stampa);
 			
 			return rs;

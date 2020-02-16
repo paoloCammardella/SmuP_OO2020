@@ -65,7 +65,7 @@ public class Artista{
 	
 	@Override
 	public String toString() {
-		return getId_Artist() + ", " + getFristName();
+		return getId_Artist();
 	}
 }
 
