@@ -58,12 +58,35 @@ public class AlbumDAOimpl implements AlbumDAO{
 	}
 
 	@Override
+	public void updateAlbum(String codice, String nome, int songNumber, String genere, String data) {
+		try {
+			String query_update_album = "UPDATE Album SET name = ? , songNumber = ?, genere = ? WHERE id_Album = ?";
+			String query_update_pubblica = "UPDATE Pubblica SET releaseDate = ?  WHERE id_Album = ?";
+			
+			PreparedStatement pst = connection.prepareStatement(query_update_album);
+			pst.setString(1, nome);
+			pst.setInt(2, songNumber);
+			pst.setString(3, genere);
+			pst.setString(4, codice);
+			pst.executeUpdate();
+			
+			PreparedStatement pst2 = connection.prepareStatement(query_update_pubblica);
+			pst2.setString(1, data);
+			pst2.setString(2, codice);
+			pst2.executeUpdate();
+		}
+		catch(SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	@Override
 	public ResultSet stampaAlbum() {
 		ResultSet rs = null;
 		try {
 			Statement st = connection.createStatement();
 			
-			String query_stampa = "SELECT * FROM Album";
+			String query_stampa = "SELECT * FROM Album AS A NATURAL JOIN Pubblica AS P";
 			rs = st.executeQuery(query_stampa);
 			
 			return rs;

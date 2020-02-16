@@ -150,6 +150,19 @@ public class Controller {
 		}
 	}
 	
+	public void updateAlbum(String codice, String nome, String songNumber, String genere, String data) {
+		if((codice.length()>0) && (nome.length()>0) && (songNumber.length()>0) && (genere.length()>0) && (data.length()>0)) {
+			int nSong = Integer.parseInt(songNumber);
+			albumDAO.updateAlbum(codice, nome, nSong, genere, data);
+		}
+		else {
+			JOptionPane.showMessageDialog(frameHome,
+					"Errore aggiornamento artista!!!",
+					"Errore",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
 	public ResultSet stampaAlbumDB() {
 		ResultSet rs = albumDAO.stampaAlbum();
 		try {
