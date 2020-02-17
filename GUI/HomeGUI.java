@@ -1033,6 +1033,7 @@ public class HomeGUI extends JFrame {
 						public void actionPerformed(ActionEvent e) {
 							String codice = textFieldCodiceArtista.getText();
 							controller.deleteArtistDB(codice);
+							panel.removeAll();
 							stampaArtistGUI();
 						}
 					});
