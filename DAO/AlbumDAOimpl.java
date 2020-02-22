@@ -56,7 +56,21 @@ public class AlbumDAOimpl implements AlbumDAO{
 			e.printStackTrace();
 		}
 	}
-
+	
+	@Override
+	public void deleteAlbum(String codice) {
+		try {
+			String query_delete_album = "DELETE FROM Album WHERE id_Album = ?";
+			
+			PreparedStatement pst = connection.prepareStatement(query_delete_album);
+			pst.setString(1, codice);
+			pst.executeUpdate();
+		}
+		catch(SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
 	@Override
 	public void updateAlbum(String codice, String nome, int songNumber, String genere, String data) {
 		try {

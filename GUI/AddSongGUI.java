@@ -11,12 +11,14 @@ import _Controller.Controller;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+
+import Entita.Album;
+import Entita.Artista;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -28,6 +30,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 import java.awt.event.MouseMotionAdapter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.Component;
@@ -35,6 +39,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JSeparator;
 
 public class AddSongGUI extends JFrame {
 
@@ -56,6 +61,7 @@ public class AddSongGUI extends JFrame {
 	private JTextField textFieldDurata;
 	private JTextField textFieldGenere;
 	private JTextField textFieldEP;
+	private JTextField textFieldDataEPSingle;
 
 	public AddSongGUI(Controller controller) {
 		setUndecorated(true);
@@ -101,6 +107,17 @@ public class AddSongGUI extends JFrame {
 		JPanel AddArtist = new JPanel();
 		AddArtist.setBackground(grey);
 
+		JComboBox<String> comboBoxSongNumberEP = new JComboBox<String>();
+		comboBoxSongNumberEP.setVisible(false);
+		comboBoxSongNumberEP.setModel(new DefaultComboBoxModel<String>(new String[] {"2", "3", "4", "5"}));
+		comboBoxSongNumberEP.setOpaque(true);
+		comboBoxSongNumberEP.setForeground(Color.WHITE);
+		comboBoxSongNumberEP.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		comboBoxSongNumberEP.setBorder(null);
+		comboBoxSongNumberEP.setBackground(new Color(21, 21, 21));
+		comboBoxSongNumberEP.setBounds(10, 536, 179, 26);
+		AddArtist.add(comboBoxSongNumberEP);
+
 		JButton buttonAggiungi = new JButton("Aggiungi");
 		buttonAggiungi.setEnabled(false);
 		buttonAggiungi.addActionListener(new ActionListener() {
@@ -108,26 +125,29 @@ public class AddSongGUI extends JFrame {
 				String artista = comboBoxArtisti.getSelectedItem().toString();
 				String nome = textFieldNomePubblicazione.getText();
 				String durata = textFieldDurata.getText();
-				//int durataInt = Integer.parseInt(durata);
 				String genere = textFieldGenere.getText();
-				String ep = textFieldEP.getText();
+				String nomeEp = textFieldEP.getText();
+				String dataPubblicazione = textFieldDataEPSingle.getText();
+				String songNumber = comboBoxSongNumberEP.getSelectedItem().toString();
 
 				if(comboBoxPubblicazioni.getSelectedItem() == "Singolo") {
-					controller.insertSingleDB(artista, nome, durata, genere);
+					controller.insertSingleDB(nome, durata, genere, artista, dataPubblicazione);
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
+					textFieldDataEPSingle.setText("");
 
 				}else if(comboBoxPubblicazioni.getSelectedItem() == "Brano") {
 					String album = comboBoxAlbum.getSelectedItem().toString();
-					controller.insertSongDB(artista, nome, durata, genere, album);
+					controller.insertSongDB(nome, durata, genere, album);
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
 
 				}else if(comboBoxPubblicazioni.getSelectedItem() == "EP") {
-					controller.insertEPDB(artista, nome, durata, genere, ep);
-					textFieldNomePubblicazione.setText("");
+					controller.insertEPDB(nomeEp, genere, songNumber, artista, dataPubblicazione);
+					textFieldEP.setText("");
+					textFieldDataEPSingle.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
 				}
@@ -147,13 +167,8 @@ public class AddSongGUI extends JFrame {
 		labelAddSong.setForeground(Color.WHITE);
 		labelAddSong.setFont(new Font("Segoe UI", Font.BOLD, 26));
 
-		JLabel labelErroreInput = new JLabel("");
-		labelErroreInput.setBounds(20, 538, 0, 23);
-		labelErroreInput.setForeground(Color.RED);
-		labelErroreInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
 		JLabel lblHaiQualcheSingolo = new JLabel("Tipo di pubblicazione");
-		lblHaiQualcheSingolo.setBounds(10, 120, 401, 25);
+		lblHaiQualcheSingolo.setBounds(10, 58, 401, 25);
 		lblHaiQualcheSingolo.setForeground(Color.WHITE);
 		lblHaiQualcheSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
@@ -168,7 +183,7 @@ public class AddSongGUI extends JFrame {
 				textFieldNomePubblicazione.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 			}
 		});
-		textFieldNomePubblicazione.setBounds(10, 229, 361, 30);
+		textFieldNomePubblicazione.setBounds(10, 167, 398, 30);
 		textFieldNomePubblicazione.setVisible(false);
 		textFieldNomePubblicazione.setSelectionColor(new Color(0, 153, 204));
 		textFieldNomePubblicazione.setSelectedTextColor(Color.WHITE);
@@ -181,13 +196,13 @@ public class AddSongGUI extends JFrame {
 		textFieldNomePubblicazione.setBackground(new Color(36, 53, 102));
 
 		JLabel labelNomePubblicazione = new JLabel("Nome Song");
-		labelNomePubblicazione.setBounds(10, 193, 361, 25);
+		labelNomePubblicazione.setBounds(10, 131, 361, 25);
 		labelNomePubblicazione.setVisible(false);
 		labelNomePubblicazione.setForeground(Color.WHITE);
 		labelNomePubblicazione.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		JLabel labelDurata = new JLabel("Durata");
-		labelDurata.setBounds(10, 270, 361, 25);
+		labelDurata.setBounds(10, 208, 361, 25);
 		labelDurata.setVisible(false);
 		labelDurata.setForeground(Color.WHITE);
 		labelDurata.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -203,7 +218,7 @@ public class AddSongGUI extends JFrame {
 				textFieldDurata.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 			}
 		});
-		textFieldDurata.setBounds(10, 306, 361, 30);
+		textFieldDurata.setBounds(10, 244, 398, 30);
 		textFieldDurata.setVisible(false);
 		textFieldDurata.setSelectionColor(new Color(0, 153, 204));
 		textFieldDurata.setSelectedTextColor(Color.WHITE);
@@ -226,7 +241,7 @@ public class AddSongGUI extends JFrame {
 				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 			}
 		});
-		textFieldGenere.setBounds(10, 383, 361, 30);
+		textFieldGenere.setBounds(10, 321, 398, 30);
 		textFieldGenere.setVisible(false);
 		textFieldGenere.setSelectionColor(new Color(0, 153, 204));
 		textFieldGenere.setSelectedTextColor(Color.WHITE);
@@ -239,7 +254,7 @@ public class AddSongGUI extends JFrame {
 		textFieldGenere.setBackground(new Color(36, 53, 102));
 
 		JLabel labelGenere = new JLabel("Genere");
-		labelGenere.setBounds(10, 347, 361, 25);
+		labelGenere.setBounds(10, 285, 361, 25);
 		labelGenere.setVisible(false);
 		labelGenere.setForeground(Color.WHITE);
 		labelGenere.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -255,7 +270,7 @@ public class AddSongGUI extends JFrame {
 				textFieldEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 			}
 		});
-		textFieldEP.setBounds(10, 460, 361, 30);
+		textFieldEP.setBounds(10, 167, 398, 30);
 		textFieldEP.setVisible(false);
 		textFieldEP.setSelectionColor(new Color(0, 153, 204));
 		textFieldEP.setSelectedTextColor(Color.WHITE);
@@ -268,7 +283,7 @@ public class AddSongGUI extends JFrame {
 		textFieldEP.setBackground(new Color(36, 53, 102));
 
 		JLabel labelNomeEP = new JLabel("Nome EP");
-		labelNomeEP.setBounds(10, 424, 361, 25);
+		labelNomeEP.setBounds(10, 131, 361, 25);
 		labelNomeEP.setVisible(false);
 		labelNomeEP.setForeground(Color.WHITE);
 		labelNomeEP.setFont(new Font("Segoe UI", Font.PLAIN, 18));
@@ -276,24 +291,83 @@ public class AddSongGUI extends JFrame {
 		JLabel labelAlbum = new JLabel("Album");
 		labelAlbum.setForeground(Color.WHITE);
 		labelAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		labelAlbum.setBounds(10, 424, 401, 25);
+		labelAlbum.setBounds(10, 362, 401, 25);
 		labelAlbum.setVisible(false);
 		AddArtist.add(labelAlbum);
 
 		comboBoxAlbum = new JComboBox<String>();
-		comboBoxAlbum.setModel(new DefaultComboBoxModel(new String[] {"Prova"}));
 		comboBoxAlbum.setOpaque(true);
 		comboBoxAlbum.setForeground(Color.WHITE);
 		comboBoxAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		comboBoxAlbum.setBorder(null);
 		comboBoxAlbum.setBackground(new Color(21, 21, 21));
-		comboBoxAlbum.setBounds(10, 460, 179, 26);
+		comboBoxAlbum.setBounds(10, 398, 179, 26);
 		comboBoxAlbum.setVisible(false);
 		AddArtist.add(comboBoxAlbum);
 
+		JLabel labelNomeArtista = new JLabel("Artista");
+		labelNomeArtista.setVisible(false);
+		labelNomeArtista.setForeground(Color.WHITE);
+		labelNomeArtista.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		labelNomeArtista.setBounds(10, 362, 401, 25);
+		AddArtist.add(labelNomeArtista);
+
+		comboBoxArtisti = new JComboBox<String>();
+		comboBoxArtisti.setVisible(false);
+		comboBoxArtisti.setOpaque(true);
+		comboBoxArtisti.setForeground(Color.WHITE);
+		comboBoxArtisti.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		comboBoxArtisti.setBorder(null);
+		comboBoxArtisti.setBackground(new Color(21, 21, 21));
+		comboBoxArtisti.setBounds(10, 398, 179, 26);
+		AddArtist.add(comboBoxArtisti);
+
+		JLabel labelSongNumberEP = new JLabel("Numero di brani");
+		labelSongNumberEP.setVisible(false);
+		labelSongNumberEP.setForeground(Color.WHITE);
+		labelSongNumberEP.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		labelSongNumberEP.setBounds(10, 500, 401, 25);
+		AddArtist.add(labelSongNumberEP);
+
+		textFieldDataEPSingle = new JTextField();
+		textFieldDataEPSingle.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldDataEPSingle.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldDataEPSingle.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
+		textFieldDataEPSingle.setVisible(false);
+		textFieldDataEPSingle.setSelectionColor(new Color(0, 153, 204));
+		textFieldDataEPSingle.setSelectedTextColor(Color.WHITE);
+		textFieldDataEPSingle.setOpaque(false);
+		textFieldDataEPSingle.setForeground(Color.WHITE);
+		textFieldDataEPSingle.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		textFieldDataEPSingle.setColumns(10);
+		textFieldDataEPSingle.setCaretColor(new Color(0, 153, 204));
+		textFieldDataEPSingle.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+		textFieldDataEPSingle.setBackground(new Color(36, 53, 102));
+		textFieldDataEPSingle.setBounds(10, 459, 398, 30);
+		AddArtist.add(textFieldDataEPSingle);
+
+		JLabel labelDataEPSingle = new JLabel("Data pubblicazione");
+		labelDataEPSingle.setVisible(false);
+		labelDataEPSingle.setForeground(Color.WHITE);
+		labelDataEPSingle.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		labelDataEPSingle.setBounds(10, 428, 376, 25);
+		AddArtist.add(labelDataEPSingle);
+
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.DARK_GRAY);
+		separator.setVisible(false);
+		separator.setBounds(79, 244, 248, 2);
+		AddArtist.add(separator);
 
 		comboBoxPubblicazioni = new JComboBox<String>();
-		comboBoxPubblicazioni.setBounds(10, 156, 179, 26);
+		comboBoxPubblicazioni.setBounds(10, 94, 179, 26);
 		comboBoxPubblicazioni.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -317,8 +391,16 @@ public class AddSongGUI extends JFrame {
 					labelNomeEP.setVisible(false);
 					textFieldEP.setVisible(false);
 					labelAlbum.setVisible(false);
+					separator.setVisible(false);
 					comboBoxAlbum.setVisible(false);
+					labelNomeArtista.setVisible(true);
+					labelSongNumberEP.setVisible(false);
+					comboBoxSongNumberEP.setVisible(false);
+					textFieldDataEPSingle.setVisible(true);
+					labelDataEPSingle.setVisible(true);
+					comboBoxArtisti.setVisible(true);
 					buttonAggiungi.setEnabled(true);
+					aggiungiArtistiComboBox();
 				}
 				else if(comboBoxPubblicazioni.getSelectedItem() == "Brano") {
 					textFieldNomePubblicazione.setVisible(true);
@@ -328,22 +410,37 @@ public class AddSongGUI extends JFrame {
 					textFieldGenere.setVisible(true);
 					labelGenere.setVisible(true);
 					labelAlbum.setVisible(true);
+					separator.setVisible(false);
 					comboBoxAlbum.setVisible(true);
 					labelNomeEP.setVisible(false);
 					textFieldEP.setVisible(false);
+					labelNomeArtista.setVisible(false);
+					comboBoxArtisti.setVisible(false);
+					labelSongNumberEP.setVisible(false);
+					comboBoxSongNumberEP.setVisible(false);
+					textFieldDataEPSingle.setVisible(false);
+					labelDataEPSingle.setVisible(false);
 					buttonAggiungi.setEnabled(true);
+					aggiungiAlbumComboBox();
 				}
 				else if(comboBoxPubblicazioni.getSelectedItem() == "EP") {
-					textFieldNomePubblicazione.setVisible(true);
-					labelNomePubblicazione.setVisible(true);
-					labelDurata.setVisible(true);
-					textFieldDurata.setVisible(true);
+					textFieldNomePubblicazione.setVisible(false);
+					labelNomePubblicazione.setVisible(false);
+					labelDurata.setVisible(false);
+					textFieldDurata.setVisible(false);
 					textFieldGenere.setVisible(true);
 					labelGenere.setVisible(true);
 					labelNomeEP.setVisible(true);
 					textFieldEP.setVisible(true);
 					labelAlbum.setVisible(false);
+					separator.setVisible(true);
 					comboBoxAlbum.setVisible(false);
+					labelNomeArtista.setVisible(true);
+					labelSongNumberEP.setVisible(true);
+					comboBoxSongNumberEP.setVisible(true);
+					textFieldDataEPSingle.setVisible(true);
+					labelDataEPSingle.setVisible(true);
+					comboBoxArtisti.setVisible(true);
 					buttonAggiungi.setEnabled(true);
 				}
 				else {
@@ -353,11 +450,18 @@ public class AddSongGUI extends JFrame {
 					textFieldDurata.setVisible(false);
 					textFieldGenere.setVisible(false);
 					labelGenere.setVisible(false);
-					textFieldEP.setVisible(false);
+					labelNomeEP.setVisible(false);
 					textFieldEP.setVisible(false);
 					labelAlbum.setVisible(false);
+					separator.setVisible(false);
 					comboBoxAlbum.setVisible(false);
+					labelNomeArtista.setVisible(false);
+					comboBoxArtisti.setVisible(false);
 					buttonAggiungi.setEnabled(false);
+					labelSongNumberEP.setVisible(false);
+					comboBoxSongNumberEP.setVisible(false);
+					textFieldDataEPSingle.setVisible(false);
+					labelDataEPSingle.setVisible(false);
 				}
 			}
 		});
@@ -415,7 +519,6 @@ public class AddSongGUI extends JFrame {
 						.addContainerGap())
 				);
 		AddArtist.setLayout(null);
-		AddArtist.add(labelErroreInput);
 		AddArtist.add(labelNomeEP);
 		AddArtist.add(textFieldEP);
 		AddArtist.add(labelGenere);
@@ -428,24 +531,37 @@ public class AddSongGUI extends JFrame {
 		AddArtist.add(lblHaiQualcheSingolo);
 		AddArtist.add(labelAddSong);
 
-		JLabel labelNomeArtista = new JLabel("Artista");
-		labelNomeArtista.setForeground(Color.WHITE);
-		labelNomeArtista.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		labelNomeArtista.setBounds(10, 47, 401, 25);
-		AddArtist.add(labelNomeArtista);
-
-		comboBoxArtisti = new JComboBox<String>();
-		comboBoxArtisti.setModel(new DefaultComboBoxModel(new String[] {"Prova"}));
-		comboBoxArtisti.setOpaque(true);
-		comboBoxArtisti.setForeground(Color.WHITE);
-		comboBoxArtisti.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		comboBoxArtisti.setBorder(null);
-		comboBoxArtisti.setBackground(new Color(21, 21, 21));
-		comboBoxArtisti.setBounds(10, 83, 179, 26);
-		AddArtist.add(comboBoxArtisti);
-
 		panelAdd.setLayout(gl_panelAdd);
-
 		setLocationRelativeTo(null);
+	}
+
+	public void aggiungiArtistiComboBox() {
+		ResultSet rs = controller.stampaArtistDB();
+		comboBoxArtisti.removeAllItems();
+		try {
+			while(rs.next()) {
+				String followers = rs.getString("followers");
+				int f = Integer.parseInt(followers);
+				Artista a = new Artista(rs.getString("id_Artist"), rs.getString("firstname"), rs.getString("secondname"), rs.getString("city"), rs.getString("nomeDArte"), rs.getString("birthDate"), f);
+				comboBoxArtisti.addItem(a.toString());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void aggiungiAlbumComboBox() {
+		ResultSet rs = controller.stampaAlbumDB();
+		comboBoxAlbum.removeAllItems();
+		try {
+			while(rs.next()) {
+				String songNumber = rs.getString("songNumber");
+				int sNumber = Integer.parseInt(songNumber);
+				Album album = new Album(rs.getString("id_Album"), rs.getString("name"), rs.getString("genere"), sNumber);
+				comboBoxAlbum.addItem(album.toString());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -370,12 +370,12 @@ public class AddAlbumGUI extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				aggiungiArticoliComboBox();
+				aggiungiArtistiComboBox();
 			}
 		});
 	}
 	
-	public void aggiungiArticoliComboBox() {
+	public void aggiungiArtistiComboBox() {
 		ResultSet rs = controller.stampaArtistDB();
 		comboBoxArtisti.removeAllItems();
 		try {
