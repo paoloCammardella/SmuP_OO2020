@@ -41,6 +41,6 @@ public class Album {
 
 	@Override
 	public String toString() {
-		return getId_Album();
+		return getId_Album() + ", " + getNome();
 	}
 }

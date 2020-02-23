@@ -54,7 +54,7 @@ public class HomeGUI extends JFrame {
 	private JScrollPane scrollPaneOthers;
 
 	public HomeGUI(Controller controller) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(HomeGUI.class.getResource("/Img/Logo-48.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(HomeGUI.class.getResource("/Img/LogoB-48.png")));
 
 		this.controller = controller;
 
@@ -125,7 +125,7 @@ public class HomeGUI extends JFrame {
 				panelShowArtists.setVisible(true);
 				panelShowAlbums.setVisible(false);
 				panelOthers.setVisible(false);
-				
+
 				stampaArtistGUI();
 			}
 		});
@@ -467,7 +467,7 @@ public class HomeGUI extends JFrame {
 				);
 
 		panelPrintArtists = new JPanel();
-		panelPrintArtists.setPreferredSize(new Dimension(400, 500));
+		panelPrintArtists.setPreferredSize(new Dimension(400, 1000));
 		panelPrintArtists.setBackground(grey);
 		panelPrintArtists.setForeground(grey);
 
@@ -622,7 +622,7 @@ public class HomeGUI extends JFrame {
 				buttonSave.setEnabled(false);
 				buttonSave.setBackground(darkGrey);
 				buttonModify.setEnabled(true);
-				
+
 				stampaArtistGUI();
 			}
 		});
@@ -666,7 +666,7 @@ public class HomeGUI extends JFrame {
 		buttonModify.setBorder(new LineBorder(new Color(0, 51, 255), 10));
 		buttonModify.setBackground(new Color(15, 15, 15));
 		buttonModify.setEnabled(true);
-		
+
 		JTextField textFieldRetribuzione = new JTextField();
 		textFieldRetribuzione.setForeground(new Color(0, 204, 0));
 		textFieldRetribuzione.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -678,74 +678,74 @@ public class HomeGUI extends JFrame {
 
 		GroupLayout gl_panelBackGroundArtist = new GroupLayout(panelBackGroundArtist);
 		gl_panelBackGroundArtist.setHorizontalGroup(
-			gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
+				gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-							.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-							.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-					.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-							.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-							.addComponent(lblFollowers, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-						.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(buttonDelete)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_panelBackGroundArtist.setVerticalGroup(
-			gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-					.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-							.addGap(21)
-							.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-								.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-									.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldCodiceArtista, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-								.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblFollowers)
-								.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-							.addContainerGap(25, Short.MAX_VALUE)
-							.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-								.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonDelete)
-								.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()
+						.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-									.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-									.addGap(33)))))
-					.addContainerGap())
-		);
+										.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+										.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+						.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+										.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+										.addComponent(lblFollowers, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
+								.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
+						.addGap(18)
+						.addComponent(buttonDelete)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				);
+		gl_panelBackGroundArtist.setVerticalGroup(
+				gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+						.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+										.addGap(21)
+										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
+												.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
+														.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+														.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
+												.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+												.addComponent(textFieldCodiceArtista, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+												.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblFollowers)
+												.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+										.addContainerGap(25, Short.MAX_VALUE)
+										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
+												.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+												.addComponent(buttonDelete)
+												.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+												.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+														.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
+																.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+														.addGap(33)))))
+						.addContainerGap())
+				);
 		panelBackGroundArtist.setLayout(gl_panelBackGroundArtist);
 		panelPrintArtists.add(panelBackGroundArtist);
 
@@ -786,7 +786,7 @@ public class HomeGUI extends JFrame {
 				);
 
 		panelPrintAlbums = new JPanel();
-		panelPrintAlbums.setPreferredSize(new Dimension(400, 500));
+		panelPrintAlbums.setPreferredSize(new Dimension(400, 1000));
 		panelPrintAlbums.setBackground(grey);
 		scrollPaneAlbums.setViewportView(panelPrintAlbums);
 		panelPrintAlbums.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -926,7 +926,7 @@ public class HomeGUI extends JFrame {
 		JButton buttonDeleteAlbum = new JButton("");
 		buttonDeleteAlbum.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String codice = textFieldArtista.getText();
+				String codice = textFieldCodiceAlbum.getText();
 				String nome = textFieldNomeAlbum.getText();
 
 				Object[] options = {"Si", "No", "Annulla"};
@@ -1164,7 +1164,7 @@ public class HomeGUI extends JFrame {
 				);
 
 		panelPrintOthers = new JPanel();
-		panelPrintOthers.setPreferredSize(new Dimension(400, 500));
+		panelPrintOthers.setPreferredSize(new Dimension(400, 750));
 		panelPrintOthers.setBackground(grey);
 		scrollPaneOthers.setViewportView(panelPrintOthers);
 
@@ -1244,7 +1244,7 @@ public class HomeGUI extends JFrame {
 				int scelta = JOptionPane.showOptionDialog(null,
 						"Sei sicuro di voler cancellare "
 								+ nome,
-								"Cancella artista",
+								"Cancella brano",
 								JOptionPane.YES_NO_CANCEL_OPTION,
 								JOptionPane.QUESTION_MESSAGE,
 								null,
@@ -1697,7 +1697,7 @@ public class HomeGUI extends JFrame {
 				int scelta = JOptionPane.showOptionDialog(null,
 						"Sei sicuro di voler cancellare "
 								+ nome,
-								"Cancella singolo",
+								"Cancella EP",
 								JOptionPane.YES_NO_CANCEL_OPTION,
 								JOptionPane.QUESTION_MESSAGE,
 								null,
@@ -2025,7 +2025,7 @@ public class HomeGUI extends JFrame {
 							buttonSave.setEnabled(false);
 							buttonSave.setBackground(darkGrey);
 							buttonModify.setEnabled(true);
-							
+
 							stampaArtistGUI();
 						}
 					});
@@ -2069,7 +2069,7 @@ public class HomeGUI extends JFrame {
 					buttonModify.setBorder(new LineBorder(new Color(0, 51, 255), 10));
 					buttonModify.setBackground(new Color(15, 15, 15));
 					buttonModify.setEnabled(true);
-					
+
 					JTextField textFieldRetribuzione = new JTextField();
 					textFieldRetribuzione.setForeground(new Color(0, 204, 0));
 					textFieldRetribuzione.setFont(new Font("Segoe UI", Font.PLAIN, 16));
@@ -2081,74 +2081,74 @@ public class HomeGUI extends JFrame {
 
 					GroupLayout gl_panelBackGroundArtist = new GroupLayout(panelBackGroundArtist);
 					gl_panelBackGroundArtist.setHorizontalGroup(
-						gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
+							gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-									.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE))
-									.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-								.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-									.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
-									.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addComponent(lblFollowers, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-									.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
-								.addGap(18)
-								.addComponent(buttonDelete)
-								.addPreferredGap(ComponentPlacement.UNRELATED)
-								.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap())
-					);
-					gl_panelBackGroundArtist.setVerticalGroup(
-						gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-								.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-									.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addGap(21)
-										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-											.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-												.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-											.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-											.addComponent(textFieldCodiceArtista, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-											.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addComponent(lblFollowers)
-											.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)))
-									.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addContainerGap(25, Short.MAX_VALUE)
-										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-											.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-											.addComponent(buttonDelete)
-											.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap()
+									.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
 											.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-												.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-													.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-													.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-													.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-												.addGap(33)))))
-								.addContainerGap())
-					);
+													.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE))
+											.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+													.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+									.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
+											.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+													.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
+											.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+													.addComponent(lblFollowers, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
+											.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+											.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
+									.addGap(18)
+									.addComponent(buttonDelete)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap())
+							);
+					gl_panelBackGroundArtist.setVerticalGroup(
+							gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+									.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
+											.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+													.addGap(21)
+													.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
+															.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+															.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
+																	.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+																	.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+													.addPreferredGap(ComponentPlacement.UNRELATED)
+													.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
+															.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+															.addComponent(textFieldCodiceArtista, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+															.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+															.addComponent(lblFollowers)
+															.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)))
+											.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+													.addContainerGap(25, Short.MAX_VALUE)
+													.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
+															.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+															.addComponent(buttonDelete)
+															.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+															.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
+																	.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
+																			.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																			.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+																			.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+																	.addGap(33)))))
+									.addContainerGap())
+							);
 					panelBackGroundArtist.setLayout(gl_panelBackGroundArtist);
 					panelPrintArtists.add(panelBackGroundArtist);
 
@@ -2159,7 +2159,7 @@ public class HomeGUI extends JFrame {
 					textFieldCity.setText(rs.getString("city"));
 					textFieldFollowers.setText(rs.getString("followers"));
 					textFieldNomeDArte.setText(rs.getString("nomeDArte"));
-					
+
 					String followers = textFieldFollowers.getText();
 					float retribuzione = controller.retribuzioneArtista(followers);
 					textFieldRetribuzione.setText(retribuzione + "€");
@@ -2318,7 +2318,7 @@ public class HomeGUI extends JFrame {
 					JButton buttonDeleteAlbum = new JButton("");
 					buttonDeleteAlbum.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							String codice = textFieldArtista.getText();
+							String codice = textFieldCodiceAlbum.getText();
 							String nome = textFieldNomeAlbum.getText();
 
 							Object[] options = {"Si", "No", "Annulla"};
@@ -2529,7 +2529,7 @@ public class HomeGUI extends JFrame {
 							int scelta = JOptionPane.showOptionDialog(null,
 									"Sei sicuro di voler cancellare "
 											+ nome,
-											"Cancella artista",
+											"Cancella brano",
 											JOptionPane.YES_NO_CANCEL_OPTION,
 											JOptionPane.QUESTION_MESSAGE,
 											null,
@@ -3033,7 +3033,7 @@ public class HomeGUI extends JFrame {
 							int scelta = JOptionPane.showOptionDialog(null,
 									"Sei sicuro di voler cancellare "
 											+ nome,
-											"Cancella singolo",
+											"Cancella EP",
 											JOptionPane.YES_NO_CANCEL_OPTION,
 											JOptionPane.QUESTION_MESSAGE,
 											null,

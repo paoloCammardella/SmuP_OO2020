@@ -382,7 +382,7 @@ public class AddAlbumGUI extends JFrame {
 			while(rs.next()) {
 				String followers = rs.getString("followers");
 				int f = Integer.parseInt(followers);
-				Artista a = new Artista(rs.getString("id_Artist"), rs.getString("firstname"), rs.getString("secondname"), rs.getString("city"), rs.getString("nomeDArte"), rs.getString("birthDate"), f);
+				Artista a = new Artista(rs.getString("id_Artist"), rs.getString("firstname"), rs.getString("secondname"), rs.getString("city"), rs.getString("birthDate"), rs.getString("nomeDArte"), f);
 				comboBoxArtisti.addItem(a.toString());
 			}
 		} catch (SQLException e) {

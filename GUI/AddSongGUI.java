@@ -122,15 +122,13 @@ public class AddSongGUI extends JFrame {
 		buttonAggiungi.setEnabled(false);
 		buttonAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String artista = comboBoxArtisti.getSelectedItem().toString();
-				String nome = textFieldNomePubblicazione.getText();
-				String durata = textFieldDurata.getText();
-				String genere = textFieldGenere.getText();
-				String nomeEp = textFieldEP.getText();
-				String dataPubblicazione = textFieldDataEPSingle.getText();
-				String songNumber = comboBoxSongNumberEP.getSelectedItem().toString();
-
 				if(comboBoxPubblicazioni.getSelectedItem() == "Singolo") {
+					String artista = comboBoxArtisti.getSelectedItem().toString();
+					String dataPubblicazione = textFieldDataEPSingle.getText();
+					String durata = textFieldDurata.getText();
+					String nome = textFieldNomePubblicazione.getText();
+					String genere = textFieldGenere.getText();
+					
 					controller.insertSingleDB(nome, durata, genere, artista, dataPubblicazione);
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
@@ -139,12 +137,22 @@ public class AddSongGUI extends JFrame {
 
 				}else if(comboBoxPubblicazioni.getSelectedItem() == "Brano") {
 					String album = comboBoxAlbum.getSelectedItem().toString();
+					String durata = textFieldDurata.getText();
+					String nome = textFieldNomePubblicazione.getText();
+					String genere = textFieldGenere.getText();
+					
 					controller.insertSongDB(nome, durata, genere, album);
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
 
 				}else if(comboBoxPubblicazioni.getSelectedItem() == "EP") {
+					String artista = comboBoxArtisti.getSelectedItem().toString();
+					String nomeEp = textFieldEP.getText();
+					String songNumber = comboBoxSongNumberEP.getSelectedItem().toString();
+					String dataPubblicazione = textFieldDataEPSingle.getText();
+					String genere = textFieldGenere.getText();
+					
 					controller.insertEPDB(nomeEp, genere, songNumber, artista, dataPubblicazione);
 					textFieldEP.setText("");
 					textFieldDataEPSingle.setText("");
@@ -542,7 +550,7 @@ public class AddSongGUI extends JFrame {
 			while(rs.next()) {
 				String followers = rs.getString("followers");
 				int f = Integer.parseInt(followers);
-				Artista a = new Artista(rs.getString("id_Artist"), rs.getString("firstname"), rs.getString("secondname"), rs.getString("city"), rs.getString("nomeDArte"), rs.getString("birthDate"), f);
+				Artista a = new Artista(rs.getString("id_Artist"), rs.getString("firstname"), rs.getString("secondname"), rs.getString("city"), rs.getString("birthDate"), rs.getString("nomeDArte"), f);
 				comboBoxArtisti.addItem(a.toString());
 			}
 		} catch (SQLException e) {

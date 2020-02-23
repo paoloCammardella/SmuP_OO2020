@@ -51,7 +51,8 @@ public class Controller {
 	public void insertArtistDB(String codice, String nome, String cognome, String dataNascita, String nomeDArte, String citta, String followers) {
 		if((codice.length()>0) && (nome.length()>0) && (cognome.length()>0) && (dataNascita.length()>0) && (nomeDArte.length()>0) && (citta.length()>0) && (followers.length()>0)) {
 			int Ifollowers = Integer.parseInt(followers);
-			artistDAO.insertArtist(codice, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
+			String codArtista = codice.substring(0, 5);
+			artistDAO.insertArtist(codArtista, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddArtist,
@@ -106,7 +107,8 @@ public class Controller {
 	public void insertSongDB(String nome, String durata, String genere, String album) {
 		if((nome.length()>0) && (durata.length()>0) && (genere.length()>0) && (album.length()>0)) {
 			int duration = Integer.parseInt(durata);
-			songDAO.insertSongDB(nome, duration, genere, album);
+			String codAlbum = album.substring(0, 5);
+			songDAO.insertSongDB(nome, duration, genere, codAlbum);
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddSong,
@@ -155,7 +157,8 @@ public class Controller {
 	public void insertSingleDB(String nome, String durata, String genere, String artista, String dataPubblicazione) {
 		if((artista.length()>0) && (nome.length()>0) && (durata.length()>0) && (genere.length()>0) && (dataPubblicazione.length()>0)) {
 			int durataInt = Integer.parseInt(durata);
-			singleDAO.insertSingle(nome, durataInt, genere, artista, dataPubblicazione);
+			String codArtista = artista.substring(0, 5);
+			singleDAO.insertSingle(nome, durataInt, genere, codArtista, dataPubblicazione);
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddSong,
@@ -204,7 +207,8 @@ public class Controller {
 	public void insertEPDB(String nome,  String genere, String songNumber, String artista, String dataPubblicazione) {
 		if((nome.length()>0) && (genere.length()>0) && (songNumber.length()>0) && (artista.length()>0)  && (dataPubblicazione.length()>0)) {
 			int songNumberInt = Integer.parseInt(songNumber);
-			epDAO.insertEP(nome, genere, songNumberInt, artista, dataPubblicazione);
+			String codArtista = artista.substring(0, 5);
+			epDAO.insertEP(nome, genere, songNumberInt, codArtista, dataPubblicazione);
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddSong,
@@ -253,7 +257,9 @@ public class Controller {
 	public void insertAlbumDB(String codice, String nome, String songNumber, String genere, String data, String artista) {
 		if((codice.length()>0) && (nome.length()>0) && (songNumber.length()>0) && (genere.length()>0) && (data.length()>0) && (artista.length()>0)){
 			int nSong = Integer.parseInt(songNumber);
-			albumDAO.insertAlbum(codice, nome, nSong, genere, data, artista);
+			String codArtista = artista.substring(0, 5);
+			String codiceAlbum = codice.substring(0, 5);
+			albumDAO.insertAlbum(codiceAlbum, nome, nSong, genere, data, codArtista);
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddAlbum,
