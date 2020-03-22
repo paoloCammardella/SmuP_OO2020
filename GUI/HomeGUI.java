@@ -54,14 +54,14 @@ public class HomeGUI extends JFrame {
 	private JScrollPane scrollPaneOthers;
 
 	public HomeGUI(Controller controller) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(HomeGUI.class.getResource("/Img/LogoB-48.png")));
-
 		this.controller = controller;
+
+		setIconImage(Toolkit.getDefaultToolkit().getImage(HomeGUI.class.getResource("/Img/LogoB-48.png")));
 
 		setBackground(new Color(36, 53, 102));
 		setTitle("Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1342, 815);
+		setBounds(100, 100, 1406, 870);
 		contentPane = new JPanel();
 		contentPane.setBackground(darkGrey);
 		setContentPane(contentPane);
@@ -69,9 +69,9 @@ public class HomeGUI extends JFrame {
 		JPanel menuRight = new JPanel();
 		menuRight.setBackground(black);
 
-		JLabel label = new JLabel("");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Logo-64.png")));
+		JLabel logoTop = new JLabel("");
+		logoTop.setHorizontalAlignment(SwingConstants.CENTER);
+		logoTop.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Logo-64.png")));
 
 		JPanel Card = new JPanel();
 		Card.setBackground(grey);
@@ -190,7 +190,7 @@ public class HomeGUI extends JFrame {
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 										.addGap(6)
-										.addComponent(label, GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE))
+										.addComponent(logoTop, GroupLayout.DEFAULT_SIZE, 989, Short.MAX_VALUE))
 								.addGroup(gl_contentPane.createSequentialGroup()
 										.addPreferredGap(ComponentPlacement.UNRELATED)
 										.addComponent(Card, GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)))
@@ -200,7 +200,7 @@ public class HomeGUI extends JFrame {
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 						.addGap(35)
-						.addComponent(label, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+						.addComponent(logoTop, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
 						.addComponent(Card, GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
 						.addContainerGap())
@@ -242,11 +242,14 @@ public class HomeGUI extends JFrame {
 		GroupLayout gl_menuRight = new GroupLayout(menuRight);
 		gl_menuRight.setHorizontalGroup(
 				gl_menuRight.createParallelGroup(Alignment.LEADING)
-				.addComponent(buttonDashboard, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-				.addComponent(buttonShowArtists, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-				.addComponent(buttonShowAlbums, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
 				.addGroup(gl_menuRight.createSequentialGroup()
 						.addComponent(buttonOthers, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				.addGroup(Alignment.TRAILING, gl_menuRight.createSequentialGroup()
+						.addGroup(gl_menuRight.createParallelGroup(Alignment.TRAILING)
+								.addComponent(buttonShowAlbums, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+								.addComponent(buttonShowArtists, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+								.addComponent(buttonDashboard, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
 						.addContainerGap())
 				);
 		gl_menuRight.setVerticalGroup(
@@ -260,7 +263,7 @@ public class HomeGUI extends JFrame {
 						.addComponent(buttonShowAlbums, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(buttonOthers, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(325, Short.MAX_VALUE))
+						.addContainerGap(380, Short.MAX_VALUE))
 				);
 		menuRight.setLayout(gl_menuRight);
 		Card.setLayout(new CardLayout(0, 0));
@@ -349,33 +352,33 @@ public class HomeGUI extends JFrame {
 
 		JLabel SpazioRight = new JLabel("");
 
-		JButton btnAddSong = new JButton("Add Song");
-		btnAddSong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAddSong.addMouseListener(new MouseAdapter() {
+		JButton buttonAddSong = new JButton("Add Song");
+		buttonAddSong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonAddSong.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnAddSong.setBackground(darkGrey);
+				buttonAddSong.setBackground(darkGrey);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				btnAddSong.setBackground(black);
+				buttonAddSong.setBackground(black);
 			}
 		});
-		btnAddSong.addActionListener(new ActionListener() {
+		buttonAddSong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.frameAddSongGUI();
 			}
 		});
-		btnAddSong.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Song-48.png")));
-		btnAddSong.setVerticalTextPosition(SwingConstants.BOTTOM);
-		btnAddSong.setIconTextGap(10);
-		btnAddSong.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnAddSong.setForeground(Color.WHITE);
-		btnAddSong.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		btnAddSong.setFocusPainted(false);
-		btnAddSong.setBorderPainted(false);
-		btnAddSong.setBorder(null);
-		btnAddSong.setBackground(new Color(15, 15, 15));
+		buttonAddSong.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Song-48.png")));
+		buttonAddSong.setVerticalTextPosition(SwingConstants.BOTTOM);
+		buttonAddSong.setIconTextGap(10);
+		buttonAddSong.setHorizontalTextPosition(SwingConstants.CENTER);
+		buttonAddSong.setForeground(Color.WHITE);
+		buttonAddSong.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		buttonAddSong.setFocusPainted(false);
+		buttonAddSong.setBorderPainted(false);
+		buttonAddSong.setBorder(null);
+		buttonAddSong.setBackground(new Color(15, 15, 15));
 
 		GroupLayout gl_panelDashboard = new GroupLayout(panelDashboard);
 		gl_panelDashboard.setHorizontalGroup(
@@ -392,7 +395,7 @@ public class HomeGUI extends JFrame {
 						.addPreferredGap(ComponentPlacement.UNRELATED)
 						.addComponent(buttonAddAlbum, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(btnAddSong, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
+						.addComponent(buttonAddSong, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
 						.addGap(1)
 						.addComponent(SpazioRight, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
 						.addContainerGap())
@@ -422,7 +425,7 @@ public class HomeGUI extends JFrame {
 								.addGroup(gl_panelDashboard.createSequentialGroup()
 										.addPreferredGap(ComponentPlacement.UNRELATED)
 										.addGroup(gl_panelDashboard.createParallelGroup(Alignment.LEADING)
-												.addComponent(btnAddSong, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE)
+												.addComponent(buttonAddSong, GroupLayout.PREFERRED_SIZE, 279, GroupLayout.PREFERRED_SIZE)
 												.addComponent(SpazioRight, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))))
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(SpazioButtom, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
@@ -434,10 +437,10 @@ public class HomeGUI extends JFrame {
 
 		Card.add(panelShowArtists, "name_228485702864300");
 
-		JLabel lblArtists_1 = new JLabel("ARTISTS");
-		lblArtists_1.setForeground(new Color(255, 255, 255));
-		lblArtists_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblArtists_1.setFont(new Font("Segoe UI", Font.BOLD, 30));
+		JLabel labelArtist = new JLabel("ARTISTS");
+		labelArtist.setForeground(new Color(255, 255, 255));
+		labelArtist.setHorizontalAlignment(SwingConstants.CENTER);
+		labelArtist.setFont(new Font("Segoe UI", Font.BOLD, 30));
 
 		scrollPaneArtists = new JScrollPane();
 		scrollPaneArtists.setAutoscrolls(true);
@@ -449,7 +452,7 @@ public class HomeGUI extends JFrame {
 				gl_panelShowArtists.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelShowArtists.createSequentialGroup()
 						.addGap(10)
-						.addComponent(lblArtists_1, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
+						.addComponent(labelArtist, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
 						.addGap(10))
 				.addGroup(gl_panelShowArtists.createSequentialGroup()
 						.addContainerGap()
@@ -460,7 +463,7 @@ public class HomeGUI extends JFrame {
 				gl_panelShowArtists.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelShowArtists.createSequentialGroup()
 						.addGap(11)
-						.addComponent(lblArtists_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelArtist, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(scrollPaneArtists, GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
 						.addGap(16))
@@ -470,293 +473,16 @@ public class HomeGUI extends JFrame {
 		panelPrintArtists.setPreferredSize(new Dimension(400, 1000));
 		panelPrintArtists.setBackground(grey);
 		panelPrintArtists.setForeground(grey);
-
 		scrollPaneArtists.setBackground(darkGrey);
 		scrollPaneArtists.setViewportView(panelPrintArtists);
-
-		JPanel panelBackGroundArtist = new JPanel();
-		panelBackGroundArtist.setBackground(darkGrey);
-
-		JTextField textFieldNomeArtista = new JTextField();
-		textFieldNomeArtista.setForeground(new Color(255, 255, 255));
-		textFieldNomeArtista.setEditable(false);
-		textFieldNomeArtista.setDisabledTextColor(new Color(255, 255, 255));
-		textFieldNomeArtista.setBackground(darkGrey);
-		textFieldNomeArtista.setBorder(null);
-		textFieldNomeArtista.setFont(new Font("Segoe UI", Font.BOLD, 24));
-		textFieldNomeArtista.setColumns(10);
-
-		JTextField textFieldNomeDArte = new JTextField();
-		textFieldNomeDArte.setForeground(new Color(255, 255, 255));
-		textFieldNomeDArte.setEditable(false);
-		textFieldNomeDArte.setDisabledTextColor(new Color(255, 255, 255));
-		textFieldNomeDArte.setBackground(darkGrey);
-		textFieldNomeDArte.setBorder(null);
-		textFieldNomeDArte.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		textFieldNomeDArte.setColumns(10);
-
-		JTextField textFieldDataNascita = new JTextField();
-		textFieldDataNascita.setForeground(new Color(255, 255, 255));
-		textFieldDataNascita.setEditable(false);
-		textFieldDataNascita.setDisabledTextColor(new Color(255, 255, 255));
-		textFieldDataNascita.setBackground(darkGrey);
-		textFieldDataNascita.setBorder(null);
-		textFieldDataNascita.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldDataNascita.setColumns(10);
-
-		JTextField textFieldFollowers = new JTextField();
-		textFieldFollowers.setForeground(new Color(255, 255, 255));
-		textFieldFollowers.setEditable(false);
-		textFieldFollowers.setDisabledTextColor(new Color(255, 255, 255));
-		textFieldFollowers.setBackground(darkGrey);
-		textFieldFollowers.setBorder(null);
-		textFieldFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		textFieldFollowers.setColumns(10);
-
-		JTextField textFieldCity = new JTextField();
-		textFieldCity.setForeground(new Color(255, 255, 255));
-		textFieldCity.setEditable(false);
-		textFieldCity.setDisabledTextColor(new Color(255, 255, 255));
-		textFieldCity.setBackground(darkGrey);
-		textFieldCity.setBorder(null);
-		textFieldCity.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldCity.setColumns(10);
-
-		JTextField textFieldCodiceArtista = new JTextField();
-		textFieldCodiceArtista.setForeground(new Color(255, 255, 255));
-		textFieldCodiceArtista.setEditable(false);
-		textFieldCodiceArtista.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldCodiceArtista.setDisabledTextColor(new Color(255, 255, 255));
-		textFieldCodiceArtista.setBackground(darkGrey);
-		textFieldCodiceArtista.setBorder(null);
-		textFieldCodiceArtista.setColumns(10);
-
-		JTextField textFieldCognomeArtista = new JTextField();
-		textFieldCognomeArtista.setForeground(Color.WHITE);
-		textFieldCognomeArtista.setFont(new Font("Segoe UI", Font.BOLD, 24));
-		textFieldCognomeArtista.setEditable(false);
-		textFieldCognomeArtista.setDisabledTextColor(Color.WHITE);
-		textFieldCognomeArtista.setColumns(10);
-		textFieldCognomeArtista.setBorder(null);
-		textFieldCognomeArtista.setBackground(new Color(21, 21, 21));
-
-		JLabel lblFollowers = new JLabel("Followers:");
-		lblFollowers.setForeground(new Color(255, 255, 255));
-		lblFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JLabel lblCod = new JLabel("Cod:");
-		lblCod.setForeground(Color.WHITE);
-		lblCod.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JLabel lblDataNascita = new JLabel("Data nascita:");
-		lblDataNascita.setForeground(Color.WHITE);
-		lblDataNascita.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JButton buttonDelete = new JButton("");
-		buttonDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String codice = textFieldCodiceArtista.getText();
-				String nome = textFieldNomeArtista.getText();
-				String cognome = textFieldCognomeArtista.getText();
-
-				Object[] options = {"Si", "No", "Annulla"};
-				int scelta = JOptionPane.showOptionDialog(null,
-						"Sei sicuro di voler cancellare "
-								+ nome + " " + cognome,
-								"Cancella artista",
-								JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE,
-								null,
-								options,
-								options[2]);
-
-				if(scelta == JOptionPane.YES_OPTION){  
-					controller.deleteArtistDB(codice);
-					stampaArtistGUI();
-				}
-			}
-		});
-		panelPrintArtists.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		buttonDelete.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
-		buttonDelete.setIconTextGap(10);
-		buttonDelete.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonDelete.setForeground(Color.WHITE);
-		buttonDelete.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonDelete.setFocusPainted(false);
-		buttonDelete.setBorderPainted(false);
-		buttonDelete.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonDelete.setBackground(new Color(15, 15, 15));
-
-		JButton buttonModify = new JButton("");
-		JButton buttonSave = new JButton("");
-		buttonSave.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonSave.setEnabled(false);
-		buttonSave.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
-		buttonSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNomeArtista.setEditable(false);
-				textFieldCognomeArtista.setEditable(false);
-				textFieldDataNascita.setEditable(false);
-				textFieldCity.setEditable(false);
-				textFieldFollowers.setEditable(false);
-				textFieldNomeDArte.setEditable(false);
-
-				textFieldNomeArtista.setBorder(null);
-				textFieldCognomeArtista.setBorder(null);
-				textFieldDataNascita.setBorder(null);
-				textFieldCity.setBorder(null);
-				textFieldFollowers.setBorder(null);
-				textFieldNomeDArte.setBorder(null);
-
-				String codice = textFieldCodiceArtista.getText();
-				String nome = textFieldNomeArtista.getText();
-				String cognome = textFieldCognomeArtista.getText();
-				String dataNascita = textFieldDataNascita.getText();
-				String nomeDArte = textFieldNomeDArte.getText();
-				String citta = textFieldCity.getText();
-				String followers = textFieldFollowers.getText();
-
-				controller.updateArtistDB(codice, nome, cognome, dataNascita, nomeDArte, citta, followers);
-
-				buttonSave.setEnabled(false);
-				buttonSave.setBackground(darkGrey);
-				buttonModify.setEnabled(true);
-
-				stampaArtistGUI();
-			}
-		});
-		buttonSave.setIconTextGap(10);
-		buttonSave.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonSave.setForeground(Color.WHITE);
-		buttonSave.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonSave.setFocusPainted(false);
-		buttonSave.setBorderPainted(false);
-		buttonSave.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonSave.setBackground(new Color(15, 15, 15));
-
-		buttonModify.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNomeArtista.setEditable(true);
-				textFieldCognomeArtista.setEditable(true);
-				textFieldDataNascita.setEditable(true);
-				textFieldCity.setEditable(true);
-				textFieldFollowers.setEditable(true);
-				textFieldNomeDArte.setEditable(true);
-				buttonSave.setEnabled(true);
-				buttonModify.setBackground(darkGrey);
-				buttonModify.setEnabled(false);
-
-				textFieldNomeArtista.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldCognomeArtista.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldDataNascita.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldCity.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldFollowers.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldNomeDArte.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-			}
-		});
-		buttonModify.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonModify.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
-		buttonModify.setIconTextGap(10);
-		buttonModify.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonModify.setForeground(Color.WHITE);
-		buttonModify.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonModify.setFocusPainted(false);
-		buttonModify.setBorderPainted(false);
-		buttonModify.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonModify.setBackground(new Color(15, 15, 15));
-		buttonModify.setEnabled(true);
-
-		JTextField textFieldRetribuzione = new JTextField();
-		textFieldRetribuzione.setForeground(new Color(0, 204, 0));
-		textFieldRetribuzione.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		textFieldRetribuzione.setEditable(false);
-		textFieldRetribuzione.setDisabledTextColor(Color.WHITE);
-		textFieldRetribuzione.setColumns(10);
-		textFieldRetribuzione.setBorder(null);
-		textFieldRetribuzione.setBackground(new Color(21, 21, 21));
-
-		GroupLayout gl_panelBackGroundArtist = new GroupLayout(panelBackGroundArtist);
-		gl_panelBackGroundArtist.setHorizontalGroup(
-				gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldCodiceArtista, GroupLayout.PREFERRED_SIZE, 159, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-						.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addComponent(lblFollowers, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE))
-						.addGap(18)
-						.addComponent(buttonDelete)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
-		gl_panelBackGroundArtist.setVerticalGroup(
-				gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-						.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addGap(21)
-										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-												.addComponent(textFieldNomeArtista, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-														.addComponent(textFieldCognomeArtista, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-														.addComponent(textFieldNomeDArte, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-												.addComponent(lblCod, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldCodiceArtista, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-												.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblFollowers)
-												.addComponent(textFieldRetribuzione, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-										.addContainerGap(25, Short.MAX_VALUE)
-										.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.TRAILING)
-												.addComponent(buttonSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-												.addComponent(buttonDelete)
-												.addComponent(buttonModify, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-												.addGroup(gl_panelBackGroundArtist.createSequentialGroup()
-														.addGroup(gl_panelBackGroundArtist.createParallelGroup(Alignment.BASELINE)
-																.addComponent(textFieldCity, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																.addComponent(textFieldDataNascita, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																.addComponent(lblDataNascita, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-														.addGap(33)))))
-						.addContainerGap())
-				);
-		panelBackGroundArtist.setLayout(gl_panelBackGroundArtist);
-		panelPrintArtists.add(panelBackGroundArtist);
-
 		panelShowArtists.setLayout(gl_panelShowArtists);
 
 		Card.add(panelShowAlbums, "name_228516752218900");
 
-		JLabel lblAlbums_1 = new JLabel("ALBUMS");
-		lblAlbums_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAlbums_1.setForeground(new Color(255, 255, 255));
-		lblAlbums_1.setFont(new Font("Segoe UI", Font.BOLD, 30));
+		JLabel labelAlbum = new JLabel("ALBUMS");
+		labelAlbum.setHorizontalAlignment(SwingConstants.CENTER);
+		labelAlbum.setForeground(new Color(255, 255, 255));
+		labelAlbum.setFont(new Font("Segoe UI", Font.BOLD, 30));
 
 		scrollPaneAlbums = new JScrollPane();
 		scrollPaneAlbums.setAutoscrolls(true);
@@ -768,7 +494,7 @@ public class HomeGUI extends JFrame {
 				gl_panelShowAlbums.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelShowAlbums.createSequentialGroup()
 						.addGap(10)
-						.addComponent(lblAlbums_1, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
+						.addComponent(labelAlbum, GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE)
 						.addGap(10))
 				.addGroup(gl_panelShowAlbums.createSequentialGroup()
 						.addContainerGap()
@@ -779,7 +505,7 @@ public class HomeGUI extends JFrame {
 				gl_panelShowAlbums.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelShowAlbums.createSequentialGroup()
 						.addGap(11)
-						.addComponent(lblAlbums_1, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+						.addComponent(labelAlbum, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(scrollPaneAlbums, GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
 						.addContainerGap())
@@ -790,249 +516,6 @@ public class HomeGUI extends JFrame {
 		panelPrintAlbums.setBackground(grey);
 		scrollPaneAlbums.setViewportView(panelPrintAlbums);
 		panelPrintAlbums.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		JPanel panelBackGroundAlbum = new JPanel();
-		panelBackGroundAlbum.setBackground(new Color(21, 21, 21));
-		panelPrintAlbums.add(panelBackGroundAlbum);
-
-		JTextField textFieldArtista = new JTextField();
-		textFieldArtista.setForeground(Color.WHITE);
-		textFieldArtista.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldArtista.setEditable(false);
-		textFieldArtista.setDisabledTextColor(Color.WHITE);
-		textFieldArtista.setColumns(10);
-		textFieldArtista.setBorder(null);
-		textFieldArtista.setBackground(new Color(21, 21, 21));
-
-		JTextField textFieldNomeAlbum = new JTextField();
-		textFieldNomeAlbum.setForeground(Color.WHITE);
-		textFieldNomeAlbum.setFont(new Font("Segoe UI", Font.BOLD, 24));
-		textFieldNomeAlbum.setEditable(false);
-		textFieldNomeAlbum.setDisabledTextColor(Color.WHITE);
-		textFieldNomeAlbum.setColumns(10);
-		textFieldNomeAlbum.setBorder(null);
-		textFieldNomeAlbum.setBackground(new Color(21, 21, 21));
-
-		JLabel lblDataPubblicazione = new JLabel("Data pubblicazione:");
-		lblDataPubblicazione.setForeground(Color.WHITE);
-		lblDataPubblicazione.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldData = new JTextField();
-		textFieldData.setForeground(Color.WHITE);
-		textFieldData.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldData.setEditable(false);
-		textFieldData.setDisabledTextColor(Color.WHITE);
-		textFieldData.setColumns(10);
-		textFieldData.setBorder(null);
-		textFieldData.setBackground(new Color(21, 21, 21));
-
-		JLabel labelGenere = new JLabel("Genere:");
-		labelGenere.setForeground(Color.WHITE);
-		labelGenere.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldGenere = new JTextField();
-		textFieldGenere.setForeground(Color.WHITE);
-		textFieldGenere.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		textFieldGenere.setEditable(false);
-		textFieldGenere.setDisabledTextColor(Color.WHITE);
-		textFieldGenere.setColumns(10);
-		textFieldGenere.setBorder(null);
-		textFieldGenere.setBackground(new Color(21, 21, 21));
-
-		JTextField textFieldNumeroBrani = new JTextField();
-		textFieldNumeroBrani.setForeground(Color.WHITE);
-		textFieldNumeroBrani.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldNumeroBrani.setEditable(false);
-		textFieldNumeroBrani.setDisabledTextColor(Color.WHITE);
-		textFieldNumeroBrani.setColumns(10);
-		textFieldNumeroBrani.setBorder(null);
-		textFieldNumeroBrani.setBackground(new Color(21, 21, 21));
-
-		JTextField textFieldCodiceAlbum = new JTextField();
-		textFieldCodiceAlbum.setForeground(Color.WHITE);
-		textFieldCodiceAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldCodiceAlbum.setEditable(false);
-		textFieldCodiceAlbum.setDisabledTextColor(Color.WHITE);
-		textFieldCodiceAlbum.setColumns(10);
-		textFieldCodiceAlbum.setBorder(null);
-		textFieldCodiceAlbum.setBackground(new Color(21, 21, 21));
-
-		JButton buttonSalvaAlbum = new JButton("");
-		JButton buttonModificaAlbum = new JButton("");
-		buttonModificaAlbum.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonModificaAlbum.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNomeAlbum.setEditable(true);
-				textFieldNumeroBrani.setEditable(true);
-				textFieldGenere.setEditable(true);
-				textFieldData.setEditable(true);
-				buttonSalvaAlbum.setEnabled(true);
-				buttonModificaAlbum.setBackground(darkGrey);
-				buttonModificaAlbum.setEnabled(false);
-
-				textFieldNomeAlbum.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldNumeroBrani.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldData.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-			}
-		});
-		buttonModificaAlbum.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
-		buttonModificaAlbum.setIconTextGap(10);
-		buttonModificaAlbum.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonModificaAlbum.setForeground(Color.WHITE);
-		buttonModificaAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonModificaAlbum.setFocusPainted(false);
-		buttonModificaAlbum.setEnabled(true);
-		buttonModificaAlbum.setBorderPainted(false);
-		buttonModificaAlbum.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonModificaAlbum.setBackground(new Color(15, 15, 15));
-
-		buttonSalvaAlbum.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNomeAlbum.setEditable(false);
-				textFieldNumeroBrani.setEditable(false);
-				textFieldGenere.setEditable(false);
-				textFieldData.setEditable(false);
-				buttonSalvaAlbum.setEnabled(false);
-				buttonModificaAlbum.setBackground(new Color(15, 15, 15));
-				buttonModificaAlbum.setEnabled(true);
-
-				String codice = textFieldCodiceAlbum.getText();
-				String nome = textFieldNomeAlbum.getText();
-				String songNumber = textFieldNumeroBrani.getText();
-				String genere = textFieldGenere.getText();
-				String data = textFieldData.getText();
-
-				controller.updateAlbum(codice, nome, songNumber, genere, data);
-
-				textFieldNomeAlbum.setBorder(null);
-				textFieldNumeroBrani.setBorder(null);
-				textFieldGenere.setBorder(null);
-				textFieldData.setBorder(null);
-			}
-		});
-		buttonSalvaAlbum.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonSalvaAlbum.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
-		buttonSalvaAlbum.setIconTextGap(10);
-		buttonSalvaAlbum.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonSalvaAlbum.setForeground(Color.WHITE);
-		buttonSalvaAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonSalvaAlbum.setFocusPainted(false);
-		buttonSalvaAlbum.setEnabled(false);
-		buttonSalvaAlbum.setBorderPainted(false);
-		buttonSalvaAlbum.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonSalvaAlbum.setBackground(new Color(15, 15, 15));
-
-		JButton buttonDeleteAlbum = new JButton("");
-		buttonDeleteAlbum.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String codice = textFieldCodiceAlbum.getText();
-				String nome = textFieldNomeAlbum.getText();
-
-				Object[] options = {"Si", "No", "Annulla"};
-				int scelta = JOptionPane.showOptionDialog(null,
-						"Sei sicuro di voler cancellare "
-								+ nome,
-								"Cancella album",
-								JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE,
-								null,
-								options,
-								options[2]);
-
-				if(scelta == JOptionPane.YES_OPTION){  
-					controller.deleteAlbumDB(codice);
-					stampaAlbumGUI();
-				}
-			}
-		});
-		buttonDeleteAlbum.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		buttonDeleteAlbum.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
-		buttonDeleteAlbum.setIconTextGap(10);
-		buttonDeleteAlbum.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonDeleteAlbum.setForeground(Color.WHITE);
-		buttonDeleteAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonDeleteAlbum.setFocusPainted(false);
-		buttonDeleteAlbum.setEnabled(true);
-		buttonDeleteAlbum.setBorderPainted(false);
-		buttonDeleteAlbum.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonDeleteAlbum.setBackground(new Color(15, 15, 15));
-
-		JLabel lblCod_1 = new JLabel("Cod:");
-		lblCod_1.setForeground(Color.WHITE);
-		lblCod_1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JLabel lblNBrani = new JLabel("N. brani:");
-		lblNBrani.setForeground(Color.WHITE);
-		lblNBrani.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-
-		GroupLayout gl_panelBackGroundAlbum = new GroupLayout(panelBackGroundAlbum);
-		gl_panelBackGroundAlbum.setHorizontalGroup(
-				gl_panelBackGroundAlbum.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundAlbum.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelBackGroundAlbum.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_panelBackGroundAlbum.createSequentialGroup()
-										.addComponent(textFieldNomeAlbum, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(textFieldArtista, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panelBackGroundAlbum.createSequentialGroup()
-										.addComponent(lblCod_1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldCodiceAlbum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(lblNBrani, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldNumeroBrani, 0, 0, Short.MAX_VALUE)))
-						.addGap(128)
-						.addGroup(gl_panelBackGroundAlbum.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panelBackGroundAlbum.createSequentialGroup()
-										.addComponent(lblDataPubblicazione, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldData, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panelBackGroundAlbum.createSequentialGroup()
-										.addComponent(labelGenere, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonDeleteAlbum, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonModificaAlbum, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonSalvaAlbum, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
-		gl_panelBackGroundAlbum.setVerticalGroup(
-				gl_panelBackGroundAlbum.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundAlbum.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelBackGroundAlbum.createParallelGroup(Alignment.TRAILING)
-								.addComponent(buttonDeleteAlbum, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonSalvaAlbum, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonModificaAlbum, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelBackGroundAlbum.createSequentialGroup()
-										.addGroup(gl_panelBackGroundAlbum.createParallelGroup(Alignment.BASELINE)
-												.addComponent(textFieldData, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblDataPubblicazione, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-										.addGap(18)
-										.addGroup(gl_panelBackGroundAlbum.createParallelGroup(Alignment.BASELINE)
-												.addComponent(textFieldGenere, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(labelGenere)))
-								.addGroup(gl_panelBackGroundAlbum.createSequentialGroup()
-										.addGroup(gl_panelBackGroundAlbum.createParallelGroup(Alignment.BASELINE)
-												.addComponent(textFieldNomeAlbum, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldArtista, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-										.addGap(18)
-										.addGroup(gl_panelBackGroundAlbum.createParallelGroup(Alignment.BASELINE)
-												.addComponent(lblCod_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldCodiceAlbum, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblNBrani, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldNumeroBrani, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))))
-						.addContainerGap(12, Short.MAX_VALUE))
-				);
-		panelBackGroundAlbum.setLayout(gl_panelBackGroundAlbum);
-
 		panelShowAlbums.setLayout(gl_panelShowAlbums);
 
 		Card.add(panelOthers, "name_175542340994200");
@@ -1050,11 +533,13 @@ public class HomeGUI extends JFrame {
 		JButton buttonSong = new JButton("Song");
 		JButton buttonSIngle = new JButton("Single");
 		JButton buttonEP = new JButton("EP");
+
 		buttonSIngle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				stampaSingleGUI();
 			}
 		});
+
 		buttonEP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				stampaEPGUI();
@@ -1077,6 +562,7 @@ public class HomeGUI extends JFrame {
 				buttonSIngle.setBackground(black);
 			}
 		});
+
 		buttonEP.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -1087,6 +573,7 @@ public class HomeGUI extends JFrame {
 				buttonEP.setBackground(black);
 			}
 		});
+
 		buttonSong.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -1164,706 +651,10 @@ public class HomeGUI extends JFrame {
 				);
 
 		panelPrintOthers = new JPanel();
-		panelPrintOthers.setPreferredSize(new Dimension(400, 750));
+		panelPrintOthers.setPreferredSize(new Dimension(400, 740));
 		panelPrintOthers.setBackground(grey);
 		scrollPaneOthers.setViewportView(panelPrintOthers);
 
-		JPanel panelBackGroundSong = new JPanel();
-		panelBackGroundSong.setBackground(new Color(21, 21, 21));
-		panelPrintOthers.add(panelBackGroundSong);
-
-		JTextField textFieldNomeSong = new JTextField();
-		textFieldNomeSong.setForeground(Color.WHITE);
-		textFieldNomeSong.setFont(new Font("Segoe UI", Font.BOLD, 24));
-		textFieldNomeSong.setEditable(false);
-		textFieldNomeSong.setDisabledTextColor(Color.WHITE);
-		textFieldNomeSong.setColumns(10);
-		textFieldNomeSong.setBorder(null);
-		textFieldNomeSong.setBackground(new Color(21, 21, 21));
-
-		JLabel labelCodSong = new JLabel("Cod:");
-		labelCodSong.setForeground(Color.WHITE);
-		labelCodSong.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldCodSong = new JTextField();
-		textFieldCodSong.setForeground(Color.WHITE);
-		textFieldCodSong.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldCodSong.setEditable(false);
-		textFieldCodSong.setDisabledTextColor(Color.WHITE);
-		textFieldCodSong.setColumns(10);
-		textFieldCodSong.setBorder(null);
-		textFieldCodSong.setBackground(new Color(21, 21, 21));
-
-		JLabel lblAlbum = new JLabel("Album:");
-		lblAlbum.setForeground(Color.WHITE);
-		lblAlbum.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldAlbumSong = new JTextField();
-		textFieldAlbumSong.setForeground(Color.WHITE);
-		textFieldAlbumSong.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldAlbumSong.setEditable(false);
-		textFieldAlbumSong.setDisabledTextColor(Color.WHITE);
-		textFieldAlbumSong.setColumns(10);
-		textFieldAlbumSong.setBorder(null);
-		textFieldAlbumSong.setBackground(new Color(21, 21, 21));
-
-		JLabel labelDurata = new JLabel("Durata:");
-		labelDurata.setForeground(Color.WHITE);
-		labelDurata.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldDurata = new JTextField();
-		textFieldDurata.setForeground(Color.WHITE);
-		textFieldDurata.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldDurata.setEditable(false);
-		textFieldDurata.setDisabledTextColor(Color.WHITE);
-		textFieldDurata.setColumns(10);
-		textFieldDurata.setBorder(null);
-		textFieldDurata.setBackground(new Color(21, 21, 21));
-
-		JLabel label_4 = new JLabel("Genere:");
-		label_4.setForeground(Color.WHITE);
-		label_4.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldGenereSong = new JTextField();
-		textFieldGenereSong.setForeground(Color.WHITE);
-		textFieldGenereSong.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		textFieldGenereSong.setEditable(false);
-		textFieldGenereSong.setDisabledTextColor(Color.WHITE);
-		textFieldGenereSong.setColumns(10);
-		textFieldGenereSong.setBorder(null);
-		textFieldGenereSong.setBackground(new Color(21, 21, 21));
-
-		JButton buttonDeleteSong = new JButton("");
-		buttonDeleteSong.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String codice = textFieldCodSong.getText();
-
-				String nome = textFieldNomeSong.getText();
-
-				Object[] options = {"Si", "No", "Annulla"};
-				int scelta = JOptionPane.showOptionDialog(null,
-						"Sei sicuro di voler cancellare "
-								+ nome,
-								"Cancella brano",
-								JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE,
-								null,
-								options,
-								options[2]);
-
-				if(scelta == JOptionPane.YES_OPTION){  
-					controller.deleteSongDB(codice);
-					stampaSongGUI();
-				}
-
-			}
-		});
-		buttonDeleteSong.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
-		buttonDeleteSong.setIconTextGap(10);
-		buttonDeleteSong.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonDeleteSong.setForeground(Color.WHITE);
-		buttonDeleteSong.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonDeleteSong.setFocusPainted(false);
-		buttonDeleteSong.setEnabled(true);
-		buttonDeleteSong.setBorderPainted(false);
-		buttonDeleteSong.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonDeleteSong.setBackground(new Color(15, 15, 15));
-
-		JButton buttonModificaSong = new JButton("");
-		JButton buttonSaveSong = new JButton("");
-
-		buttonModificaSong.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNomeSong.setEditable(true);
-				textFieldDurata.setEditable(true);
-				buttonSaveSong.setEnabled(true);
-				buttonModificaSong.setBackground(darkGrey);
-				buttonModificaSong.setEnabled(false);
-
-				textFieldNomeSong.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldDurata.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-			}
-		});
-		buttonModificaSong.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
-		buttonModificaSong.setIconTextGap(10);
-		buttonModificaSong.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonModificaSong.setForeground(Color.WHITE);
-		buttonModificaSong.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonModificaSong.setFocusPainted(false);
-		buttonModificaSong.setEnabled(true);
-		buttonModificaSong.setBorderPainted(false);
-		buttonModificaSong.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonModificaSong.setBackground(new Color(15, 15, 15));
-
-		buttonSaveSong.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNomeSong.setEditable(false);
-				textFieldDurata.setEditable(false);
-				buttonSaveSong.setEnabled(false);
-				buttonModificaSong.setBackground(black);
-				buttonModificaSong.setEnabled(true);
-
-				String codice = textFieldCodSong.getText();
-				String nome = textFieldNomeSong.getSelectedText();
-				String durata = textFieldDurata.getText();
-
-				controller.updateSong(codice, nome, durata);
-
-				textFieldNomeSong.setBorder(null);
-				textFieldDurata.setBorder(null);
-			}
-		});
-		buttonSaveSong.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
-		buttonSaveSong.setIconTextGap(10);
-		buttonSaveSong.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonSaveSong.setForeground(Color.WHITE);
-		buttonSaveSong.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonSaveSong.setFocusPainted(false);
-		buttonSaveSong.setEnabled(false);
-		buttonSaveSong.setBorderPainted(false);
-		buttonSaveSong.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonSaveSong.setBackground(new Color(15, 15, 15));
-		GroupLayout gl_panelBackGroundSong = new GroupLayout(panelBackGroundSong);
-		gl_panelBackGroundSong.setHorizontalGroup(
-				gl_panelBackGroundSong.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundSong.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelBackGroundSong.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldNomeSong, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelBackGroundSong.createSequentialGroup()
-										.addComponent(labelCodSong, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldCodSong, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(lblAlbum, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldAlbumSong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGap(190)
-						.addGroup(gl_panelBackGroundSong.createParallelGroup(Alignment.LEADING)
-								.addComponent(labelDurata, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelBackGroundSong.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldDurata, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldGenereSong, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-						.addGap(26)
-						.addComponent(buttonDeleteSong, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonModificaSong, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonSaveSong, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
-		gl_panelBackGroundSong.setVerticalGroup(
-				gl_panelBackGroundSong.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundSong.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelBackGroundSong.createParallelGroup(Alignment.TRAILING)
-								.addComponent(buttonDeleteSong, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonSaveSong, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonModificaSong, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelBackGroundSong.createSequentialGroup()
-										.addGroup(gl_panelBackGroundSong.createParallelGroup(Alignment.BASELINE)
-												.addComponent(labelDurata, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldDurata, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGap(18)
-										.addGroup(gl_panelBackGroundSong.createParallelGroup(Alignment.BASELINE)
-												.addComponent(label_4)
-												.addComponent(textFieldGenereSong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(gl_panelBackGroundSong.createSequentialGroup()
-										.addComponent(textFieldNomeSong, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addGroup(gl_panelBackGroundSong.createParallelGroup(Alignment.BASELINE)
-												.addComponent(labelCodSong, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldCodSong, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblAlbum, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldAlbumSong, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))))
-						.addContainerGap(12, Short.MAX_VALUE))
-				);
-		panelBackGroundSong.setLayout(gl_panelBackGroundSong);
-
-		JPanel panelBackGroundSingle = new JPanel();
-		panelBackGroundSingle.setBackground(new Color(21, 21, 21));
-		panelPrintOthers.add(panelBackGroundSingle);
-
-		JTextField textFieldNomeSingolo = new JTextField();
-		textFieldNomeSingolo.setForeground(Color.WHITE);
-		textFieldNomeSingolo.setFont(new Font("Segoe UI", Font.BOLD, 24));
-		textFieldNomeSingolo.setEditable(false);
-		textFieldNomeSingolo.setDisabledTextColor(Color.WHITE);
-		textFieldNomeSingolo.setColumns(10);
-		textFieldNomeSingolo.setBorder(null);
-		textFieldNomeSingolo.setBackground(new Color(21, 21, 21));
-
-		JLabel label_1 = new JLabel("Cod:");
-		label_1.setForeground(Color.WHITE);
-		label_1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldCodSingolo = new JTextField();
-		textFieldCodSingolo.setForeground(Color.WHITE);
-		textFieldCodSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldCodSingolo.setEditable(false);
-		textFieldCodSingolo.setDisabledTextColor(Color.WHITE);
-		textFieldCodSingolo.setColumns(10);
-		textFieldCodSingolo.setBorder(null);
-		textFieldCodSingolo.setBackground(new Color(21, 21, 21));
-
-		JLabel lblArtista = new JLabel("Artista:");
-		lblArtista.setForeground(Color.WHITE);
-		lblArtista.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldArtistaSingolo = new JTextField();
-		textFieldArtistaSingolo.setForeground(Color.WHITE);
-		textFieldArtistaSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldArtistaSingolo.setEditable(false);
-		textFieldArtistaSingolo.setDisabledTextColor(Color.WHITE);
-		textFieldArtistaSingolo.setColumns(10);
-		textFieldArtistaSingolo.setBorder(null);
-		textFieldArtistaSingolo.setBackground(new Color(21, 21, 21));
-
-		JLabel label_3 = new JLabel("Durata:");
-		label_3.setForeground(Color.WHITE);
-		label_3.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JLabel label_5 = new JLabel("Genere:");
-		label_5.setForeground(Color.WHITE);
-		label_5.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldDurataSingolo = new JTextField();
-		textFieldDurataSingolo.setForeground(Color.WHITE);
-		textFieldDurataSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldDurataSingolo.setEditable(false);
-		textFieldDurataSingolo.setDisabledTextColor(Color.WHITE);
-		textFieldDurataSingolo.setColumns(10);
-		textFieldDurataSingolo.setBorder(null);
-		textFieldDurataSingolo.setBackground(new Color(21, 21, 21));
-
-		JTextField textFieldGenereSingolo = new JTextField();
-		textFieldGenereSingolo.setForeground(Color.WHITE);
-		textFieldGenereSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		textFieldGenereSingolo.setEditable(false);
-		textFieldGenereSingolo.setDisabledTextColor(Color.WHITE);
-		textFieldGenereSingolo.setColumns(10);
-		textFieldGenereSingolo.setBorder(null);
-		textFieldGenereSingolo.setBackground(new Color(21, 21, 21));
-
-		JButton buttonDeleteSingle = new JButton("");
-		buttonDeleteSingle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String codice = textFieldCodSingolo.getText();
-				String nome = textFieldNomeSingolo.getText();
-
-				Object[] options = {"Si", "No", "Annulla"};
-				int scelta = JOptionPane.showOptionDialog(null,
-						"Sei sicuro di voler cancellare "
-								+ nome,
-								"Cancella singolo",
-								JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE,
-								null,
-								options,
-								options[2]);
-
-				if(scelta == JOptionPane.YES_OPTION){  
-					controller.deleteSingleDB(codice);
-					stampaSingleGUI();
-				}
-			}
-		});
-		buttonDeleteSingle.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
-		buttonDeleteSingle.setIconTextGap(10);
-		buttonDeleteSingle.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonDeleteSingle.setForeground(Color.WHITE);
-		buttonDeleteSingle.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonDeleteSingle.setFocusPainted(false);
-		buttonDeleteSingle.setEnabled(true);
-		buttonDeleteSingle.setBorderPainted(false);
-		buttonDeleteSingle.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonDeleteSingle.setBackground(new Color(15, 15, 15));
-
-		JTextField textFieldDataPubblicazioneSingolo = new JTextField();
-		textFieldDataPubblicazioneSingolo.setForeground(Color.WHITE);
-		textFieldDataPubblicazioneSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldDataPubblicazioneSingolo.setEditable(false);
-		textFieldDataPubblicazioneSingolo.setDisabledTextColor(Color.WHITE);
-		textFieldDataPubblicazioneSingolo.setColumns(10);
-		textFieldDataPubblicazioneSingolo.setBorder(null);
-		textFieldDataPubblicazioneSingolo.setBackground(new Color(21, 21, 21));
-
-		JButton buttonModifySingolo = new JButton("");
-		JButton buttonSaveModifySingolo = new JButton("");
-
-		buttonModifySingolo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNomeSingolo.setEditable(true);
-				textFieldDurataSingolo.setEditable(true);
-				textFieldDataPubblicazioneSingolo.setEditable(true);
-				textFieldGenereSingolo.setEditable(true);
-
-				buttonSaveModifySingolo.setEnabled(true);
-				buttonModifySingolo.setBackground(darkGrey);
-				buttonModifySingolo.setEnabled(false);
-
-				textFieldNomeSingolo.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldDurataSingolo.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldDataPubblicazioneSingolo.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldGenereSingolo.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-			}
-		});
-		buttonModifySingolo.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
-		buttonModifySingolo.setIconTextGap(10);
-		buttonModifySingolo.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonModifySingolo.setForeground(Color.WHITE);
-		buttonModifySingolo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonModifySingolo.setFocusPainted(false);
-		buttonModifySingolo.setEnabled(true);
-		buttonModifySingolo.setBorderPainted(false);
-		buttonModifySingolo.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonModifySingolo.setBackground(new Color(15, 15, 15));
-
-		buttonSaveModifySingolo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String codice = textFieldCodSingolo.getText();
-				String nome = textFieldNomeSingolo.getText();
-				String durata = textFieldDurataSingolo.getText();
-				String dataPubblicazione = textFieldDataPubblicazioneSingolo.getText();
-				String genere = textFieldGenereSingolo.getText();
-
-				controller.updateSingle(codice, nome, durata, genere, dataPubblicazione);
-
-				textFieldNomeSingolo.setBorder(null);
-				textFieldDurataSingolo.setBorder(null);
-				textFieldDataPubblicazioneSingolo.setBorder(null);
-				textFieldGenereSingolo.setBorder(null);
-
-				buttonSaveModifySingolo.setEnabled(false);
-				buttonModifySingolo.setBackground(black);
-				buttonModifySingolo.setEnabled(true);
-			}
-		});
-		buttonSaveModifySingolo.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
-		buttonSaveModifySingolo.setIconTextGap(10);
-		buttonSaveModifySingolo.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonSaveModifySingolo.setForeground(Color.WHITE);
-		buttonSaveModifySingolo.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonSaveModifySingolo.setFocusPainted(false);
-		buttonSaveModifySingolo.setEnabled(false);
-		buttonSaveModifySingolo.setBorderPainted(false);
-		buttonSaveModifySingolo.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonSaveModifySingolo.setBackground(new Color(15, 15, 15));
-
-		JLabel lblDataPubblicazione_1 = new JLabel("Data:");
-		lblDataPubblicazione_1.setForeground(Color.WHITE);
-		lblDataPubblicazione_1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		GroupLayout gl_panelBackGroundSingle = new GroupLayout(panelBackGroundSingle);
-		gl_panelBackGroundSingle.setHorizontalGroup(
-				gl_panelBackGroundSingle.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundSingle.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelBackGroundSingle.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldNomeSingolo, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelBackGroundSingle.createSequentialGroup()
-										.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldCodSingolo, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(lblArtista, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldArtistaSingolo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGap(14)
-						.addComponent(lblDataPubblicazione_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-						.addGap(12)
-						.addComponent(textFieldDataPubblicazioneSingolo, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelBackGroundSingle.createParallelGroup(Alignment.LEADING)
-								.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelBackGroundSingle.createParallelGroup(Alignment.LEADING)
-								.addComponent(textFieldDurataSingolo, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textFieldGenereSingolo, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-						.addGap(26)
-						.addComponent(buttonDeleteSingle, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonModifySingolo, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonSaveModifySingolo, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
-		gl_panelBackGroundSingle.setVerticalGroup(
-				gl_panelBackGroundSingle.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundSingle.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelBackGroundSingle.createParallelGroup(Alignment.TRAILING)
-								.addComponent(buttonDeleteSingle, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonSaveModifySingolo, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonModifySingolo, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelBackGroundSingle.createSequentialGroup()
-										.addComponent(textFieldNomeSingolo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(18)
-										.addGroup(gl_panelBackGroundSingle.createParallelGroup(Alignment.BASELINE)
-												.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldCodSingolo, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblArtista, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textFieldArtistaSingolo, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(gl_panelBackGroundSingle.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblDataPubblicazione_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldDataPubblicazioneSingolo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGroup(gl_panelBackGroundSingle.createSequentialGroup()
-												.addGroup(gl_panelBackGroundSingle.createParallelGroup(Alignment.BASELINE)
-														.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-														.addComponent(textFieldDurataSingolo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addGap(18)
-												.addGroup(gl_panelBackGroundSingle.createParallelGroup(Alignment.BASELINE)
-														.addComponent(label_5)
-														.addComponent(textFieldGenereSingolo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-						.addContainerGap(12, Short.MAX_VALUE))
-				);
-		panelBackGroundSingle.setLayout(gl_panelBackGroundSingle);
-
-		JPanel panelBackGroundEP = new JPanel();
-		panelBackGroundEP.setBackground(new Color(21, 21, 21));
-		panelPrintOthers.add(panelBackGroundEP);
-
-		JTextField textFieldNomeEP = new JTextField();
-		textFieldNomeEP.setForeground(Color.WHITE);
-		textFieldNomeEP.setFont(new Font("Segoe UI", Font.BOLD, 24));
-		textFieldNomeEP.setEditable(false);
-		textFieldNomeEP.setDisabledTextColor(Color.WHITE);
-		textFieldNomeEP.setColumns(10);
-		textFieldNomeEP.setBorder(null);
-		textFieldNomeEP.setBackground(new Color(21, 21, 21));
-
-		JLabel label_2 = new JLabel("Cod:");
-		label_2.setForeground(Color.WHITE);
-		label_2.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldCodEP = new JTextField();
-		textFieldCodEP.setForeground(Color.WHITE);
-		textFieldCodEP.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldCodEP.setEditable(false);
-		textFieldCodEP.setDisabledTextColor(Color.WHITE);
-		textFieldCodEP.setColumns(10);
-		textFieldCodEP.setBorder(null);
-		textFieldCodEP.setBackground(new Color(21, 21, 21));
-
-		JLabel label_6 = new JLabel("Artista:");
-		label_6.setForeground(Color.WHITE);
-		label_6.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldArtistaEP = new JTextField();
-		textFieldArtistaEP.setForeground(Color.WHITE);
-		textFieldArtistaEP.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldArtistaEP.setEditable(false);
-		textFieldArtistaEP.setDisabledTextColor(Color.WHITE);
-		textFieldArtistaEP.setColumns(10);
-		textFieldArtistaEP.setBorder(null);
-		textFieldArtistaEP.setBackground(new Color(21, 21, 21));
-
-		JLabel label_7 = new JLabel("Data:");
-		label_7.setForeground(Color.WHITE);
-		label_7.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldDataEP = new JTextField();
-		textFieldDataEP.setForeground(Color.WHITE);
-		textFieldDataEP.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldDataEP.setEditable(false);
-		textFieldDataEP.setDisabledTextColor(Color.WHITE);
-		textFieldDataEP.setColumns(10);
-		textFieldDataEP.setBorder(null);
-		textFieldDataEP.setBackground(new Color(21, 21, 21));
-
-		JLabel label_9 = new JLabel("Genere:");
-		label_9.setForeground(Color.WHITE);
-		label_9.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-		JTextField textFieldGenereEP = new JTextField();
-		textFieldGenereEP.setForeground(Color.WHITE);
-		textFieldGenereEP.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-		textFieldGenereEP.setEditable(false);
-		textFieldGenereEP.setDisabledTextColor(Color.WHITE);
-		textFieldGenereEP.setColumns(10);
-		textFieldGenereEP.setBorder(null);
-		textFieldGenereEP.setBackground(new Color(21, 21, 21));
-
-		JButton buttonDeleteEP = new JButton("");
-		buttonDeleteEP.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String codice = textFieldCodEP.getText();
-				String nome = textFieldNomeEP.getText();
-
-				Object[] options = {"Si", "No", "Annulla"};
-				int scelta = JOptionPane.showOptionDialog(null,
-						"Sei sicuro di voler cancellare "
-								+ nome,
-								"Cancella EP",
-								JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE,
-								null,
-								options,
-								options[2]);
-
-				if(scelta == JOptionPane.YES_OPTION){  
-					controller.deleteEPDB(codice);
-					stampaEPGUI();
-				}
-			}
-		});
-		buttonDeleteEP.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
-		buttonDeleteEP.setIconTextGap(10);
-		buttonDeleteEP.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonDeleteEP.setForeground(Color.WHITE);
-		buttonDeleteEP.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonDeleteEP.setFocusPainted(false);
-		buttonDeleteEP.setEnabled(true);
-		buttonDeleteEP.setBorderPainted(false);
-		buttonDeleteEP.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonDeleteEP.setBackground(new Color(15, 15, 15));
-
-		JTextField textFieldNumeroBraniEP = new JTextField();
-		textFieldNumeroBraniEP.setForeground(Color.WHITE);
-		textFieldNumeroBraniEP.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldNumeroBraniEP.setEditable(false);
-		textFieldNumeroBraniEP.setDisabledTextColor(Color.WHITE);
-		textFieldNumeroBraniEP.setColumns(10);
-		textFieldNumeroBraniEP.setBorder(null);
-		textFieldNumeroBraniEP.setBackground(new Color(21, 21, 21));
-
-		JButton buttonModifyEP = new JButton("");
-		JButton buttonSaveEP = new JButton("");
-		buttonSaveEP.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String codice = textFieldCodEP.getText();
-				String nome = textFieldNomeEP.getText();
-				String dataPubblicazione = textFieldDataEP.getText();
-				String genere = textFieldGenereEP.getText();
-				String numberSong = textFieldNumeroBraniEP.getText();
-
-				controller.updateEP(codice, nome, dataPubblicazione, genere, numberSong);
-
-				textFieldNomeEP.setBorder(null);
-				textFieldDataEP.setBorder(null);
-				textFieldGenereEP.setBorder(null);
-				textFieldNumeroBraniEP.setBorder(null);
-
-				buttonSaveEP.setEnabled(false);
-				buttonModifyEP.setBackground(black);
-				buttonModifyEP.setEnabled(true);
-			}
-		});
-		buttonSaveEP.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
-		buttonSaveEP.setIconTextGap(10);
-		buttonSaveEP.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonSaveEP.setForeground(Color.WHITE);
-		buttonSaveEP.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonSaveEP.setFocusPainted(false);
-		buttonSaveEP.setEnabled(false);
-		buttonSaveEP.setBorderPainted(false);
-		buttonSaveEP.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonSaveEP.setBackground(new Color(15, 15, 15));
-
-		buttonModifyEP.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				textFieldNomeEP.setEditable(true);
-				textFieldDataEP.setEditable(true);
-				textFieldGenereEP.setEditable(true);
-				textFieldNumeroBraniEP.setEditable(true);
-
-				buttonSaveEP.setEnabled(true);
-				buttonModifyEP.setBackground(darkGrey);
-				buttonModifyEP.setEnabled(false);
-
-				textFieldNomeEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldDataEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldGenereEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-				textFieldNumeroBraniEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-			}
-		});
-		buttonModifyEP.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
-		buttonModifyEP.setIconTextGap(10);
-		buttonModifyEP.setHorizontalTextPosition(SwingConstants.RIGHT);
-		buttonModifyEP.setForeground(Color.WHITE);
-		buttonModifyEP.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonModifyEP.setFocusPainted(false);
-		buttonModifyEP.setEnabled(true);
-		buttonModifyEP.setBorderPainted(false);
-		buttonModifyEP.setBorder(new LineBorder(new Color(0, 51, 255), 10));
-		buttonModifyEP.setBackground(new Color(15, 15, 15));
-
-		JLabel lblNBrani_1 = new JLabel("N. brani");
-		lblNBrani_1.setForeground(Color.WHITE);
-		lblNBrani_1.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		GroupLayout gl_panelBackGroundEP = new GroupLayout(panelBackGroundEP);
-		gl_panelBackGroundEP.setHorizontalGroup(
-				gl_panelBackGroundEP.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundEP.createSequentialGroup()
-						.addGroup(gl_panelBackGroundEP.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelBackGroundEP.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(label_2, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldCodEP, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldArtistaEP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addGap(14)
-										.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-										.addGap(12)
-										.addComponent(textFieldDataEP, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panelBackGroundEP.createSequentialGroup()
-										.addGap(12)
-										.addComponent(textFieldNomeEP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addGroup(gl_panelBackGroundEP.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panelBackGroundEP.createSequentialGroup()
-										.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldGenereEP, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panelBackGroundEP.createSequentialGroup()
-										.addComponent(lblNBrani_1, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED)
-										.addComponent(textFieldNumeroBraniEP, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(buttonDeleteEP, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonModifyEP, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonSaveEP, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
-		gl_panelBackGroundEP.setVerticalGroup(
-				gl_panelBackGroundEP.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panelBackGroundEP.createSequentialGroup()
-						.addGap(22)
-						.addGroup(gl_panelBackGroundEP.createParallelGroup(Alignment.TRAILING)
-								.addComponent(buttonSaveEP, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addComponent(buttonModifyEP, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panelBackGroundEP.createParallelGroup(Alignment.BASELINE)
-										.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldCodEP, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-										.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textFieldArtistaEP, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_panelBackGroundEP.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panelBackGroundEP.createSequentialGroup()
-												.addGroup(gl_panelBackGroundEP.createParallelGroup(Alignment.LEADING)
-														.addComponent(lblNBrani_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-														.addComponent(textFieldNumeroBraniEP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-												.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-												.addGroup(gl_panelBackGroundEP.createParallelGroup(Alignment.LEADING)
-														.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-														.addGroup(gl_panelBackGroundEP.createParallelGroup(Alignment.BASELINE)
-																.addComponent(textFieldDataEP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																.addComponent(label_9)
-																.addComponent(textFieldGenereEP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-										.addComponent(buttonDeleteEP, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)))
-						.addContainerGap(12, Short.MAX_VALUE))
-				.addGroup(gl_panelBackGroundEP.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(textFieldNomeEP, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(59, Short.MAX_VALUE))
-				);
-		panelBackGroundEP.setLayout(gl_panelBackGroundEP);
 		panelOthers.setLayout(gl_panelOthers);
 		contentPane.setLayout(gl_contentPane);
 		setLocationRelativeTo(null);

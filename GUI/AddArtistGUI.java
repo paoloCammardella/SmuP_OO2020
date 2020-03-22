@@ -41,7 +41,6 @@ public class AddArtistGUI extends JFrame {
 	private JPanel contentPane;
 
 	private Controller controller;
-
 	private JTextField textFieldCodiceArtista;
 	private JTextField textFieldNome;
 	private JTextField textFieldCognome;
@@ -186,9 +185,9 @@ public class AddArtistGUI extends JFrame {
 		textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldNome.setBackground(new Color(36, 53, 102));
 
-		JLabel lblCognome = new JLabel("Cognome");
-		lblCognome.setForeground(Color.WHITE);
-		lblCognome.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		JLabel labelCognome = new JLabel("Cognome");
+		labelCognome.setForeground(Color.WHITE);
+		labelCognome.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		textFieldCognome = new JTextField();
 		textFieldCognome.addFocusListener(new FocusAdapter() {
@@ -262,9 +261,9 @@ public class AddArtistGUI extends JFrame {
 		textFieldNomeDarte.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldNomeDarte.setBackground(new Color(36, 53, 102));
 
-		JLabel lblCitt = new JLabel("Citt\u00E0");
-		lblCitt.setForeground(Color.WHITE);
-		lblCitt.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		JLabel labelCitta = new JLabel("Citt\u00E0");
+		labelCitta.setForeground(Color.WHITE);
+		labelCitta.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		textFieldCitta = new JTextField();
 		textFieldCitta.addFocusListener(new FocusAdapter() {
@@ -323,9 +322,9 @@ public class AddArtistGUI extends JFrame {
 		textFieldFollowers.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldFollowers.setBackground(new Color(36, 53, 102));
 
-		JLabel lblFollowers = new JLabel("Followers");
-		lblFollowers.setForeground(Color.WHITE);
-		lblFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		JLabel labelblFollowers = new JLabel("Followers");
+		labelblFollowers.setForeground(Color.WHITE);
+		labelblFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		GroupLayout gl_AddArtist = new GroupLayout(AddArtist);
 		gl_AddArtist.setHorizontalGroup(
@@ -341,16 +340,16 @@ public class AddArtistGUI extends JFrame {
 												.addComponent(labelCodiceArtista, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(textFieldCodiceArtista, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
 												.addComponent(textFieldNome, Alignment.LEADING)
-												.addComponent(lblCognome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(labelCognome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(labelNome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(textFieldCognome, Alignment.LEADING)
 												.addComponent(labelData, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(textFieldDataNascita, Alignment.LEADING)
 												.addComponent(labelNomeDarte, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(textFieldNomeDarte, Alignment.LEADING)
-												.addComponent(lblCitt, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(labelCitta, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(textFieldCitta, Alignment.LEADING)
-												.addComponent(lblFollowers, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(labelblFollowers, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(textFieldFollowers, Alignment.LEADING)
 												.addComponent(labelErroreInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 						.addContainerGap())
@@ -369,7 +368,7 @@ public class AddArtistGUI extends JFrame {
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textFieldNome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblCognome)
+						.addComponent(labelCognome)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textFieldCognome, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
@@ -381,11 +380,11 @@ public class AddArtistGUI extends JFrame {
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textFieldNomeDarte, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblCitt)
+						.addComponent(labelCitta)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textFieldCitta, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(lblFollowers)
+						.addComponent(labelblFollowers)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
@@ -406,19 +405,19 @@ public class AddArtistGUI extends JFrame {
 		labelX.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		labelX.setForeground(new Color(255, 0, 0));
 
-		JButton btnAnnulla = new JButton("Annulla");
-		btnAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAnnulla.addActionListener(new ActionListener() {
+		JButton buttonAnnulla = new JButton("Annulla");
+		buttonAnnulla.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		buttonAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}
 		});
-		btnAnnulla.setForeground(Color.WHITE);
-		btnAnnulla.setFont(new Font("Segoe UI", Font.PLAIN, 20));
-		btnAnnulla.setFocusPainted(false);
-		btnAnnulla.setBorderPainted(false);
-		btnAnnulla.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
-		btnAnnulla.setBackground(new Color(204, 0, 0));
+		buttonAnnulla.setForeground(Color.WHITE);
+		buttonAnnulla.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		buttonAnnulla.setFocusPainted(false);
+		buttonAnnulla.setBorderPainted(false);
+		buttonAnnulla.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
+		buttonAnnulla.setBackground(new Color(204, 0, 0));
 
 		GroupLayout gl_panelAdd = new GroupLayout(panelAdd);
 		gl_panelAdd.setHorizontalGroup(
@@ -434,7 +433,7 @@ public class AddArtistGUI extends JFrame {
 												.addComponent(labelX)
 												.addContainerGap())
 										.addGroup(gl_panelAdd.createSequentialGroup()
-												.addComponent(btnAnnulla, GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+												.addComponent(buttonAnnulla, GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
 												.addGap(11))
 										.addGroup(gl_panelAdd.createSequentialGroup()
 												.addComponent(buttonAggiungi, GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
@@ -449,7 +448,7 @@ public class AddArtistGUI extends JFrame {
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(buttonAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+						.addComponent(buttonAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 						.addContainerGap())
 				);
 		panelAdd.setLayout(gl_panelAdd);
