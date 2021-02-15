@@ -24,6 +24,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -59,6 +61,7 @@ public class AddArtistGUI extends JFrame {
 	int mouseX, mouseY;
 
 	public AddArtistGUI(Controller controller) {
+		
 		setUndecorated(true);
 
 		setResizable(false);

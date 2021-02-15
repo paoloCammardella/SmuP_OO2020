@@ -70,13 +70,21 @@ public class Controller {
 	public void insertArtistDB(String codice, String nome, String cognome, String dataNascita, String nomeDArte, String citta, String followers) {
 		if((codice.length()>0) && (nome.length()>0) && (cognome.length()>0) && (dataNascita.length()>0) && (nomeDArte.length()>0) && (citta.length()>0) && (followers.length()>0)) {
 			int Ifollowers = Integer.parseInt(followers);
-			if(codice.length() >= 5) {
-				String codArtista = codice.substring(0, 5);
-				artistDAO.insertArtist(codArtista, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
+			if (Ifollowers >= 0) {
+				if(codice.length() >= 5) {
+					String codArtista = codice.substring(0, 5);
+					artistDAO.insertArtist(codArtista, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
+				}
+				else {
+					JOptionPane.showMessageDialog(frameAddArtist,
+							"Il codice deve essere di 5 caratteri!!!",
+							"Errore",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			else {
 				JOptionPane.showMessageDialog(frameAddArtist,
-						"Il codice deve essere di 5 caratteri!!!",
+						"Il numero di followers deve essere > 0!!!",
 						"Errore",
 						JOptionPane.ERROR_MESSAGE);
 			}
@@ -104,7 +112,14 @@ public class Controller {
 	public void updateArtistDB(String codice, String nome, String cognome, String dataNascita, String nomeDArte, String citta, String followers) {
 		if((codice.length()>0) && (nome.length()>0) && (cognome.length()>0) && (dataNascita.length()>0) && (nomeDArte.length()>0) && (citta.length()>0) && (followers.length()>0)) {
 			int Ifollowers = Integer.parseInt(followers);
-			artistDAO.updateArtist(codice, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
+			if (Ifollowers >= 0) 
+				artistDAO.updateArtist(codice, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
+			else {
+				JOptionPane.showMessageDialog(frameAddArtist,
+						"Il numero di followers deve essere > 0!!!",
+						"Errore",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		else {
 			JOptionPane optionPane = new JOptionPane("Errore aggiornamento artista!!!", JOptionPane.ERROR_MESSAGE);    
@@ -136,8 +151,16 @@ public class Controller {
 	public void insertSongDB(String nome, String durata, String genere, String album) {
 		if((nome.length()>0) && (durata.length()>0) && (genere.length()>0) && (album.length()>0)) {
 			int duration = Integer.parseInt(durata);
-			String codAlbum = album.substring(0, 5);
-			songDAO.insertSongDB(nome, duration, genere, codAlbum);
+			if (duration > 0) {
+				String codAlbum = album.substring(0, 5);
+				songDAO.insertSongDB(nome, duration, genere, codAlbum);
+			}
+			else {
+				JOptionPane.showMessageDialog(frameAddArtist,
+						"La durata deve essere > 0!!!",
+						"Errore",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddSong,
@@ -162,7 +185,14 @@ public class Controller {
 	public void updateSong(String codice, String nome, String songDuration) {
 		if((codice.length()>0) && (nome.length()>0) && (songDuration.length()>0)) {
 			int sDuration = Integer.parseInt(songDuration);
-			songDAO.updateSong(codice, nome, sDuration);
+			if (sDuration > 0)
+				songDAO.updateSong(codice, nome, sDuration);
+			else {
+				JOptionPane.showMessageDialog(frameAddArtist,
+						"La durata deve essere > 0!!!",
+						"Errore",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		else {
 			JOptionPane optionPane = new JOptionPane("Errore aggiornamento il brano!!!", JOptionPane.ERROR_MESSAGE);    
@@ -188,8 +218,16 @@ public class Controller {
 	public void insertSingleDB(String nome, String durata, String genere, String artista, String dataPubblicazione) {
 		if((artista.length()>0) && (nome.length()>0) && (durata.length()>0) && (genere.length()>0) && (dataPubblicazione.length()>0)) {
 			int durataInt = Integer.parseInt(durata);
-			String codArtista = artista.substring(0, 5);
-			singleDAO.insertSingle(nome, durataInt, genere, codArtista, dataPubblicazione);
+			if (durataInt > 0) {
+				String codArtista = artista.substring(0, 5);
+				singleDAO.insertSingle(nome, durataInt, genere, codArtista, dataPubblicazione);
+			}
+			else {
+				JOptionPane.showMessageDialog(frameAddArtist,
+						"La durata deve essere > 0!!!",
+						"Errore",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddSong,
@@ -214,7 +252,14 @@ public class Controller {
 	public void updateSingle(String codice,String nome, String durata, String genere, String dataPubblicazione) {
 		if((codice.length()>0) && (nome.length()>0) && (durata.length()>0) && (genere.length()>0) && (dataPubblicazione.length()>0)) {
 			int durataInt = Integer.parseInt(durata);
-			singleDAO.updateSingle(codice, nome, durataInt, genere, dataPubblicazione);
+			if (durataInt > 0)
+				singleDAO.updateSingle(codice, nome, durataInt, genere, dataPubblicazione);
+			else {
+				JOptionPane.showMessageDialog(frameAddArtist,
+						"La durata deve essere > 0!!!",
+						"Errore",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		else {
 			JOptionPane optionPane = new JOptionPane("Errore aggiornamento singolo!!!", JOptionPane.ERROR_MESSAGE);    
