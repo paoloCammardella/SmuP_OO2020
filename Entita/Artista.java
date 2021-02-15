@@ -1,5 +1,7 @@
 package Entita;
 
+import java.util.ArrayList;
+
 public class Artista{
 	
 	private String fristName;
@@ -9,7 +11,8 @@ public class Artista{
 	private String birthDate;
 	private String city;
 	private int followers;
-	
+	private ArrayList<Pubblica> pubblica;
+
 	public Artista(String id_Artist,  String firstName, String lastName, String city, String birthDate, String nickname, int followers) {
 		setId_Artist(id_Artist);
 		setFristName(firstName);
@@ -61,6 +64,14 @@ public class Artista{
 	}
 	public void setFollowers(int followers) {
 		this.followers = followers;
+	}
+	
+	public ArrayList<Pubblica> getPubblica() {
+		return pubblica;
+	}
+
+	public void setPubblica(ArrayList<Pubblica> pubblica) {
+		this.pubblica = pubblica;
 	}
 	
 	@Override

@@ -10,8 +10,10 @@ import java.awt.Toolkit;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+
 import java.awt.Cursor;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -21,6 +23,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.border.LineBorder;
@@ -688,8 +692,9 @@ public class HomeGUI extends JFrame {
 					textFieldNomeDArte.setBorder(null);
 					textFieldNomeDArte.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 					textFieldNomeDArte.setColumns(10);
-
-					JTextField textFieldDataNascita = new JTextField();
+					
+					DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+					JTextField textFieldDataNascita = new JFormattedTextField(format);
 					textFieldDataNascita.setForeground(new Color(255, 255, 255));
 					textFieldDataNascita.setEditable(false);
 					textFieldDataNascita.setDisabledTextColor(new Color(255, 255, 255));
@@ -999,8 +1004,9 @@ public class HomeGUI extends JFrame {
 					JLabel lblDataPubblicazione = new JLabel("Data pubblicazione:");
 					lblDataPubblicazione.setForeground(Color.WHITE);
 					lblDataPubblicazione.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-					JTextField textFieldData = new JTextField();
+					
+					DateFormat format = new SimpleDateFormat("dd/mm/yyyy"); 
+					JTextField textFieldData = new JFormattedTextField(format);
 					textFieldData.setForeground(Color.WHITE);
 					textFieldData.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 					textFieldData.setEditable(false);
@@ -1581,8 +1587,9 @@ public class HomeGUI extends JFrame {
 					buttonDeleteSingle.setBorderPainted(false);
 					buttonDeleteSingle.setBorder(new LineBorder(new Color(0, 51, 255), 10));
 					buttonDeleteSingle.setBackground(new Color(15, 15, 15));
-
-					JTextField textFieldDataPubblicazioneSingolo = new JTextField();
+					
+					DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+					JTextField textFieldDataPubblicazioneSingolo = new JFormattedTextField(format);
 					textFieldDataPubblicazioneSingolo.setForeground(Color.WHITE);
 					textFieldDataPubblicazioneSingolo.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 					textFieldDataPubblicazioneSingolo.setEditable(false);
@@ -1791,8 +1798,9 @@ public class HomeGUI extends JFrame {
 					JLabel label_7 = new JLabel("Data:");
 					label_7.setForeground(Color.WHITE);
 					label_7.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-					JTextField textFieldDataEP = new JTextField();
+					
+					DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+					JTextField textFieldDataEP = new JFormattedTextField(format);
 					textFieldDataEP.setForeground(Color.WHITE);
 					textFieldDataEP.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 					textFieldDataEP.setEditable(false);
@@ -1866,17 +1874,24 @@ public class HomeGUI extends JFrame {
 							String dataPubblicazione = textFieldDataEP.getText();
 							String genere = textFieldGenereEP.getText();
 							String numberSong = textFieldNumeroBraniEP.getText();
+							
+							if( Integer.parseInt(numberSong) > 5)
+								JOptionPane.showMessageDialog(null,
+										"Numero brani EP errore!!!",
+										"Errore",
+										JOptionPane.ERROR_MESSAGE);
+							else {
+								controller.updateEP(codice, nome, dataPubblicazione, genere, numberSong);
 
-							controller.updateEP(codice, nome, dataPubblicazione, genere, numberSong);
+								textFieldNomeEP.setBorder(null);
+								textFieldDataEP.setBorder(null);
+								textFieldGenereEP.setBorder(null);
+								textFieldNumeroBraniEP.setBorder(null);
 
-							textFieldNomeEP.setBorder(null);
-							textFieldDataEP.setBorder(null);
-							textFieldGenereEP.setBorder(null);
-							textFieldNumeroBraniEP.setBorder(null);
-
-							buttonSaveEP.setEnabled(false);
-							buttonModifyEP.setBackground(black);
-							buttonModifyEP.setEnabled(true);
+								buttonSaveEP.setEnabled(false);
+								buttonModifyEP.setBackground(black);
+								buttonModifyEP.setEnabled(true);
+							}
 						}
 					});
 					buttonSaveEP.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));

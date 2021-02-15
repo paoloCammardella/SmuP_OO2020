@@ -214,7 +214,7 @@ public class AddArtistGUI extends JFrame {
 		labelData.setForeground(Color.WHITE);
 		labelData.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		
-		DateFormat format = new SimpleDateFormat("DD/MM/YYYY");
+		DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
 		textFieldDataNascita = new JFormattedTextField(format);
 		textFieldDataNascita.addFocusListener(new FocusAdapter() {
 			@Override
@@ -308,9 +308,12 @@ public class AddArtistGUI extends JFrame {
 				char c = e.getKeyChar();
 				if(Character.isLetter(c)) {
 					labelErroreInput.setText("Caratteri non validi");
+					buttonAggiungi.setEnabled(false);
 				}
-				else
+				else if(Character.isDigit(c)) {
 					labelErroreInput.setText("");
+					buttonAggiungi.setEnabled(true);
+				}
 			}
 		});
 		textFieldFollowers.setSelectionColor(new Color(0, 153, 204));

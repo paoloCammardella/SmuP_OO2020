@@ -32,8 +32,6 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 			pst.setInt(6, followers);
 			pst.setString(7, nomeDArte);
 			pst.executeUpdate();
-			
-			System.out.println("\nInserimento avvenuto(Artista)...");
 		}
 		catch(SQLException e) {
 			System.out.println("Errore inserimento: " + e.getMessage());

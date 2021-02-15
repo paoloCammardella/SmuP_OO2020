@@ -24,8 +24,7 @@ public class EPDAOimpl implements EPDAO{
 		try {
 			String query_insert_ep = "INSERT INTO EP (id_EP, nameEP, songNumber, genere) VALUES( ?, ?, ?, ?)";
 			String sequence = "SELECT NEXTVAL('codiceEP')";
-			String sequencePubblica = "SELECT NEXTVAL('codicePubblica')";
-			String query_insert_pubblicazione = "INSERT INTO Pubblica (id_Release, releaseDate, id_Artist, id_Album, id_Single, id_EP) VALUES (?, ?, ?, NULL, NULL, ?)";
+			String query_insert_pubblicazione = "INSERT INTO Pubblica (releaseDate, id_Artist, id_Album, id_Single, id_EP) VALUES (?, ?, NULL, NULL, ?)";
 
 			Statement seq = connection.createStatement();
 			rs = seq.executeQuery(sequence);
@@ -44,19 +43,10 @@ public class EPDAOimpl implements EPDAO{
 			pst1.setString(4, genere);
 			pst1.execute();
 
-			Statement seqPubblica = connection.createStatement();
-			rs = seqPubblica.executeQuery(sequencePubblica);
-
-			int idPubblica = 0;
-			if(rs.next()) {
-				idPubblica = rs.getInt(1);
-			}
-
 			PreparedStatement pst2 = connection.prepareStatement(query_insert_pubblicazione);
-			pst2.setInt(1, idPubblica);
-			pst2.setString(2, dataPubblicazione);
-			pst2.setString(3, artista);
-			pst2.setInt(4, idEP);
+			pst2.setString(1, dataPubblicazione);
+			pst2.setString(2, artista);
+			pst2.setInt(3, idEP);
 			pst2.execute();
 		}
 		catch(SQLException e) {

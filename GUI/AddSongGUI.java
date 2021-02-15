@@ -11,6 +11,7 @@ import _Controller.Controller;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 
@@ -36,6 +37,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.Component;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -101,8 +104,6 @@ public class AddSongGUI extends JFrame {
 		panelAdd.setBackground(darkGrey);
 		contentPane.add(panelAdd, BorderLayout.CENTER);
 
-		DateFormat format = new SimpleDateFormat("dd/MM/YYYY");
-
 		JPanel AddArtist = new JPanel();
 		AddArtist.setBackground(grey);
 
@@ -121,7 +122,7 @@ public class AddSongGUI extends JFrame {
 		buttonAggiungi.setEnabled(false);
 		buttonAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBoxPubblicazioni.getSelectedItem() == "Singolo") {
+				if(comboBoxPubblicazioni.getSelectedItem() == "Singolo" && comboBoxArtisti.getItemCount() != 0) {
 					String artista = comboBoxArtisti.getSelectedItem().toString();
 					String dataPubblicazione = textFieldDataEPSingle.getText();
 					String durata = textFieldDurata.getText();
@@ -129,23 +130,25 @@ public class AddSongGUI extends JFrame {
 					String genere = textFieldGenere.getText();
 
 					controller.insertSingleDB(nome, durata, genere, artista, dataPubblicazione);
+					
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
 					textFieldDataEPSingle.setText("");
 
-				}else if(comboBoxPubblicazioni.getSelectedItem() == "Brano") {
+				}else if(comboBoxPubblicazioni.getSelectedItem() == "Brano" && comboBoxAlbum.getItemCount() != 0) {
 					String album = comboBoxAlbum.getSelectedItem().toString();
 					String durata = textFieldDurata.getText();
 					String nome = textFieldNomePubblicazione.getText();
 					String genere = textFieldGenere.getText();
 
 					controller.insertSongDB(nome, durata, genere, album);
+					
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
 
-				}else if(comboBoxPubblicazioni.getSelectedItem() == "EP") {
+				}else if(comboBoxPubblicazioni.getSelectedItem() == "EP" && comboBoxArtisti.getItemCount() != 0) {
 					String artista = comboBoxArtisti.getSelectedItem().toString();
 					String nomeEp = textFieldEP.getText();
 					String songNumber = comboBoxSongNumberEP.getSelectedItem().toString();
@@ -153,10 +156,16 @@ public class AddSongGUI extends JFrame {
 					String genere = textFieldGenere.getText();
 
 					controller.insertEPDB(nomeEp, genere, songNumber, artista, dataPubblicazione);
+					
 					textFieldEP.setText("");
 					textFieldDataEPSingle.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
+				}else {
+					JOptionPane optionPane = new JOptionPane("Verifica di aver inserito almeno un album/artista", JOptionPane.ERROR_MESSAGE);    
+					JDialog dialog = optionPane.createDialog("Errore");
+					dialog.setAlwaysOnTop(true);
+					dialog.setVisible(true);
 				}
 			}
 		});
@@ -336,7 +345,8 @@ public class AddSongGUI extends JFrame {
 		labelSongNumberEP.setBounds(10, 500, 401, 25);
 		AddArtist.add(labelSongNumberEP);
 
-		textFieldDataEPSingle = new JTextField();
+		DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+		textFieldDataEPSingle = new JFormattedTextField(format);
 		textFieldDataEPSingle.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -474,7 +484,7 @@ public class AddSongGUI extends JFrame {
 				setVisible(false);
 			}
 		});
-		labelX.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		labelX.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		labelX.setForeground(new Color(255, 0, 0));
 
 		JButton buttonAnnulla = new JButton("Annulla");
@@ -493,28 +503,28 @@ public class AddSongGUI extends JFrame {
 
 		GroupLayout gl_panelAdd = new GroupLayout(panelAdd);
 		gl_panelAdd.setHorizontalGroup(
-				gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+			gl_panelAdd.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
-								.addComponent(AddArtist, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-								.addComponent(labelX)
-								.addComponent(buttonAggiungi, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-								.addComponent(buttonAnnulla, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
-						.addContainerGap())
-				);
+					.addContainerGap()
+					.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+						.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+						.addComponent(AddArtist, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+						.addComponent(buttonAggiungi, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+						.addComponent(buttonAnnulla, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
+					.addContainerGap())
+		);
 		gl_panelAdd.setVerticalGroup(
-				gl_panelAdd.createParallelGroup(Alignment.LEADING)
+			gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-						.addComponent(labelX)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(AddArtist, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addComponent(buttonAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
+					.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(AddArtist, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(buttonAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(buttonAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 		AddArtist.setLayout(null);
 		AddArtist.add(labelNomeEP);
 		AddArtist.add(textFieldEP);

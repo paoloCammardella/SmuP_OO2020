@@ -24,8 +24,7 @@ public class SingleDAOimpl implements SingleDAO{
 		try {
 			String query_insert_single = "INSERT INTO Singolo (id_Single, nameSingle, duration, genere) VALUES( ?, ?, ?, ?)";
 			String sequenceSingolo = "SELECT NEXTVAL('codiceSingolo')";
-			String sequencePubblica = "SELECT NEXTVAL('codicePubblica')";
-			String query_insert_pubblicazione = "INSERT INTO Pubblica (id_Release, releaseDate, id_Artist, id_Album, id_Single, id_EP) VALUES (?, ?, ?, NULL, ?, NULL)";
+			String query_insert_pubblicazione = "INSERT INTO Pubblica (releaseDate, id_Artist, id_Album, id_Single, id_EP) VALUES (?, ?, NULL, ?, NULL)";
 			
 			Statement seqSingolo = connection.createStatement();
 			rs = seqSingolo.executeQuery(sequenceSingolo);
@@ -42,19 +41,10 @@ public class SingleDAOimpl implements SingleDAO{
 			pst1.setString(4, genere);
 			pst1.execute();
 			
-			Statement seqPubblica = connection.createStatement();
-			rs = seqPubblica.executeQuery(sequencePubblica);
-			
-			int idPubblica = 0;
-			if(rs.next()) {
-				idPubblica = rs.getInt(1);
-			}
-			
 			PreparedStatement pst2 = connection.prepareStatement(query_insert_pubblicazione);
-			pst2.setInt(1, idPubblica);
-			pst2.setString(2, dataPubblicazione);
-			pst2.setString(3, artista);
-			pst2.setInt(4, idSingolo);
+			pst2.setString(1, dataPubblicazione);
+			pst2.setString(2, artista);
+			pst2.setInt(3, idSingolo);
 			pst2.execute();
 		}
 		catch(SQLException e) {

@@ -1,3 +1,9 @@
+/* Creazione DB */
+
+CREATE DATABASE "SmuP";
+
+/* Tabelle */
+
 CREATE TABLE Artista(
     id_Artist CHAR(5) PRIMARY KEY,
     firstName VARCHAR(30) NOT NULL,
@@ -51,6 +57,8 @@ CREATE TABLE Brano(
     CONSTRAINT FK2 FOREIGN KEY (id_Album) REFERENCES Album(id_Album) ON DELETE CASCADE
 );
 
+/* Sequenze */
+
 CREATE SEQUENCE codicePubblica
 START WITH 0
 INCREMENT BY 1
@@ -78,3 +86,35 @@ INCREMENT BY 1
 MINVALUE 0
 MAXVALUE 1000
 NO CYCLE;
+
+/* Trigger id pubblica */
+
+CREATE OR REPLACE FUNCTION idPubblicaSequence() RETURNS trigger AS
+$BODY$
+BEGIN
+   	new.id_Release := NEXTVAL('codicePubblica');
+	RETURN NEW;
+END;
+$BODY$
+language plpgsql;
+
+CREATE TRIGGER insertIdPubblica_trigger
+BEFORE INSERT ON Pubblica
+FOR EACH ROW
+EXECUTE PROCEDURE idPubblicaSequence();
+
+/*Trigger id brano*/
+
+CREATE OR REPLACE FUNCTION idBranoSequence() RETURNS trigger AS
+$BODY$
+BEGIN
+   	new.id_Song := NEXTVAL('codiceBrano');
+	RETURN NEW;
+END;
+$BODY$
+language plpgsql;
+
+CREATE TRIGGER insertIdBrano_trigger
+BEFORE INSERT ON Brano
+FOR EACH ROW
+EXECUTE PROCEDURE idBranoSequence();

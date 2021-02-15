@@ -20,27 +20,14 @@ public class SongDAOimpl implements SongDAO{
 
 	@Override
 	public void insertSongDB(String nome, int durata, String genere, String album) {
-		ResultSet rs = null;
 		try {
-			String query_insert_song = "INSERT INTO Brano (id_Song, songName, songDuration, genereSong, id_Album) VALUES( ?, ?, ?, ?, ?)";
-			String sequence = "SELECT NEXTVAL('codiceBrano')";
-			
-			Statement seq = connection.createStatement();
-			rs = seq.executeQuery(sequence);
-			
-			int idBrano = 0;
-			if(rs.next()) {
-				idBrano = rs.getInt(1);
-			}
-			else
-				System.out.print("Errore sequenza");
+			String query_insert_song = "INSERT INTO Brano (songName, songDuration, genereSong, id_Album) VALUES(?, ?, ?, ?)";
 			
 			PreparedStatement pst1 = connection.prepareStatement(query_insert_song);
-			pst1.setInt(1, idBrano);
-			pst1.setString(2, nome);
-			pst1.setInt(3, durata);
-			pst1.setString(4, genere);
-			pst1.setString(5, album);
+			pst1.setString(1, nome);
+			pst1.setInt(2, durata);
+			pst1.setString(3, genere);
+			pst1.setString(4, album);
 			pst1.execute();
 		}
 		catch(SQLException e) {

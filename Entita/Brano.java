@@ -5,6 +5,7 @@ public class Brano {
 	private String name;
 	private String duration;
 	private String genre;
+	private Album brano;
 	
 	public Brano(String name, String artist, String duration, String genre) {
 		setName(name);
@@ -29,5 +30,13 @@ public class Brano {
 	}
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+
+	public Album getBrano() {
+		return brano;
+	}
+
+	public void setBrano(Album brano) {
+		this.brano = brano;
 	}
 }

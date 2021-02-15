@@ -4,55 +4,82 @@ import Connessione.ConnessioneDB;
 import DAO.*;
 import GUI.*;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class Controller {
 
 	Connection connection;
 	
-	HomeGUI frameHome;
-	AddArtistGUI frameAddArtist;
-	AddAlbumGUI frameAddAlbum;
-	AddSongGUI frameAddSong;
+	private HomeGUI frameHome;
+	private AddArtistGUI frameAddArtist;
+	private AddAlbumGUI frameAddAlbum;
+	private AddSongGUI frameAddSong;
 	
-	ArtistaDAO artistDAO;
-	SongDAO songDAO;
-	AlbumDAO albumDAO;
-	EPDAO epDAO;
-	SingleDAO singleDAO;
+	private ArtistaDAO artistDAO;
+	private SongDAO songDAO;
+	private AlbumDAO albumDAO;
+	private EPDAO epDAO;
+	private SingleDAO singleDAO;
 
 	public Controller() {
-		//Connessione al DB
+		// Connessione al DB
 		connection = ConnessioneDB.getConnection();
 
-		//Frame principale
+		// Frame principale
 		frameHome = new HomeGUI(this);
 		frameHome.setVisible(true);
 
-		//Altri frame
+		// Altri frame
 		frameAddArtist = new AddArtistGUI(this);
 		frameAddAlbum = new AddAlbumGUI(this);
 		frameAddSong = new AddSongGUI(this);
 		
-		//DAO
+		// DAO
 		artistDAO = new ArtistaDAOimpl(this, connection);
 		songDAO = new SongDAOimpl(this, connection);
 		albumDAO = new AlbumDAOimpl(this, connection);
 		epDAO = new EPDAOimpl(this, connection);
 		singleDAO = new SingleDAOimpl(this, connection);
+		
+		// Aspetto default dei componenti
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
-		Controller controller = new Controller();
+		new Controller();
 	}
-
+	
+	// ARTIST
+	
 	public void insertArtistDB(String codice, String nome, String cognome, String dataNascita, String nomeDArte, String citta, String followers) {
 		if((codice.length()>0) && (nome.length()>0) && (cognome.length()>0) && (dataNascita.length()>0) && (nomeDArte.length()>0) && (citta.length()>0) && (followers.length()>0)) {
 			int Ifollowers = Integer.parseInt(followers);
-			String codArtista = codice.substring(0, 5);
-			artistDAO.insertArtist(codArtista, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
+			if(codice.length() >= 5) {
+				String codArtista = codice.substring(0, 5);
+				artistDAO.insertArtist(codArtista, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
+			}
+			else {
+				JOptionPane.showMessageDialog(frameAddArtist,
+						"Il codice deve essere di 5 caratteri!!!",
+						"Errore",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddArtist,
@@ -67,10 +94,10 @@ public class Controller {
 			artistDAO.deleteArtist(codice);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-				    "Impossibile eliminare l'artista!!!",
-				    "Errore",
-				    JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Impossibile eliminare l'artista!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -80,10 +107,10 @@ public class Controller {
 			artistDAO.updateArtist(codice, nome, cognome, dataNascita, citta, Ifollowers, nomeDArte);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-					"Errore aggiornamento artista!!!",
-					"Errore",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Errore aggiornamento artista!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -103,7 +130,9 @@ public class Controller {
 		}
 		return rs;
 	}
-
+	
+	// SONG
+	
 	public void insertSongDB(String nome, String durata, String genere, String album) {
 		if((nome.length()>0) && (durata.length()>0) && (genere.length()>0) && (album.length()>0)) {
 			int duration = Integer.parseInt(durata);
@@ -123,10 +152,10 @@ public class Controller {
 			songDAO.deleteSong(codice);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-				    "Impossibile eliminare il brano!!!",
-				    "Errore",
-				    JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Impossibile eliminare il brano!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -136,10 +165,10 @@ public class Controller {
 			songDAO.updateSong(codice, nome, sDuration);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-					"Errore aggiornamento il brano!!!",
-					"Errore",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Errore aggiornamento il brano!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -153,7 +182,9 @@ public class Controller {
 		}
 		return rs;
 	}
-
+	
+	// SINGLE
+	
 	public void insertSingleDB(String nome, String durata, String genere, String artista, String dataPubblicazione) {
 		if((artista.length()>0) && (nome.length()>0) && (durata.length()>0) && (genere.length()>0) && (dataPubblicazione.length()>0)) {
 			int durataInt = Integer.parseInt(durata);
@@ -173,10 +204,10 @@ public class Controller {
 			singleDAO.deleteSingle(codice);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-				    "Impossibile eliminare il singolo!!!",
-				    "Errore",
-				    JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Impossibile eliminare il singolo!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -186,10 +217,10 @@ public class Controller {
 			singleDAO.updateSingle(codice, nome, durataInt, genere, dataPubblicazione);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-					"Errore aggiornamento singolo!!!",
-					"Errore",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Errore aggiornamento singolo!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -203,6 +234,8 @@ public class Controller {
 		}
 		return rs;
 	}
+	
+	// EP
 	
 	public void insertEPDB(String nome,  String genere, String songNumber, String artista, String dataPubblicazione) {
 		if((nome.length()>0) && (genere.length()>0) && (songNumber.length()>0) && (artista.length()>0)  && (dataPubblicazione.length()>0)) {
@@ -223,10 +256,10 @@ public class Controller {
 			epDAO.deleteEP(codice);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-				    "Impossibile eliminare l'EP!!!",
-				    "Errore",
-				    JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Impossibile eliminare l'EP!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -236,10 +269,10 @@ public class Controller {
 			epDAO.updateEP(codice, nome, dataPubblicazione, genere, songNumberInt);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-					"Errore aggiornamento EP!!!",
-					"Errore",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Errore aggiornamento EP!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -254,12 +287,22 @@ public class Controller {
 		return rs;
 	}
 	
+	// ALBUM
+	
 	public void insertAlbumDB(String codice, String nome, String songNumber, String genere, String data, String artista) {
 		if((codice.length()>0) && (nome.length()>0) && (songNumber.length()>0) && (genere.length()>0) && (data.length()>0) && (artista.length()>0)){
 			int nSong = Integer.parseInt(songNumber);
 			String codArtista = artista.substring(0, 5);
-			String codiceAlbum = codice.substring(0, 5);
-			albumDAO.insertAlbum(codiceAlbum, nome, nSong, genere, data, codArtista);
+			if(codice.length() >= 5) {
+				String codiceAlbum = codice.substring(0, 5);
+				albumDAO.insertAlbum(codiceAlbum, nome, nSong, genere, data, codArtista);
+			}
+			else {
+				JOptionPane.showMessageDialog(frameAddAlbum,
+						"Il codice deve essere di 5 caratteri!!!",
+						"Errore",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		else {
 			JOptionPane.showMessageDialog(frameAddAlbum,
@@ -274,10 +317,10 @@ public class Controller {
 			albumDAO.deleteAlbum(codice);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-				    "Impossibile eliminare l'album!!!",
-				    "Errore",
-				    JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Impossibile eliminare l'album!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -287,10 +330,10 @@ public class Controller {
 			albumDAO.updateAlbum(codice, nome, nSong, genere, data);
 		}
 		else {
-			JOptionPane.showMessageDialog(null,
-					"Errore aggiornamento album!!!",
-					"Errore",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane optionPane = new JOptionPane("Errore aggiornamento album!!!", JOptionPane.ERROR_MESSAGE);    
+			JDialog dialog = optionPane.createDialog("Errore");
+			dialog.setAlwaysOnTop(true);
+			dialog.setVisible(true);
 		}
 	}
 	
@@ -304,7 +347,9 @@ public class Controller {
 		}
 		return rs;
 	}
-
+	
+	// Visualizzazione FRAME
+	
 	public void frameAddArtistGUI() {
 		frameAddArtist.setVisible(true);
 	}

@@ -1,14 +1,15 @@
 package Connessione;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConnessioneDB {
 	
 	private static Connection connection = null;
 	
-	private ConnessioneDB() {
-		
-	}
+	// Costruttore private
+	private ConnessioneDB() { }
 	
 	public static Connection getConnection() {
 		
@@ -34,7 +35,6 @@ public class ConnessioneDB {
 			}
 		}
 		return connection;
-		
 	}
 }
 

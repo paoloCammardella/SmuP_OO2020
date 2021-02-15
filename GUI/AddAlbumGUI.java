@@ -35,6 +35,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -94,9 +96,6 @@ public class AddAlbumGUI extends JFrame {
 		});
 		panelAdd.setBackground(darkGrey);
 		contentPane.add(panelAdd, BorderLayout.SOUTH);
-
-
-		DateFormat format = new SimpleDateFormat("dd/MM/YYYY");
 
 		JPanel AddAlbum = new JPanel();
 		AddAlbum.setBackground(grey);
@@ -165,12 +164,10 @@ public class AddAlbumGUI extends JFrame {
 		textFieldGenere.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				//labelGenere.setForeground(blue);
 				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
-				//labelGenere.setForeground(Color.WHITE);
 				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 			}
 		});
@@ -225,7 +222,8 @@ public class AddAlbumGUI extends JFrame {
 		labelData.setForeground(Color.WHITE);
 		labelData.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
-		textFieldData = new JTextField();
+		DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
+		textFieldData = new JFormattedTextField(format);
 		textFieldData.setSelectionColor(new Color(0, 153, 204));
 		textFieldData.setSelectedTextColor(Color.WHITE);
 		textFieldData.setOpaque(false);
