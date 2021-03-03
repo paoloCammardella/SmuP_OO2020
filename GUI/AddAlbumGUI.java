@@ -55,6 +55,11 @@ public class AddAlbumGUI extends JFrame {
 	Color black = new Color(15, 15, 15);
 	Color blue = new Color(0, 0, 255);
 	Color darkBlue = new Color(0, 0, 153);
+	Color green = new Color(50,205,50);
+	Color darkGreen = new Color(0,100,0);
+	Color purple = new Color(147,112,219);
+	Color blueViolet = new Color(138,43,226);
+	Color darkPurple = new Color(128,0,128);
 
 	int mouseX, mouseY;
 	private JTextField textFieldData;
@@ -125,7 +130,7 @@ public class AddAlbumGUI extends JFrame {
 		buttonAggiungi.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		buttonAggiungi.setFocusPainted(false);
 		buttonAggiungi.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
-		buttonAggiungi.setBackground(blue);
+		buttonAggiungi.setBackground(green);
 
 		JLabel labelCodice = new JLabel("Codice");
 		labelCodice.setForeground(Color.WHITE);
@@ -139,7 +144,7 @@ public class AddAlbumGUI extends JFrame {
 		textFieldNome.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -164,7 +169,7 @@ public class AddAlbumGUI extends JFrame {
 		textFieldGenere.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -190,7 +195,7 @@ public class AddAlbumGUI extends JFrame {
 		textFieldCodice.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldCodice.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldCodice.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -244,6 +249,16 @@ public class AddAlbumGUI extends JFrame {
 		textFieldSongNumber.setCaretColor(new Color(0, 153, 204));
 		textFieldSongNumber.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldSongNumber.setBackground(new Color(36, 53, 102));
+		textFieldSongNumber.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				textFieldSongNumber.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				textFieldSongNumber.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
+			}
+		});
 
 		JLabel lblNumeroDiBrani = new JLabel("Numero di brani");
 		lblNumeroDiBrani.setForeground(Color.WHITE);

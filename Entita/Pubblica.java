@@ -3,17 +3,17 @@ package Entita;
 import java.util.Date;
 
 public class Pubblica {
-	
+
 	private Date releaseDate;
 	private Artista artist;
 	private Album album;
 	private Singolo single;
 	private EP ep;
-	
+
 	public Pubblica(Date releaseDate) {
 		setReleaseDate(releaseDate);
 	}
-	
+
 	public Date getReleaseDate() {
 		return releaseDate;
 	}

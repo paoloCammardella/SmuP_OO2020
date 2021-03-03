@@ -13,8 +13,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 
 import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
@@ -24,8 +22,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -49,7 +45,6 @@ public class AddArtistGUI extends JFrame {
 	private JFormattedTextField textFieldDataNascita;
 	private JTextField textFieldNomeDarte;
 	private JTextField textFieldCitta;
-	private JTextField textFieldFollowers;
 	private JButton buttonAggiungi;
 
 	Color darkGrey = new Color(21, 21, 21);
@@ -57,11 +52,17 @@ public class AddArtistGUI extends JFrame {
 	Color black = new Color(15, 15, 15);
 	Color blue = new Color(0, 0, 255);
 	Color darkBlue = new Color(0, 0, 153);
+	Color green = new Color(50,205,50);
+	Color darkGreen = new Color(0,100,0);
+	Color purple = new Color(147,112,219);
+	Color blueViolet = new Color(138,43,226);
+	Color darkPurple = new Color(128,0,128);
+
 
 	int mouseX, mouseY;
 
 	public AddArtistGUI(Controller controller) {
-		
+
 		setUndecorated(true);
 
 		setResizable(false);
@@ -112,9 +113,8 @@ public class AddArtistGUI extends JFrame {
 				String dataNascita = textFieldDataNascita.getText();
 				String nomeDArte = textFieldNomeDarte.getText();
 				String citta = textFieldCitta.getText();
-				String followers = textFieldFollowers.getText();
 
-				controller.insertArtistDB(codice, nome, cognome, dataNascita, nomeDArte, citta, followers);
+				controller.insertArtistDB(codice, nome, cognome, dataNascita, nomeDArte, citta);
 
 				textFieldCodiceArtista.setText("");
 				textFieldNome.setText("");
@@ -122,7 +122,6 @@ public class AddArtistGUI extends JFrame {
 				textFieldDataNascita.setText("");
 				textFieldNomeDarte.setText("");
 				textFieldCitta.setText("");
-				textFieldFollowers.setText("");
 			}
 		});
 		buttonAggiungi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -131,7 +130,7 @@ public class AddArtistGUI extends JFrame {
 		buttonAggiungi.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		buttonAggiungi.setFocusPainted(false);
 		buttonAggiungi.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
-		buttonAggiungi.setBackground(blue);
+		buttonAggiungi.setBackground(green);
 
 		JLabel labelAddArtist = new JLabel("Add Artist");
 		labelAddArtist.setHorizontalAlignment(SwingConstants.CENTER);
@@ -146,7 +145,7 @@ public class AddArtistGUI extends JFrame {
 		textFieldCodiceArtista.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldCodiceArtista.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldCodiceArtista.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -171,7 +170,7 @@ public class AddArtistGUI extends JFrame {
 		textFieldNome.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldNome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -196,7 +195,7 @@ public class AddArtistGUI extends JFrame {
 		textFieldCognome.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldCognome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldCognome.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -216,13 +215,13 @@ public class AddArtistGUI extends JFrame {
 		JLabel labelData = new JLabel("Data nascita");
 		labelData.setForeground(Color.WHITE);
 		labelData.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		
+
 		DateFormat format = new SimpleDateFormat("dd/mm/yyyy");
 		textFieldDataNascita = new JFormattedTextField(format);
 		textFieldDataNascita.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldDataNascita.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldDataNascita.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -247,7 +246,7 @@ public class AddArtistGUI extends JFrame {
 		textFieldNomeDarte.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldNomeDarte.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldNomeDarte.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -272,7 +271,7 @@ public class AddArtistGUI extends JFrame {
 		textFieldCitta.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldCitta.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldCitta.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -293,54 +292,15 @@ public class AddArtistGUI extends JFrame {
 		labelErroreInput.setForeground(Color.RED);
 		labelErroreInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
-		textFieldFollowers = new JTextField();
-		textFieldFollowers.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				textFieldFollowers.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				textFieldFollowers.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-			}
-		});
-		textFieldFollowers.setOpaque(false);
-		textFieldFollowers.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				char c = e.getKeyChar();
-				if(Character.isLetter(c)) {
-					labelErroreInput.setText("Caratteri non validi");
-					buttonAggiungi.setEnabled(false);
-				}
-				else if(Character.isDigit(c)) {
-					labelErroreInput.setText("");
-					buttonAggiungi.setEnabled(true);
-				}
-			}
-		});
-		textFieldFollowers.setSelectionColor(new Color(0, 153, 204));
-		textFieldFollowers.setSelectedTextColor(Color.WHITE);
-		textFieldFollowers.setForeground(Color.WHITE);
-		textFieldFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldFollowers.setColumns(10);
-		textFieldFollowers.setCaretColor(new Color(0, 153, 204));
-		textFieldFollowers.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		textFieldFollowers.setBackground(new Color(36, 53, 102));
-
-		JLabel labelblFollowers = new JLabel("Followers");
-		labelblFollowers.setForeground(Color.WHITE);
-		labelblFollowers.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-
 		GroupLayout gl_AddArtist = new GroupLayout(AddArtist);
 		gl_AddArtist.setHorizontalGroup(
 				gl_AddArtist.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddArtist.createSequentialGroup()
-						.addGroup(gl_AddArtist.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(Alignment.LEADING, gl_AddArtist.createSequentialGroup()
+						.addGroup(gl_AddArtist.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_AddArtist.createSequentialGroup()
 										.addContainerGap()
 										.addComponent(labelAddArtist, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addGroup(Alignment.LEADING, gl_AddArtist.createSequentialGroup()
+								.addGroup(gl_AddArtist.createSequentialGroup()
 										.addGap(20)
 										.addGroup(gl_AddArtist.createParallelGroup(Alignment.TRAILING, false)
 												.addComponent(labelCodiceArtista, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -355,8 +315,6 @@ public class AddArtistGUI extends JFrame {
 												.addComponent(textFieldNomeDarte, Alignment.LEADING)
 												.addComponent(labelCitta, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(textFieldCitta, Alignment.LEADING)
-												.addComponent(labelblFollowers, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(textFieldFollowers, Alignment.LEADING)
 												.addComponent(labelErroreInput, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 						.addContainerGap())
 				);
@@ -389,11 +347,7 @@ public class AddArtistGUI extends JFrame {
 						.addComponent(labelCitta)
 						.addPreferredGap(ComponentPlacement.RELATED)
 						.addComponent(textFieldCitta, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(labelblFollowers)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(textFieldFollowers, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
+						.addGap(73)
 						.addComponent(labelErroreInput, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
 				);
 		AddArtist.setLayout(gl_AddArtist);

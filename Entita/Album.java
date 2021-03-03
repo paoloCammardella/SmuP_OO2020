@@ -3,7 +3,7 @@ package Entita;
 import java.util.ArrayList;
 
 public class Album {
-	
+
 	private String id_Album;
 	private String nome;
 	private String genre;
@@ -42,7 +42,7 @@ public class Album {
 	public void setId_Album(String id_Album) {
 		this.id_Album = id_Album;
 	}
-	
+
 	public ArrayList<Brano> getBrano() {
 		return brano;
 	}
@@ -50,7 +50,7 @@ public class Album {
 	public void setBrano(ArrayList<Brano> brano) {
 		this.brano = brano;
 	}
-	
+
 	public ArrayList<Pubblica> getPubblica() {
 		return pubblica;
 	}

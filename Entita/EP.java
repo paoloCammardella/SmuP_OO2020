@@ -3,16 +3,16 @@ package Entita;
 import java.util.ArrayList;
 
 public class EP {
-	
+
 	private String name;
 	private String id_EP;
 	private ArrayList<Pubblica> pubblica;
-	
+
 	public EP(String name, String EP) {
 		setName(name);
 		setId_EP(EP);
 	}
-	
+
 	public String getName() {
 		return name;
 	}

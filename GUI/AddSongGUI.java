@@ -57,6 +57,12 @@ public class AddSongGUI extends JFrame {
 	Color black = new Color(15, 15, 15);
 	Color blue = new Color(0, 0, 255);
 	Color darkBlue = new Color(0, 0, 153);
+	Color green = new Color(50,205,50);
+	Color darkGreen = new Color(0,100,0);
+	Color purple = new Color(147,112,219);
+	Color blueViolet = new Color(138,43,226);
+	Color darkPurple = new Color(128,0,128);
+
 
 	int mouseX, mouseY;
 	private JTextField textFieldNomePubblicazione;
@@ -118,7 +124,7 @@ public class AddSongGUI extends JFrame {
 		comboBoxSongNumberEP.setBounds(10, 536, 179, 26);
 		AddArtist.add(comboBoxSongNumberEP);
 
-		JButton buttonAggiungi = new JButton("Aggiungi");
+		JButton buttonAggiungi = new JButton("Add");
 		buttonAggiungi.setEnabled(false);
 		buttonAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -130,7 +136,7 @@ public class AddSongGUI extends JFrame {
 					String genere = textFieldGenere.getText();
 
 					controller.insertSingleDB(nome, durata, genere, artista, dataPubblicazione);
-					
+
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
@@ -143,7 +149,7 @@ public class AddSongGUI extends JFrame {
 					String genere = textFieldGenere.getText();
 
 					controller.insertSongDB(nome, durata, genere, album);
-					
+
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
 					textFieldGenere.setText("");
@@ -156,7 +162,7 @@ public class AddSongGUI extends JFrame {
 					String genere = textFieldGenere.getText();
 
 					controller.insertEPDB(nomeEp, genere, songNumber, artista, dataPubblicazione);
-					
+
 					textFieldEP.setText("");
 					textFieldDataEPSingle.setText("");
 					textFieldDurata.setText("");
@@ -175,7 +181,7 @@ public class AddSongGUI extends JFrame {
 		buttonAggiungi.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		buttonAggiungi.setFocusPainted(false);
 		buttonAggiungi.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(255, 0, 0)));
-		buttonAggiungi.setBackground(blue);
+		buttonAggiungi.setBackground(green);
 
 		JLabel labelAddSong = new JLabel("Add Song");
 		labelAddSong.setBounds(10, 11, 401, 36);
@@ -192,7 +198,7 @@ public class AddSongGUI extends JFrame {
 		textFieldNomePubblicazione.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldNomePubblicazione.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldNomePubblicazione.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -227,7 +233,7 @@ public class AddSongGUI extends JFrame {
 		textFieldDurata.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldDurata.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldDurata.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -250,7 +256,7 @@ public class AddSongGUI extends JFrame {
 		textFieldGenere.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -279,7 +285,7 @@ public class AddSongGUI extends JFrame {
 		textFieldEP.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -350,7 +356,7 @@ public class AddSongGUI extends JFrame {
 		textFieldDataEPSingle.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				textFieldDataEPSingle.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blue));
+				textFieldDataEPSingle.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -503,28 +509,28 @@ public class AddSongGUI extends JFrame {
 
 		GroupLayout gl_panelAdd = new GroupLayout(panelAdd);
 		gl_panelAdd.setHorizontalGroup(
-			gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+				gl_panelAdd.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
-						.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-						.addComponent(AddArtist, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-						.addComponent(buttonAggiungi, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-						.addComponent(buttonAnnulla, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
-					.addContainerGap())
-		);
+						.addContainerGap()
+						.addGroup(gl_panelAdd.createParallelGroup(Alignment.TRAILING)
+								.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+								.addComponent(AddArtist, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+								.addComponent(buttonAggiungi, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+								.addComponent(buttonAnnulla, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
+						.addContainerGap())
+				);
 		gl_panelAdd.setVerticalGroup(
-			gl_panelAdd.createParallelGroup(Alignment.LEADING)
+				gl_panelAdd.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelAdd.createSequentialGroup()
-					.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AddArtist, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(buttonAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(buttonAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+						.addComponent(labelX, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(AddArtist, GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(buttonAggiungi, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(buttonAnnulla, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
+				);
 		AddArtist.setLayout(null);
 		AddArtist.add(labelNomeEP);
 		AddArtist.add(textFieldEP);

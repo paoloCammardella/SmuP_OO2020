@@ -3,7 +3,7 @@ package Entita;
 import java.util.ArrayList;
 
 public class Artista{
-	
+
 	private String fristName;
 	private String lastName;
 	private String nickname;
@@ -22,7 +22,7 @@ public class Artista{
 		setNickname(nickname);
 		setFollowers(0);
 	}
-	
+
 	public String getFristName() {
 		return fristName;
 	}
@@ -65,7 +65,7 @@ public class Artista{
 	public void setFollowers(int followers) {
 		this.followers = followers;
 	}
-	
+
 	public ArrayList<Pubblica> getPubblica() {
 		return pubblica;
 	}
@@ -73,7 +73,7 @@ public class Artista{
 	public void setPubblica(ArrayList<Pubblica> pubblica) {
 		this.pubblica = pubblica;
 	}
-	
+
 	@Override
 	public String toString() {
 		return getId_Artist() + ", " + getNickname();

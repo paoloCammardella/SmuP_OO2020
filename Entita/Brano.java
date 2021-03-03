@@ -1,12 +1,12 @@
 package Entita;
 
 public class Brano {
-	
+
 	private String name;
 	private String duration;
 	private String genre;
 	private Album brano;
-	
+
 	public Brano(String name, String artist, String duration, String genre) {
 		setName(name);
 		setDuration(duration);
