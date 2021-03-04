@@ -88,6 +88,7 @@ public class LoginGUI extends JFrame {
 		panelLogin.setBackground(grey);
 
 		JLabel labelX = new JLabel("x");
+		labelX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labelX.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

@@ -90,6 +90,7 @@ public class SignUpGUI extends JFrame {
 		panelLogin.setBackground(grey);
 
 		JLabel labelX = new JLabel("x");
+		labelX.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labelX.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -210,6 +211,9 @@ public class SignUpGUI extends JFrame {
 
 				usernameTextField.setText("");
 				passwordField.setText("");
+				
+				controller.frameLoginGUI();
+				setVisible(false);
 			}
 		});
 		btnAccedi.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

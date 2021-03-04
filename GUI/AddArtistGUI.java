@@ -362,7 +362,7 @@ public class AddArtistGUI extends JFrame {
 				setVisible(false);
 			}
 		});
-		labelX.setFont(new Font("Segoe UI", Font.PLAIN, 20));
+		labelX.setFont(new Font("Segoe UI", Font.PLAIN, 24));
 		labelX.setForeground(new Color(255, 0, 0));
 
 		JButton buttonAnnulla = new JButton("Annulla");

@@ -67,7 +67,6 @@ public class AddSongGUI extends JFrame {
 	int mouseX, mouseY;
 	private JTextField textFieldNomePubblicazione;
 	private JTextField textFieldDurata;
-	private JTextField textFieldGenere;
 	private JTextField textFieldEP;
 	private JTextField textFieldDataEPSingle;
 
@@ -112,6 +111,17 @@ public class AddSongGUI extends JFrame {
 
 		JPanel AddArtist = new JPanel();
 		AddArtist.setBackground(grey);
+		
+		JComboBox<String> comboBoxGenere = new JComboBox<String>();
+		comboBoxGenere.setVisible(false);
+		comboBoxGenere.setModel(new DefaultComboBoxModel(new String[] {"Pop", "Rock", "Blues", "Regge", "Jazz", "Bossa nova", "Soul", "Lirica", "Metal", "Funk", "Country", "Hip-Hop"}));
+		comboBoxGenere.setOpaque(true);
+		comboBoxGenere.setForeground(Color.WHITE);
+		comboBoxGenere.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+		comboBoxGenere.setBorder(null);
+		comboBoxGenere.setBackground(new Color(21, 21, 21));
+		comboBoxGenere.setBounds(10, 321, 179, 26);
+		AddArtist.add(comboBoxGenere);
 
 		JComboBox<String> comboBoxSongNumberEP = new JComboBox<String>();
 		comboBoxSongNumberEP.setVisible(false);
@@ -133,40 +143,37 @@ public class AddSongGUI extends JFrame {
 					String dataPubblicazione = textFieldDataEPSingle.getText();
 					String durata = textFieldDurata.getText();
 					String nome = textFieldNomePubblicazione.getText();
-					String genere = textFieldGenere.getText();
+					String genere = comboBoxGenere.getSelectedItem().toString();
 
 					controller.insertSingleDB(nome, durata, genere, artista, dataPubblicazione);
 
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
-					textFieldGenere.setText("");
 					textFieldDataEPSingle.setText("");
 
 				}else if(comboBoxPubblicazioni.getSelectedItem() == "Brano" && comboBoxAlbum.getItemCount() != 0) {
 					String album = comboBoxAlbum.getSelectedItem().toString();
 					String durata = textFieldDurata.getText();
 					String nome = textFieldNomePubblicazione.getText();
-					String genere = textFieldGenere.getText();
+					String genere = comboBoxGenere.getSelectedItem().toString();
 
 					controller.insertSongDB(nome, durata, genere, album);
 
 					textFieldNomePubblicazione.setText("");
 					textFieldDurata.setText("");
-					textFieldGenere.setText("");
 
 				}else if(comboBoxPubblicazioni.getSelectedItem() == "EP" && comboBoxArtisti.getItemCount() != 0) {
 					String artista = comboBoxArtisti.getSelectedItem().toString();
 					String nomeEp = textFieldEP.getText();
 					String songNumber = comboBoxSongNumberEP.getSelectedItem().toString();
 					String dataPubblicazione = textFieldDataEPSingle.getText();
-					String genere = textFieldGenere.getText();
+					String genere = comboBoxGenere.getSelectedItem().toString();
 
 					controller.insertEPDB(nomeEp, genere, songNumber, artista, dataPubblicazione);
 
 					textFieldEP.setText("");
 					textFieldDataEPSingle.setText("");
 					textFieldDurata.setText("");
-					textFieldGenere.setText("");
 				}else {
 					JOptionPane optionPane = new JOptionPane("Verifica di aver inserito almeno un album/artista", JOptionPane.ERROR_MESSAGE);    
 					JDialog dialog = optionPane.createDialog("Errore");
@@ -251,29 +258,6 @@ public class AddSongGUI extends JFrame {
 		textFieldDurata.setCaretColor(new Color(0, 153, 204));
 		textFieldDurata.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
 		textFieldDurata.setBackground(new Color(36, 53, 102));
-
-		textFieldGenere = new JTextField();
-		textFieldGenere.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
-			}
-			@Override
-			public void focusLost(FocusEvent e) {
-				textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-			}
-		});
-		textFieldGenere.setBounds(10, 321, 398, 30);
-		textFieldGenere.setVisible(false);
-		textFieldGenere.setSelectionColor(new Color(0, 153, 204));
-		textFieldGenere.setSelectedTextColor(Color.WHITE);
-		textFieldGenere.setOpaque(false);
-		textFieldGenere.setForeground(Color.WHITE);
-		textFieldGenere.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-		textFieldGenere.setColumns(10);
-		textFieldGenere.setCaretColor(new Color(0, 153, 204));
-		textFieldGenere.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(255, 255, 255)));
-		textFieldGenere.setBackground(new Color(36, 53, 102));
 
 		JLabel labelGenere = new JLabel("Genere");
 		labelGenere.setBounds(10, 285, 361, 25);
@@ -403,7 +387,7 @@ public class AddSongGUI extends JFrame {
 					labelNomePubblicazione.setVisible(true);
 					labelDurata.setVisible(true);
 					textFieldDurata.setVisible(true);
-					textFieldGenere.setVisible(true);
+					comboBoxGenere.setVisible(true);
 					labelGenere.setVisible(true);
 					labelNomeEP.setVisible(false);
 					textFieldEP.setVisible(false);
@@ -423,7 +407,7 @@ public class AddSongGUI extends JFrame {
 					labelNomePubblicazione.setVisible(true);
 					labelDurata.setVisible(true);
 					textFieldDurata.setVisible(true);
-					textFieldGenere.setVisible(true);
+					comboBoxGenere.setVisible(true);
 					labelGenere.setVisible(true);
 					labelAlbum.setVisible(true);
 					comboBoxAlbum.setVisible(true);
@@ -443,7 +427,7 @@ public class AddSongGUI extends JFrame {
 					labelNomePubblicazione.setVisible(false);
 					labelDurata.setVisible(false);
 					textFieldDurata.setVisible(false);
-					textFieldGenere.setVisible(true);
+					comboBoxGenere.setVisible(true);
 					labelGenere.setVisible(true);
 					labelNomeEP.setVisible(true);
 					textFieldEP.setVisible(true);
@@ -460,9 +444,9 @@ public class AddSongGUI extends JFrame {
 				else {
 					textFieldNomePubblicazione.setVisible(false);
 					labelNomePubblicazione.setVisible(false);
+					comboBoxGenere.setVisible(false);
 					labelDurata.setVisible(false);
 					textFieldDurata.setVisible(false);
-					textFieldGenere.setVisible(false);
 					labelGenere.setVisible(false);
 					labelNomeEP.setVisible(false);
 					textFieldEP.setVisible(false);
@@ -535,7 +519,6 @@ public class AddSongGUI extends JFrame {
 		AddArtist.add(labelNomeEP);
 		AddArtist.add(textFieldEP);
 		AddArtist.add(labelGenere);
-		AddArtist.add(textFieldGenere);
 		AddArtist.add(labelDurata);
 		AddArtist.add(textFieldDurata);
 		AddArtist.add(labelNomePubblicazione);
