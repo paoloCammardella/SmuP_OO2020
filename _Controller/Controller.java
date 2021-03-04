@@ -80,8 +80,18 @@ public class Controller {
 
 	// SEARCH
 
-	public void search(String TestoDaCercare) {
-
+	public ResultSet search(String nomeDaCercare) {
+		ResultSet rs = null;
+		if((nomeDaCercare.length()>0)) {
+			rs = artistDAO.searchArtist(nomeDaCercare);
+			try {
+				if(rs != null)
+					return rs;	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return rs;
 	}
 
 	// USER

@@ -203,7 +203,7 @@ $BODY$
 BEGIN
     UPDATE Artista as A
     SET followers = followers - 1
-    WHERE A.id_artist =  NEW.id_Artist;
+    WHERE A.id_artist IN (SELECT id_Artist FROM Following AS F WHERE id_Following = OLD.id_Following AND A.id_Artist = F.id_Artist);
 	RETURN NEW;
 END;
 $BODY$

@@ -36,7 +36,12 @@ public class FollowingDAOimpl implements FollowingDAO {
 
 	@Override
 	public void removeFollow(String id_User, String id_Following) {
-		try {
+		try {			
+			String query_decremente_followers = "UPDATE Artista AS A SET followers = followers - 1 WHERE A.id_artist IN (SELECT id_Artist FROM Following AS F WHERE id_Following = ?)";
+			PreparedStatement pst2 = connection.prepareStatement(query_decremente_followers);
+			pst2.setString(1, id_Following);
+			pst2.executeUpdate();
+			
 			String query_delete_follow = "DELETE FROM Following WHERE id_Following = ? AND id_User = ?";
 
 			PreparedStatement pst1 = connection.prepareStatement(query_delete_follow);

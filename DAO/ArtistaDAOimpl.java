@@ -71,6 +71,8 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 		}
 	}
 
+	
+	// STAMPA PER USER NON ADMIN
 	@Override
 	public ResultSet stampaArtist(String id_User) {
 		ResultSet rs = null;
@@ -96,6 +98,23 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 
 			String query_stampa = "SELECT * FROM Artista";
 			rs = st.executeQuery(query_stampa);
+
+			return rs;
+		}
+		catch(SQLException e) {
+			System.err.println(e.getMessage());
+		}
+		return rs;
+	}
+
+	@Override
+	public ResultSet searchArtist(String nomeDaCercare) {
+		ResultSet rs = null;
+		try {
+			Statement st = connection.createStatement();
+
+			String query_cerca = "SELECT nomeDArte, id_Artist FROM Artista AS A WHERE nomeDArte LIKE '%" + nomeDaCercare + "%'";
+			rs = st.executeQuery(query_cerca);
 
 			return rs;
 		}
