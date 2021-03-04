@@ -29,6 +29,7 @@ public class Controller {
 	// Interface
 	private UtenteDAO utenteDAO;
 	private ArtistaDAO artistDAO;
+	private FollowingDAO followingDAO;
 	private SongDAO songDAO;
 	private AlbumDAO albumDAO;
 	private EPDAO epDAO;
@@ -51,7 +52,8 @@ public class Controller {
 		frameAddSong = new AddSongGUI(this);
 
 		// DAO
-		utenteDAO = new UtenteDAOimpl(this,connection);
+		followingDAO = new FollowingDAOimpl(this, connection);
+		utenteDAO = new UtenteDAOimpl(this, connection);
 		artistDAO = new ArtistaDAOimpl(this, connection);
 		songDAO = new SongDAOimpl(this, connection);
 		albumDAO = new AlbumDAOimpl(this, connection);
@@ -123,6 +125,42 @@ public class Controller {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	// FOLLOWING
+	
+	public void insertFollow(String id_User, String id_Artist) {
+		if ((id_User.length()>0 && id_Artist.length()>0))
+			followingDAO.insertFollow(id_User, id_Artist);
+		else {
+			JOptionPane.showMessageDialog(null,
+					"Impossibile aggiungere l'artista ai preferiti",
+					"Errore",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void deleteFollow(String id_User, String id_Following) {
+		if ((id_User.length()>0 && id_Following.length()>0)) {
+			followingDAO.removeFollow(id_User, id_Following);
+		}
+		else {
+			JOptionPane.showMessageDialog(null,
+					"Impossibile eliminare l'artista dai preferiti",
+					"Errore",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public ResultSet stampaFollowing() {
+		ResultSet rs = followingDAO.printFollow(user.getId());
+		try {
+			if(rs != null)
+				return rs;	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
 
 	// ARTIST
 
@@ -186,6 +224,17 @@ public class Controller {
 		return retribuzione;
 	}
 
+	public ResultSet stampaArtistDB(String id_User) {
+		ResultSet rs = artistDAO.stampaArtist(id_User);
+		try {
+			if(rs != null)
+				return rs;	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 	public ResultSet stampaArtistDB() {
 		ResultSet rs = artistDAO.stampaArtist();
 		try {

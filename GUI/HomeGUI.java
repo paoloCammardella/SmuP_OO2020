@@ -107,7 +107,7 @@ public class HomeGUI extends JFrame {
 		buttonDashboard.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				buttonDashboard.setBackground(darkGrey);
+				buttonDashboard.setBackground(blueViolet);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -140,7 +140,7 @@ public class HomeGUI extends JFrame {
 		buttonShowArtists.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				buttonShowArtists.setBackground(darkGrey);
+				buttonShowArtists.setBackground(blueViolet);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -172,7 +172,7 @@ public class HomeGUI extends JFrame {
 		buttonShowAlbums.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				buttonShowAlbums.setBackground(darkGrey);
+				buttonShowAlbums.setBackground(blueViolet);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -226,7 +226,7 @@ public class HomeGUI extends JFrame {
 		buttonOthers.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				buttonOthers.setBackground(darkGrey);
+				buttonOthers.setBackground(blueViolet);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -249,7 +249,7 @@ public class HomeGUI extends JFrame {
 		btnLogOut.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				btnLogOut.setBackground(darkGrey);
+				btnLogOut.setBackground(blueViolet);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -281,38 +281,34 @@ public class HomeGUI extends JFrame {
 		lblNameUsers.setFont(new Font("Segoe UI", Font.PLAIN, 20));
 		GroupLayout gl_menuRight = new GroupLayout(menuRight);
 		gl_menuRight.setHorizontalGroup(
-				gl_menuRight.createParallelGroup(Alignment.TRAILING)
+			gl_menuRight.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_menuRight.createSequentialGroup()
-						.addGroup(gl_menuRight.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_menuRight.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(lblNameUsers, GroupLayout.PREFERRED_SIZE, 201, GroupLayout.PREFERRED_SIZE)
-										.addGap(10))
-								.addGroup(gl_menuRight.createParallelGroup(Alignment.LEADING)
-										.addComponent(buttonOthers, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
-										.addComponent(buttonShowAlbums, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-										.addComponent(buttonShowArtists, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-										.addComponent(buttonDashboard, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-										.addComponent(btnLogOut, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)))
-						.addGap(0))
-				);
+					.addGroup(gl_menuRight.createParallelGroup(Alignment.TRAILING)
+						.addComponent(buttonOthers, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+						.addComponent(buttonShowAlbums, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+						.addComponent(buttonShowArtists, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+						.addComponent(buttonDashboard, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+						.addComponent(btnLogOut, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+						.addComponent(lblNameUsers, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+					.addGap(0))
+		);
 		gl_menuRight.setVerticalGroup(
-				gl_menuRight.createParallelGroup(Alignment.LEADING)
+			gl_menuRight.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_menuRight.createSequentialGroup()
-						.addGap(40)
-						.addComponent(lblNameUsers, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-						.addGap(111)
-						.addComponent(buttonDashboard, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addGap(3)
-						.addComponent(buttonShowArtists, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addGap(3)
-						.addComponent(buttonShowAlbums, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonOthers, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
-						.addComponent(btnLogOut, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
+					.addGap(40)
+					.addComponent(lblNameUsers, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+					.addGap(111)
+					.addComponent(buttonDashboard, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addGap(3)
+					.addComponent(buttonShowArtists, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addGap(3)
+					.addComponent(buttonShowAlbums, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(buttonOthers, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 308, Short.MAX_VALUE)
+					.addComponent(btnLogOut, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 		menuRight.setLayout(gl_menuRight);
 		Card.setLayout(new CardLayout(0, 0));
 
@@ -344,7 +340,7 @@ public class HomeGUI extends JFrame {
 		buttonAddArtist.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				buttonAddArtist.setBackground(darkGrey);
+				buttonAddArtist.setBackground(blueViolet);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -371,7 +367,7 @@ public class HomeGUI extends JFrame {
 		buttonAddAlbum.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				buttonAddAlbum.setBackground(darkGrey);
+				buttonAddAlbum.setBackground(blueViolet);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -405,7 +401,7 @@ public class HomeGUI extends JFrame {
 		buttonAddSong.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				buttonAddSong.setBackground(darkGrey);
+				buttonAddSong.setBackground(blueViolet);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -821,7 +817,7 @@ public class HomeGUI extends JFrame {
 				);
 		panelBackGroundArtist.setLayout(gl_panelBackGroundArtist);
 		panelPrintArtists.add(panelBackGroundArtist);
-		panelPrintArtists.setPreferredSize(new Dimension(400, 1000));
+		panelPrintArtists.setPreferredSize(new Dimension(400, 700));
 		panelPrintArtists.setBackground(grey);
 		panelPrintArtists.setForeground(grey);
 		scrollPaneArtists.setBackground(darkGrey);
@@ -1039,11 +1035,10 @@ public class HomeGUI extends JFrame {
 		panelPrintArtists.removeAll();
 		panelPrintArtists.revalidate();
 		panelPrintArtists.repaint();
-		ResultSet rs = controller.stampaArtistDB();
+		ResultSet rs = controller.stampaArtistDB(controller.user.getId());
 		try {
 			if(rs != null) {
 				while(rs.next()) {
-					panelPrintArtists = new JPanel();
 					JPanel panelBackGroundArtist = new JPanel();
 					panelBackGroundArtist.setBackground(darkGrey);
 

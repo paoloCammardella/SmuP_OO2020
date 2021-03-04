@@ -72,6 +72,23 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 	}
 
 	@Override
+	public ResultSet stampaArtist(String id_User) {
+		ResultSet rs = null;
+		try {
+			Statement st = connection.createStatement();
+
+			String query_stampa = "SELECT * FROM Artista WHERE id_Artist NOT IN (SELECT id_Artist FROM Following WHERE id_User = '" + id_User + "')";
+			rs = st.executeQuery(query_stampa);
+
+			return rs;
+		}
+		catch(SQLException e) {
+			System.err.println(e.getMessage());
+		}
+		return rs;
+	}
+	
+	@Override
 	public ResultSet stampaArtist() {
 		ResultSet rs = null;
 		try {

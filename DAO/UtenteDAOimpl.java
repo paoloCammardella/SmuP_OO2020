@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 import Entita.Utente;
 import _Controller.Controller;
 
@@ -33,6 +35,10 @@ public class UtenteDAOimpl implements UtenteDAO {
 		catch(SQLException e) {
 			System.out.println("Errore inserimento: " + e.getMessage());
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,
+					"Username già in uso!!!",
+					"Errore",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

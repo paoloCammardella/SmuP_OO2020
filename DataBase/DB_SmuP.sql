@@ -23,7 +23,8 @@ CREATE TABLE Following (
     id_Artist CHAR(5),
     id_User CHAR(5),
     CONSTRAINT FK1 FOREIGN KEY (id_User) REFERENCES Utente(id_User) ON DELETE SET DEFAULT,
-    CONSTRAINT FK2 FOREIGN KEY (id_Artist) REFERENCES Artista(id_Artist) ON DELETE SET DEFAULT
+    CONSTRAINT FK2 FOREIGN KEY (id_Artist) REFERENCES Artista(id_Artist) ON DELETE SET DEFAULT,
+    CONSTRAINT NoSelfFollow CHECK (id_Artist <> id_User)
 );
 
 CREATE TABLE Album(
@@ -176,3 +177,39 @@ CREATE TRIGGER insertIdBrano_trigger
 BEFORE INSERT ON Brano
 FOR EACH ROW
 EXECUTE PROCEDURE idBranoSequence();
+
+/* Incrementa followers */
+
+CREATE OR REPLACE FUNCTION incrementaFollow() RETURNS trigger AS
+$BODY$
+BEGIN
+    UPDATE Artista as A
+    SET followers = followers + 1
+    WHERE A.id_artist =  NEW.id_Artist;
+	RETURN NEW;
+END;
+$BODY$
+language plpgsql;
+
+CREATE TRIGGER incrementaFollowersTrigger
+AFTER INSERT ON Following
+FOR EACH ROW
+EXECUTE PROCEDURE incrementaFollow();
+
+/* Decrementa followers */
+
+CREATE OR REPLACE FUNCTION decrementaFollow() RETURNS trigger AS
+$BODY$
+BEGIN
+    UPDATE Artista as A
+    SET followers = followers - 1
+    WHERE A.id_artist =  NEW.id_Artist;
+	RETURN NEW;
+END;
+$BODY$
+language plpgsql;
+
+CREATE TRIGGER decrementaFollowersTrigger
+AFTER DELETE ON Following
+FOR EACH ROW
+EXECUTE PROCEDURE decrementaFollow();
