@@ -141,6 +141,7 @@ public class HomeUserGUI extends JFrame {
 		buttonSearch.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Search.png")));
 
 		JButton buttonShowArtists = new JButton("Show all artists");
+		buttonShowArtists.setFocusPainted(false);
 		buttonShowArtists.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelSearchDB.setVisible(false);
@@ -169,7 +170,6 @@ public class HomeUserGUI extends JFrame {
 		buttonShowArtists.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Artists-48.png")));
 		buttonShowArtists.setForeground(Color.WHITE);
 		buttonShowArtists.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-		buttonShowArtists.setFocusPainted(false);
 		buttonShowArtists.setBorderPainted(false);
 		buttonShowArtists.setBackground(new Color(15, 15, 15));
 
@@ -337,41 +337,45 @@ public class HomeUserGUI extends JFrame {
 
 		GroupLayout gl_menuRight = new GroupLayout(menuRight);
 		gl_menuRight.setHorizontalGroup(
-				gl_menuRight.createParallelGroup(Alignment.LEADING)
+			gl_menuRight.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_menuRight.createSequentialGroup()
-						.addComponent(btnFollow, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				.addGroup(Alignment.TRAILING, gl_menuRight.createSequentialGroup()
-						.addGroup(gl_menuRight.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_menuRight.createSequentialGroup()
-										.addComponent(lblNameUsers, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-										.addGap(10))
-								.addComponent(buttonOthers, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-								.addComponent(buttonShowAlbums, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-								.addComponent(buttonShowArtists, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-								.addComponent(buttonSearch, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-								.addComponent(btnLogOut, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
-						.addGap(0))
-				);
+					.addComponent(btnFollow, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(gl_menuRight.createSequentialGroup()
+					.addGroup(gl_menuRight.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnLogOut, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+						.addGroup(gl_menuRight.createSequentialGroup()
+							.addGroup(gl_menuRight.createParallelGroup(Alignment.TRAILING)
+								.addComponent(buttonShowArtists, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+								.addComponent(buttonSearch, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+								.addComponent(lblNameUsers, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+							.addGap(10)))
+					.addGap(0))
+				.addGroup(gl_menuRight.createSequentialGroup()
+					.addGroup(gl_menuRight.createParallelGroup(Alignment.TRAILING)
+						.addComponent(buttonShowAlbums, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+						.addComponent(buttonOthers, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+					.addContainerGap())
+		);
 		gl_menuRight.setVerticalGroup(
-				gl_menuRight.createParallelGroup(Alignment.LEADING)
+			gl_menuRight.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_menuRight.createSequentialGroup()
-						.addGap(40)
-						.addComponent(lblNameUsers, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-						.addGap(111)
-						.addComponent(buttonSearch, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addGap(3)
-						.addComponent(buttonShowArtists, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addGap(3)
-						.addComponent(buttonShowAlbums, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(buttonOthers, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(btnFollow, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
-						.addComponent(btnLogOut, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap())
-				);
+					.addGap(40)
+					.addComponent(lblNameUsers, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+					.addGap(111)
+					.addComponent(buttonSearch, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addGap(3)
+					.addComponent(buttonShowArtists, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addGap(3)
+					.addComponent(buttonShowAlbums, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(buttonOthers, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnFollow, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+					.addComponent(btnLogOut, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 		menuRight.setLayout(gl_menuRight);
 		Card.setLayout(new CardLayout(0, 0));
 
@@ -1105,7 +1109,17 @@ public class HomeUserGUI extends JFrame {
 							textFieldData.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 						}
 					});
-					buttonModificaAlbum.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Modify-48.png")));
+					buttonModificaAlbum.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							buttonModificaAlbum.setBackground(blueViolet);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonModificaAlbum.setBackground(black);
+						}
+					});
+					buttonModificaAlbum.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
 					buttonModificaAlbum.setIconTextGap(10);
 					buttonModificaAlbum.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonModificaAlbum.setForeground(Color.WHITE);
@@ -1140,8 +1154,21 @@ public class HomeUserGUI extends JFrame {
 							textFieldData.setBorder(null);
 						}
 					});
+					buttonSalvaAlbum.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							if (buttonSalvaAlbum.isEnabled() == true)
+								buttonSalvaAlbum.setBackground(blueViolet);
+							else
+								buttonSalvaAlbum.setBackground(black);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonSalvaAlbum.setBackground(black);
+						}
+					});
 					buttonSalvaAlbum.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-					buttonSalvaAlbum.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Save-48.png")));
+					buttonSalvaAlbum.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
 					buttonSalvaAlbum.setIconTextGap(10);
 					buttonSalvaAlbum.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonSalvaAlbum.setForeground(Color.WHITE);
@@ -1175,8 +1202,21 @@ public class HomeUserGUI extends JFrame {
 							}
 						}
 					});
+					buttonDeleteAlbum.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							if (buttonDeleteAlbum.isEnabled() == true)
+								buttonDeleteAlbum.setBackground(blueViolet);
+							else
+								buttonDeleteAlbum.setBackground(black);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonDeleteAlbum.setBackground(black);
+						}
+					});
 					buttonDeleteAlbum.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-					buttonDeleteAlbum.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/DeleteArtist-48.png")));
+					buttonDeleteAlbum.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
 					buttonDeleteAlbum.setIconTextGap(10);
 					buttonDeleteAlbum.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonDeleteAlbum.setForeground(Color.WHITE);
@@ -1380,7 +1420,18 @@ public class HomeUserGUI extends JFrame {
 
 						}
 					});
-					buttonDeleteSong.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/DeleteArtist-48.png")));
+					buttonDeleteSong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonDeleteSong.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							buttonDeleteSong.setBackground(blueViolet);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonDeleteSong.setBackground(black);
+						}
+					});
+					buttonDeleteSong.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
 					buttonDeleteSong.setIconTextGap(10);
 					buttonDeleteSong.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonDeleteSong.setForeground(Color.WHITE);
@@ -1406,7 +1457,18 @@ public class HomeUserGUI extends JFrame {
 							textFieldDurata.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 						}
 					});
-					buttonModificaSong.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Modify-48.png")));
+					buttonModificaSong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonModificaSong.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							buttonModificaSong.setBackground(blueViolet);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonModificaSong.setBackground(black);
+						}
+					});
+					buttonModificaSong.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
 					buttonModificaSong.setIconTextGap(10);
 					buttonModificaSong.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonModificaSong.setForeground(Color.WHITE);
@@ -1435,7 +1497,21 @@ public class HomeUserGUI extends JFrame {
 							textFieldDurata.setBorder(null);
 						}
 					});
-					buttonSaveSong.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Save-48.png")));
+					buttonSaveSong.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonSaveSong.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							if (buttonSaveSong.isEnabled() == true)
+								buttonSaveSong.setBackground(blueViolet);
+							else
+								buttonSaveSong.setBackground(black);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonSaveSong.setBackground(black);
+						}
+					});
+					buttonSaveSong.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
 					buttonSaveSong.setIconTextGap(10);
 					buttonSaveSong.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonSaveSong.setForeground(Color.WHITE);
@@ -1445,6 +1521,7 @@ public class HomeUserGUI extends JFrame {
 					buttonSaveSong.setBorderPainted(false);
 					buttonSaveSong.setBorder(new LineBorder(new Color(0, 51, 255), 10));
 					buttonSaveSong.setBackground(new Color(15, 15, 15));
+					
 					GroupLayout gl_panelBackGroundSong = new GroupLayout(panelBackGroundSong);
 					gl_panelBackGroundSong.setHorizontalGroup(
 							gl_panelBackGroundSong.createParallelGroup(Alignment.LEADING)
@@ -1617,7 +1694,18 @@ public class HomeUserGUI extends JFrame {
 							}
 						}
 					});
-					buttonDeleteSingle.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/DeleteArtist-48.png")));
+					buttonDeleteSingle.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonDeleteSingle.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							buttonDeleteSingle.setBackground(blueViolet);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonDeleteSingle.setBackground(black);
+						}
+					});
+					buttonDeleteSingle.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
 					buttonDeleteSingle.setIconTextGap(10);
 					buttonDeleteSingle.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonDeleteSingle.setForeground(Color.WHITE);
@@ -1658,7 +1746,18 @@ public class HomeUserGUI extends JFrame {
 							textFieldGenereSingolo.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 						}
 					});
-					buttonModifySingolo.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Modify-48.png")));
+					buttonModifySingolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonModifySingolo.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							buttonModifySingolo.setBackground(blueViolet);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonModifySingolo.setBackground(black);
+						}
+					});
+					buttonModifySingolo.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
 					buttonModifySingolo.setIconTextGap(10);
 					buttonModifySingolo.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonModifySingolo.setForeground(Color.WHITE);
@@ -1689,7 +1788,21 @@ public class HomeUserGUI extends JFrame {
 							buttonModifySingolo.setEnabled(true);
 						}
 					});
-					buttonSaveModifySingolo.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Save-48.png")));
+					buttonSaveModifySingolo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonSaveModifySingolo.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							if (buttonSaveModifySingolo.isEnabled() == true)
+								buttonSaveModifySingolo.setBackground(blueViolet);
+							else
+								buttonSaveModifySingolo.setBackground(black);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonSaveModifySingolo.setBackground(black);
+						}
+					});
+					buttonSaveModifySingolo.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
 					buttonSaveModifySingolo.setIconTextGap(10);
 					buttonSaveModifySingolo.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonSaveModifySingolo.setForeground(Color.WHITE);
@@ -1885,7 +1998,18 @@ public class HomeUserGUI extends JFrame {
 							}
 						}
 					});
-					buttonDeleteEP.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/DeleteArtist-48.png")));
+					buttonDeleteEP.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonDeleteEP.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							buttonDeleteEP.setBackground(blueViolet);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonDeleteEP.setBackground(black);
+						}
+					});
+					buttonDeleteEP.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/DeleteArtist-48.png")));
 					buttonDeleteEP.setIconTextGap(10);
 					buttonDeleteEP.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonDeleteEP.setForeground(Color.WHITE);
@@ -1934,7 +2058,7 @@ public class HomeUserGUI extends JFrame {
 							}
 						}
 					});
-					buttonSaveEP.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Save-48.png")));
+					buttonSaveEP.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Save-48.png")));
 					buttonSaveEP.setIconTextGap(10);
 					buttonSaveEP.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonSaveEP.setForeground(Color.WHITE);
@@ -1944,7 +2068,20 @@ public class HomeUserGUI extends JFrame {
 					buttonSaveEP.setBorderPainted(false);
 					buttonSaveEP.setBorder(new LineBorder(new Color(0, 51, 255), 10));
 					buttonSaveEP.setBackground(new Color(15, 15, 15));
-
+					buttonSaveEP.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonSaveEP.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							if (buttonSaveEP.isEnabled() == true)
+								buttonSaveEP.setBackground(blueViolet);
+							else
+								buttonSaveEP.setBackground(black);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonSaveEP.setBackground(black);
+						}
+					});
 					buttonModifyEP.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							textFieldNomeEP.setEditable(true);
@@ -1962,7 +2099,18 @@ public class HomeUserGUI extends JFrame {
 							textFieldNumeroBraniEP.setBorder(new MatteBorder(0, 0, 2, 0, (Color) blueViolet));
 						}
 					});
-					buttonModifyEP.setIcon(new ImageIcon(HomeUserGUI.class.getResource("/Img/Modify-48.png")));
+					buttonModifyEP.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					buttonModifyEP.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							buttonModifyEP.setBackground(blueViolet);
+						}
+						@Override
+						public void mouseExited(MouseEvent e) {
+							buttonModifyEP.setBackground(black);
+						}
+					});
+					buttonModifyEP.setIcon(new ImageIcon(HomeGUI.class.getResource("/Img/Modify-48.png")));
 					buttonModifyEP.setIconTextGap(10);
 					buttonModifyEP.setHorizontalTextPosition(SwingConstants.RIGHT);
 					buttonModifyEP.setForeground(Color.WHITE);
@@ -2064,7 +2212,7 @@ public class HomeUserGUI extends JFrame {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void stampaFollowing() {
 		panelPrintFollowed.removeAll();
 		panelPrintFollowed.revalidate();
@@ -2289,11 +2437,6 @@ public class HomeUserGUI extends JFrame {
 					textFieldCodiceArtistaSearch.setText(rs.getString("id_Artist"));
 				}
 			}
-			else
-				JOptionPane.showMessageDialog(null,
-						nomeDaCercare + " non trovato !!!",
-						"Errore",
-						JOptionPane.ERROR_MESSAGE);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

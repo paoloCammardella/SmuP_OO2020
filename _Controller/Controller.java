@@ -91,6 +91,12 @@ public class Controller {
 				e.printStackTrace();
 			}
 		}
+		else {
+			JOptionPane.showMessageDialog(frameAddArtist,
+					"Inserisci dei dati validi!!!",
+					"Errore",
+					JOptionPane.ERROR_MESSAGE);
+		}
 		return rs;
 	}
 

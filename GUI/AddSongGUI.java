@@ -111,7 +111,7 @@ public class AddSongGUI extends JFrame {
 
 		JPanel AddArtist = new JPanel();
 		AddArtist.setBackground(grey);
-		
+
 		JComboBox<String> comboBoxGenere = new JComboBox<String>();
 		comboBoxGenere.setVisible(false);
 		comboBoxGenere.setModel(new DefaultComboBoxModel(new String[] {"Pop", "Rock", "Blues", "Regge", "Jazz", "Bossa nova", "Soul", "Lirica", "Metal", "Funk", "Country", "Hip-Hop"}));
