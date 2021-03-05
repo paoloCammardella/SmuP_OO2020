@@ -108,12 +108,12 @@ public class ArtistaDAOimpl implements ArtistaDAO{
 	}
 
 	@Override
-	public ResultSet searchArtist(String nomeDaCercare) {
+	public ResultSet searchArtist(String nomeDaCercare, String id_User) {
 		ResultSet rs = null;
 		try {
 			Statement st = connection.createStatement();
 
-			String query_cerca = "SELECT nomeDArte, id_Artist FROM Artista AS A WHERE nomeDArte LIKE '%" + nomeDaCercare + "%'";
+			String query_cerca = "SELECT nomeDArte, id_Artist FROM Artista AS A WHERE nomeDArte LIKE '%" + nomeDaCercare + "%' AND id_Artist NOT IN (SELECT id_Artist FROM Following WHERE id_User = '" + id_User + "')";
 			rs = st.executeQuery(query_cerca);
 
 			return rs;

@@ -83,7 +83,7 @@ public class Controller {
 	public ResultSet search(String nomeDaCercare) {
 		ResultSet rs = null;
 		if((nomeDaCercare.length()>0)) {
-			rs = artistDAO.searchArtist(nomeDaCercare);
+			rs = artistDAO.searchArtist(nomeDaCercare, user.getId());
 			try {
 				if(rs != null)
 					return rs;	
@@ -141,9 +141,9 @@ public class Controller {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	// FOLLOWING
-	
+
 	public void insertFollow(String id_User, String id_Artist) {
 		if ((id_User.length()>0 && id_Artist.length()>0))
 			followingDAO.insertFollow(id_User, id_Artist);
@@ -154,7 +154,7 @@ public class Controller {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public void deleteFollow(String id_User, String id_Following) {
 		if ((id_User.length()>0 && id_Following.length()>0)) {
 			followingDAO.removeFollow(id_User, id_Following);
@@ -166,7 +166,7 @@ public class Controller {
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	public ResultSet stampaFollowing() {
 		ResultSet rs = followingDAO.printFollow(user.getId());
 		try {
@@ -250,7 +250,7 @@ public class Controller {
 		}
 		return rs;
 	}
-	
+
 	public ResultSet stampaArtistDB() {
 		ResultSet rs = artistDAO.stampaArtist();
 		try {

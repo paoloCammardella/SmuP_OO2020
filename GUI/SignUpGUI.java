@@ -127,12 +127,12 @@ public class SignUpGUI extends JFrame {
 		lblLogin.setFont(new Font("Segoe UI", Font.BOLD, 26));
 
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(127, 105, 376, 25);
+		lblUsername.setBounds(119, 105, 376, 25);
 		lblUsername.setForeground(Color.WHITE);
 		lblUsername.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		usernameTextField = new JTextField();
-		usernameTextField.setBounds(127, 136, 421, 30);
+		usernameTextField.setBounds(119, 136, 431, 30);
 		usernameTextField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -154,12 +154,12 @@ public class SignUpGUI extends JFrame {
 		usernameTextField.setBackground(new Color(36, 53, 102));
 
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(127, 172, 376, 25);
+		lblPassword.setBounds(119, 172, 376, 25);
 		lblPassword.setForeground(Color.WHITE);
 		lblPassword.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		JButton buttonAnnulla = new JButton("Annulla");
-		buttonAnnulla.setBounds(127, 356, 421, 41);
+		buttonAnnulla.setBounds(119, 356, 431, 41);
 		buttonAnnulla.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.frameLoginGUI();
@@ -185,7 +185,7 @@ public class SignUpGUI extends JFrame {
 		buttonAnnulla.setBackground(new Color(204, 0, 0));
 
 		JCheckBox chckbxIsAdmin = new JCheckBox("Is Admin");
-		chckbxIsAdmin.setBounds(127, 244, 109, 34);
+		chckbxIsAdmin.setBounds(119, 244, 431, 34);
 
 		chckbxIsAdmin.setIcon(new ImageIcon(SignUpGUI.class.getResource("/Img/boxCheck-32.png")));
 		chckbxIsAdmin.setSelectedIcon(new ImageIcon(SignUpGUI.class.getResource("/Img/Check-32.png")));
@@ -198,7 +198,7 @@ public class SignUpGUI extends JFrame {
 		chckbxIsAdmin.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 
 		JButton btnAccedi = new JButton("Registrati");
-		btnAccedi.setBounds(127, 309, 421, 41);
+		btnAccedi.setBounds(119, 309, 431, 41);
 		btnAccedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String username = usernameTextField.getText();
@@ -244,7 +244,7 @@ public class SignUpGUI extends JFrame {
 
 		passwordField = new JPasswordField();
 		passwordField.setEchoChar('●');
-		passwordField.setBounds(127, 203, 376, 30);
+		passwordField.setBounds(119, 203, 376, 30);
 		passwordField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -277,7 +277,7 @@ public class SignUpGUI extends JFrame {
 			}
 		});
 		chckbxShowPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		chckbxShowPassword.setBounds(518, 199, 40, 34);
+		chckbxShowPassword.setBounds(510, 199, 40, 34);
 
 		chckbxShowPassword.setIcon(new ImageIcon(LoginGUI.class.getResource("/Img/NOShowPassword-32.png")));
 		chckbxShowPassword.setSelectedIcon(new ImageIcon(LoginGUI.class.getResource("/Img/ShowPassword-32.png")));

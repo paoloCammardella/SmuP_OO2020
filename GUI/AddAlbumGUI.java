@@ -107,8 +107,7 @@ public class AddAlbumGUI extends JFrame {
 		AddAlbum.setBackground(grey);
 
 		JComboBox<String> comboBoxGenere = new JComboBox<String>();
-		comboBoxGenere.setVisible(false);
-		comboBoxGenere.setModel(new DefaultComboBoxModel(new String[] {"Pop", "Rock", "Blues", "Regge", "Jazz", "Bossa nova", "Soul", "Lirica", "Metal", "Funk", "Country", "Hip-Hop"}));
+		comboBoxGenere.setModel(new DefaultComboBoxModel(new String[] {"Pop", "Rock", "Blues", "Regge", "Jazz", "Bossa nova", "Soul", "Lirica", "Metal", "Alternative", "Funk", "Country", "Hip-Hop"}));
 		comboBoxGenere.setOpaque(true);
 		comboBoxGenere.setForeground(Color.WHITE);
 		comboBoxGenere.setFont(new Font("Segoe UI", Font.PLAIN, 14));
