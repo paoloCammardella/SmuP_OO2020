@@ -69,10 +69,6 @@ public class HomeUserGUI extends JFrame {
 	private JScrollPane scrollPaneAlbums;
 	private JScrollPane scrollPaneOthers;
 	private JTextField searchTextField;
-	private JTextField CodiceArtista;
-	private JTextField textFildNomeDarteArtista;
-	private JTextField textFieldCodiceArtistaSearch;
-	private JTextField textFieldNomeDarteSearch;
 
 	public HomeUserGUI(Controller controller) {
 		this.controller = controller;
@@ -1657,7 +1653,7 @@ public class HomeUserGUI extends JFrame {
 					panelBackGroundFollowArtist.setBackground(new Color(21, 21, 21));
 					panelPrintFollowed.add(panelBackGroundFollowArtist);
 
-					CodiceArtista = new JTextField();
+					JTextField CodiceArtista = new JTextField();
 					CodiceArtista.setText("CODICE ARTISTA");
 					CodiceArtista.setForeground(Color.WHITE);
 					CodiceArtista.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -1667,7 +1663,7 @@ public class HomeUserGUI extends JFrame {
 					CodiceArtista.setBorder(null);
 					CodiceArtista.setBackground(new Color(21, 21, 21));
 
-					textFildNomeDarteArtista = new JTextField();
+					JTextField textFildNomeDarteArtista = new JTextField();
 					textFildNomeDarteArtista.setText("NOME D'ARTE");
 					textFildNomeDarteArtista.setForeground(Color.WHITE);
 					textFildNomeDarteArtista.setFont(new Font("Segoe UI", Font.BOLD, 24));
@@ -1779,7 +1775,7 @@ public class HomeUserGUI extends JFrame {
 					panelBackGroundSearchArtist.setBackground(new Color(21, 21, 21));
 					panelPrintSearch.add(panelBackGroundSearchArtist);
 
-					textFieldCodiceArtistaSearch = new JTextField();
+					JTextField textFieldCodiceArtistaSearch = new JTextField();
 					textFieldCodiceArtistaSearch.setText("CODICE ARTISTA");
 					textFieldCodiceArtistaSearch.setForeground(Color.WHITE);
 					textFieldCodiceArtistaSearch.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -1789,7 +1785,7 @@ public class HomeUserGUI extends JFrame {
 					textFieldCodiceArtistaSearch.setBorder(null);
 					textFieldCodiceArtistaSearch.setBackground(new Color(21, 21, 21));
 
-					textFieldNomeDarteSearch = new JTextField();
+					JTextField textFieldNomeDarteSearch = new JTextField();
 					textFieldNomeDarteSearch.setText("NOME D'ARTE");
 					textFieldNomeDarteSearch.setForeground(Color.WHITE);
 					textFieldNomeDarteSearch.setFont(new Font("Segoe UI", Font.BOLD, 24));
